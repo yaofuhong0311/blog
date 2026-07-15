@@ -8,10 +8,10 @@
 
 **这个站点放什么**：
 
-- [工具](/tools/)：自己写的小工具，附说明和源码
+- [工具与 Demo](/tools/)：自己写的小工具和练手 Demo，附说明和源码
 - 学习笔记：系统学习后的整理输出
 - AI Coding 实践：AI 辅助编程在真实工程里的经验
 
 工作之外骑公路车，坚持晨间训练。
 
-联系我：[GitHub](https://github.com/yaofuhong0311)
+联系我：[GitHub](https://github.com/yaofuhong0311) · [yaofuhong0311@gmail.com](mailto:yaofuhong0311@gmail.com)
