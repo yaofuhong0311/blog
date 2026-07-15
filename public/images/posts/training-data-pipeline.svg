@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="480" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="p" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/>
+    </marker>
+  </defs>
+
+  <text x="600" y="52" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">训练数据链路：采集 → 汇聚 → 对话式分析</text>
+
+  <!-- 数据源 -->
+  <g text-anchor="middle">
+    <rect x="60" y="110" width="200" height="90" rx="12" fill="#7fa3c4"/>
+    <text x="160" y="148" fill="#ffffff" font-size="17" font-weight="700">小米体脂秤</text>
+    <text x="160" y="176" fill="#eef5fa" font-size="13">每日晨间称重</text>
+
+    <rect x="60" y="250" width="200" height="90" rx="12" fill="#7fa3c4"/>
+    <text x="160" y="288" fill="#ffffff" font-size="17" font-weight="700">Zwift + 功率计</text>
+    <text x="160" y="316" fill="#eef5fa" font-size="13">晨间骑行台训练</text>
+  </g>
+
+  <!-- 中转 -->
+  <rect x="340" y="110" width="210" height="90" rx="12" fill="#5b88b0"/>
+  <text x="445" y="143" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">xiaomi2weight</text>
+  <text x="445" y="167" text-anchor="middle" fill="#eef5fa" font-size="13">
+    <tspan x="445">自写同步工具</tspan>
+    <tspan x="445" dy="20">抓秤数据写入 Garmin</tspan>
+  </text>
+
+  <!-- Garmin -->
+  <rect x="630" y="170" width="210" height="120" rx="12" fill="#3a6491"/>
+  <text x="735" y="208" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">Garmin Connect</text>
+  <text x="735" y="234" text-anchor="middle" fill="#eef5fa" font-size="13">
+    <tspan x="735">活动 / 体重 / HRV / 睡眠</tspan>
+    <tspan x="735" dy="20">FTP · VO2max · 训练负载</tspan>
+  </text>
+
+  <!-- icu -->
+  <rect x="630" y="330" width="210" height="80" rx="12" fill="#7fa3c4"/>
+  <text x="735" y="363" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">intervals.icu</text>
+  <text x="735" y="388" text-anchor="middle" fill="#eef5fa" font-size="13">训练日历与图表复盘</text>
+
+  <!-- Claude -->
+  <rect x="930" y="150" width="210" height="160" rx="12" fill="#24476b"/>
+  <text x="1035" y="190" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">Claude Code</text>
+  <text x="1035" y="218" text-anchor="middle" fill="#eef5fa" font-size="13">
+    <tspan x="1035">garmin_mcp（开源）</tspan>
+    <tspan x="1035" dy="20">110+ 工具按需调用</tspan>
+    <tspan x="1035" dy="20">一句话跨源综合分析</tspan>
+  </text>
+
+  <!-- 连线 -->
+  <line x1="260" y1="155" x2="335" y2="155" stroke="#3a6491" stroke-width="2.5" marker-end="url(#p)"/>
+  <line x1="550" y1="170" x2="640" y2="205" stroke="#3a6491" stroke-width="2.5" marker-end="url(#p)"/>
+  <line x1="260" y1="295" x2="640" y2="245" stroke="#3a6491" stroke-width="2.5" marker-end="url(#p)"/>
+  <text x="430" y="278" font-size="13" fill="#6b87a3">骑行数据自动上传</text>
+
+  <line x1="735" y1="290" x2="735" y2="325" stroke="#3a6491" stroke-width="2.5" marker-end="url(#p)"/>
+  <text x="810" y="313" font-size="13" fill="#6b87a3">自动同步</text>
+
+  <line x1="840" y1="230" x2="925" y2="230" stroke="#3a6491" stroke-width="2.5" marker-end="url(#p)"/>
+  <text x="882" y="218" text-anchor="middle" font-size="13" fill="#3f5d7d" font-weight="600">MCP</text>
+
+  <text x="60" y="440" font-size="14" fill="#6b87a3">左半段解决"数据进得来"（一次搭好，全自动）；右半段解决"数据看得懂"（MCP 让分析变成一句话的事）</text>
+</svg>
