@@ -11,5 +11,14 @@ github: https://github.com/yaofuhong0311/sticky-markdown-note
 
 ## 截图
 
-<!-- 截图放到 public/images/tools/ 后，这样引用： -->
-<!-- ![便签效果](/images/tools/sticky-markdown-note.png) -->
+便签本体：Markdown 任务列表实时渲染，勾选即划线，可换色、可置顶：
+
+![便签渲染效果](/images/tools/sticky-note.png)
+
+编辑模式带格式工具栏（标题/列表/任务/引用/代码块）：
+
+![编辑模式](/images/tools/sticky-edit.png)
+
+Sticky Hub 管理窗口集中查看全部便签，支持归档与全局快捷键随处速记（⌥⌘N）：
+
+![Sticky Hub 管理窗口](/images/tools/sticky-hub.png)
