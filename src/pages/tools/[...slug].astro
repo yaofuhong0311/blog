@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import Markdown from "@components/misc/Markdown.astro";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+
+export async function getStaticPaths() {
+	const tools = await getCollection("tools");
+	return tools.map((entry) => ({
+		params: { slug: entry.slug },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<MainGridLayout title={entry.data.title} description={entry.data.description}>
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+        <div class="card-base z-10 px-6 md:px-9 py-6 relative w-full">
+            <h1 class="text-3xl font-bold text-black/90 dark:text-white/90 mb-2">{entry.data.title}</h1>
+            {entry.data.tags.length > 0 && (
+                <div class="flex flex-wrap gap-2 mb-4">
+                    {entry.data.tags.map((tag) => (
+                        <span class="text-sm px-2 py-0.5 rounded-md bg-[var(--btn-regular-bg)] text-[var(--btn-content)]">
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+            )}
+            <Markdown class="mt-2">
+                <Content />
+            </Markdown>
+            {(entry.data.github || entry.data.download) && (
+                <div class="flex gap-3 mt-6 pt-4 border-t border-black/10 dark:border-white/10">
+                    {entry.data.github && (
+                        <a
+                            href={entry.data.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn-regular rounded-lg h-10 px-4 flex items-center gap-2 active:scale-95"
+                        >
+                            <Icon name="fa6-brands:github" class="text-[1.2rem]" />
+                            <span>GitHub 仓库</span>
+                        </a>
+                    )}
+                    {entry.data.download && (
+                        <a
+                            href={entry.data.download}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn-regular rounded-lg h-10 px-4 flex items-center gap-2 active:scale-95"
+                        >
+                            <Icon name="material-symbols:download-rounded" class="text-[1.3rem]" />
+                            <span>下载</span>
+                        </a>
+                    )}
+                </div>
+            )}
+        </div>
+    </div>
+</MainGridLayout>

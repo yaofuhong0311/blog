@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import { url } from "../../utils/url-utils";
+
+const tools = await getCollection("tools");
+---
+
+<MainGridLayout title="工具" description="我做的一些小工具">
+    <div class="flex flex-col gap-4">
+        {
+            tools.map((tool) => (
+                <a
+                    href={url(`/tools/${tool.slug}/`)}
+                    class="card-base px-9 py-6 rounded-[var(--radius-large)] block hover:bg-[var(--btn-plain-bg-hover)] active:scale-[0.98] transition"
+                >
+                    <div class="flex items-center justify-between gap-4">
+                        <div class="text-xl font-bold text-90">{tool.data.title}</div>
+                        <Icon
+                            name="material-symbols:chevron-right-rounded"
+                            class="text-[1.5rem] text-[var(--primary)] shrink-0"
+                        />
+                    </div>
+                    <div class="text-50 mt-2">{tool.data.description}</div>
+                    {tool.data.tags.length > 0 && (
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            {tool.data.tags.map((tag) => (
+                                <span class="text-sm px-2 py-0.5 rounded-md bg-[var(--btn-regular-bg)] text-[var(--btn-content)]">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+                </a>
+            ))
+        }
+    </div>
+</MainGridLayout>
