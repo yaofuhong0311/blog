@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="500" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="axe" markerWidth="12" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L12,5 L0,10 z" fill="#3a6491"/>
+    </marker>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7fa3c4"/>
+      <stop offset="1" stop-color="#24476b"/>
+    </linearGradient>
+  </defs>
+
+  <text x="600" y="56" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">不同 Agent 对沙箱底层的依赖谱</text>
+
+  <!-- 轴 -->
+  <line x1="80" y1="420" x2="1130" y2="420" stroke="#3a6491" stroke-width="3" marker-end="url(#axe)"/>
+  <rect x="80" y="432" width="1030" height="10" rx="5" fill="url(#grad)"/>
+  <text x="90" y="470" font-size="14" fill="#3f5d7d" font-weight="600">依赖最轻</text>
+  <text x="1110" y="470" text-anchor="end" font-size="14" fill="#3f5d7d" font-weight="600">依赖最重</text>
+
+  <!-- 各档 -->
+  <g text-anchor="middle">
+    <rect x="90" y="250" width="180" height="150" rx="12" fill="#7fa3c4"/>
+    <text x="180" y="282" fill="#ffffff" font-size="16" font-weight="700">OpenAI Agents SDK</text>
+    <text x="180" y="310" fill="#eef5fa" font-size="13">
+      <tspan x="180">循环在调用方进程</tspan>
+      <tspan x="180" dy="21">沙箱只是无状态执行端</tspan>
+      <tspan x="180" dy="21">进程创建 + 临时文件系统</tspan>
+    </text>
+
+    <rect x="300" y="220" width="180" height="180" rx="12" fill="#6d96ba"/>
+    <text x="390" y="252" fill="#ffffff" font-size="16" font-weight="700">Devin / Amp</text>
+    <text x="390" y="280" fill="#eef5fa" font-size="13">
+      <tspan x="390">真实计算/会话在各自云端</tspan>
+      <tspan x="390" dy="21">沙箱近似外壳</tspan>
+      <tspan x="390" dy="21">Devin 唯一强制 PTY</tspan>
+    </text>
+
+    <rect x="510" y="190" width="180" height="210" rx="12" fill="#5b88b0"/>
+    <text x="600" y="222" fill="#ffffff" font-size="16" font-weight="700">Claude Code / Codex</text>
+    <text x="600" y="250" fill="#eef5fa" font-size="13">
+      <tspan x="600">会话状态存于沙箱文件</tspan>
+      <tspan x="600" dy="21">文件系统必须跨</tspan>
+      <tspan x="600" dy="21">pause/resume 持久</tspan>
+      <tspan x="600" dy="21">否则无法续接对话</tspan>
+    </text>
+
+    <rect x="720" y="160" width="180" height="240" rx="12" fill="#3a6491"/>
+    <text x="810" y="192" fill="#ffffff" font-size="16" font-weight="700">OpenCode / OpenClaw</text>
+    <text x="810" y="220" fill="#eef5fa" font-size="13">
+      <tspan x="810">后台常驻 Daemon</tspan>
+      <tspan x="810" dy="21">+ 端口暴露</tspan>
+      <tspan x="810" dy="21">+ pause/resume 保活</tspan>
+    </text>
+
+    <rect x="930" y="120" width="180" height="280" rx="12" fill="#24476b"/>
+    <text x="1020" y="152" fill="#ffffff" font-size="16" font-weight="700">Managed Agents</text>
+    <text x="1020" y="180" fill="#eef5fa" font-size="13">
+      <tspan x="1020">推理在厂商云端</tspan>
+      <tspan x="1020" dy="21">沙箱作远程工具执行端</tspan>
+      <tspan x="1020" dy="21">两类常驻进程</tspan>
+      <tspan x="1020" dy="21">+ 隔离持久的会话目录</tspan>
+      <tspan x="1020" dy="21">+ 路由状态文件</tspan>
+    </text>
+  </g>
+
+  <text x="600" y="95" text-anchor="middle" font-size="14" fill="#6b87a3">要支持到谱系的哪一端，沙箱底层就要建到对应深度</text>
+</svg>
