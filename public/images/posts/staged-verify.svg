@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8aa3bd"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="500" rx="20" fill="#f2f6fa"/>
+
+  <!-- 四道门：主体 -->
+  <g text-anchor="middle">
+    <rect x="30" y="120" width="255" height="130" rx="16" fill="#3a6491"/>
+    <text x="157" y="168" fill="#ffffff" font-size="22" font-weight="700">P1 干净 review</text>
+    <text x="157" y="200" fill="#c9dced" font-size="15">
+      <tspan x="157">零污染子代理，只给 diff</tspan>
+      <tspan x="157" dy="24">隔离"作者自查"</tspan>
+    </text>
+
+    <rect x="325" y="120" width="255" height="130" rx="16" fill="#3a6491"/>
+    <text x="452" y="168" fill="#ffffff" font-size="22" font-weight="700">P2 冒烟+单测</text>
+    <text x="452" y="200" fill="#c9dced" font-size="15">
+      <tspan x="452">覆盖率只看变更行</tspan>
+      <tspan x="452" dy="24">flaky 连跑三次零容忍</tspan>
+    </text>
+
+    <rect x="620" y="120" width="255" height="130" rx="16" fill="#3a6491"/>
+    <text x="747" y="168" fill="#ffffff" font-size="22" font-weight="700">P3 边界双轨</text>
+    <text x="747" y="200" fill="#c9dced" font-size="15">
+      <tspan x="747">白盒×黑盒，求差集</tspan>
+      <tspan x="747" dy="24">差集 = 可能漏实现</tspan>
+    </text>
+
+    <rect x="915" y="120" width="255" height="130" rx="16" fill="#24476b"/>
+    <text x="1042" y="168" fill="#ffffff" font-size="22" font-weight="700">P4 集群覆盖</text>
+    <text x="1042" y="200" fill="#c9dced" font-size="15">
+      <tspan x="1042">同套用例指向真实环境</tspan>
+      <tspan x="1042" dy="24">专抓环境差异</tspan>
+    </text>
+  </g>
+
+  <g stroke="#8aa3bd" stroke-width="3" fill="none">
+    <line x1="285" y1="185" x2="317" y2="185" marker-end="url(#arrow2)"/>
+    <line x1="580" y1="185" x2="612" y2="185" marker-end="url(#arrow2)"/>
+    <line x1="875" y1="185" x2="907" y2="185" marker-end="url(#arrow2)"/>
+  </g>
+
+  <!-- 门的语义：每道门下方的闸门标注 -->
+  <g font-size="15" fill="#7a92ab" text-anchor="middle">
+    <text x="157" y="296">报告落盘</text>
+    <text x="452" y="296">报告落盘</text>
+    <text x="747" y="296">报告落盘</text>
+    <text x="1042" y="296">报告落盘</text>
+  </g>
+  <g stroke="#c3d2e0" stroke-width="1.5">
+    <line x1="60" y1="270" x2="255" y2="270"/>
+    <line x1="355" y1="270" x2="550" y2="270"/>
+    <line x1="650" y1="270" x2="845" y2="270"/>
+    <line x1="945" y1="270" x2="1140" y2="270"/>
+  </g>
+
+  <!-- 推进规则：底部一句话，次要层级 -->
+  <rect x="180" y="360" width="840" height="86" rx="14" fill="none" stroke="#8aa3bd" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <text x="600" y="396" font-size="17" fill="#3f5d7d" font-weight="600" text-anchor="middle">每道门：产出报告 → 停下等人确认 → 才进下一道</text>
+  <text x="600" y="426" font-size="15" fill="#7a92ab" text-anchor="middle">FAIL 绝不推进 · 重跑第 N 道会使下游失效 · 状态落盘可断点续跑</text>
+</svg>
