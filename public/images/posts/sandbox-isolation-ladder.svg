@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="520" rx="20" fill="#f2f6fa"/>
+
+  <!-- 台阶：高度递增 -->
+  <g text-anchor="middle">
+    <rect x="60" y="300" width="240" height="150" rx="14" fill="#7fa3c4"/>
+    <text x="180" y="345" fill="#ffffff" font-size="22" font-weight="700">容器 runc</text>
+    <text x="180" y="376" fill="#eaf2f9" font-size="15">
+      <tspan x="180">共享宿主内核</tspan>
+      <tspan x="180" dy="24">namespace + cgroup + seccomp</tspan>
+    </text>
+
+    <rect x="340" y="240" width="240" height="210" rx="14" fill="#5b88b0"/>
+    <text x="460" y="285" fill="#ffffff" font-size="22" font-weight="700">gVisor</text>
+    <text x="460" y="316" fill="#eaf2f9" font-size="15">
+      <tspan x="460">用户态内核替身 Sentry</tspan>
+      <tspan x="460" dy="24">syscall 大多不落真内核</tspan>
+    </text>
+
+    <rect x="620" y="180" width="240" height="270" rx="14" fill="#3a6491"/>
+    <text x="740" y="225" fill="#ffffff" font-size="22" font-weight="700">microVM</text>
+    <text x="740" y="256" fill="#eaf2f9" font-size="15">
+      <tspan x="740">Firecracker / Kata</tspan>
+      <tspan x="740" dy="24">EPT 硬件边界 + 独立内核</tspan>
+    </text>
+
+    <rect x="900" y="120" width="240" height="330" rx="14" fill="#24476b"/>
+    <text x="1020" y="165" fill="#ffffff" font-size="22" font-weight="700">Wasm</text>
+    <text x="1020" y="196" fill="#eaf2f9" font-size="15">
+      <tspan x="1020">指令集里没有 syscall</tspan>
+      <tspan x="1020" dy="24">能力靠 WASI 显式授权</tspan>
+    </text>
+  </g>
+
+  <!-- 哲学标签：台阶上方 -->
+  <g font-size="15" fill="#3f5d7d" font-weight="600" text-anchor="middle">
+    <text x="180" y="278">"发出来我拦一部分"</text>
+    <text x="460" y="218">"发出来我替你处理"</text>
+    <text x="740" y="158">"内核之上再加一道墙"</text>
+    <text x="1020" y="98">"能力从未存在过"</text>
+  </g>
+
+  <!-- 底部代价注解：次要层级 -->
+  <g font-size="14" fill="#7a92ab" text-anchor="middle">
+    <text x="180" y="486">代价：躲不掉内核漏洞</text>
+    <text x="460" y="486">代价：兼容性 + 性能税</text>
+    <text x="740" y="486">代价：/dev/kvm、GPU 缺口</text>
+    <text x="1020" y="486">代价：负载得编译成 Wasm</text>
+  </g>
+
+  <!-- 左侧纵轴提示 -->
+  <text x="46" y="130" font-size="15" fill="#7a92ab" transform="rotate(-90 46 130)" text-anchor="end">离宿主内核越来越远 →</text>
+</svg>
