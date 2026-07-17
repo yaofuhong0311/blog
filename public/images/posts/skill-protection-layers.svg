@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="560" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="d" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/>
+    </marker>
+  </defs>
+
+  <text x="600" y="50" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">技能防导出：出口拦截的分层防御</text>
+  <text x="600" y="80" text-anchor="middle" font-size="14" fill="#6b87a3">原则：用可以，拿走不行 —— 只拦"导出通道"，绝不拦"使用"</text>
+
+  <!-- 出口通道（左） -->
+  <g text-anchor="middle">
+    <rect x="60" y="150" width="200" height="70" rx="12" fill="#7fa3c4"/>
+    <text x="160" y="180" fill="#ffffff" font-size="16" font-weight="700">聊天回复</text>
+    <text x="160" y="203" fill="#eef5fa" font-size="12">只记日志 · 永不拦</text>
+
+    <rect x="60" y="250" width="200" height="70" rx="12" fill="#5b88b0"/>
+    <text x="160" y="280" fill="#ffffff" font-size="16" font-weight="700">写文件</text>
+    <text x="160" y="303" fill="#eef5fa" font-size="12">命中则不落盘</text>
+
+    <rect x="60" y="350" width="200" height="70" rx="12" fill="#5b88b0"/>
+    <text x="160" y="380" fill="#ffffff" font-size="16" font-weight="700">下载</text>
+    <text x="160" y="403" fill="#eef5fa" font-size="12">命中则拒绝</text>
+  </g>
+
+  <!-- 两道检测层（中） -->
+  <rect x="360" y="150" width="260" height="270" rx="14" fill="none" stroke="#3a6491" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="490" y="140" text-anchor="middle" font-size="14" fill="#3f5d7d" font-weight="600">出口内容检测</text>
+
+  <rect x="385" y="175" width="210" height="105" rx="12" fill="#3a6491"/>
+  <text x="490" y="205" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">指纹层（哈希）</text>
+  <text x="490" y="230" text-anchor="middle" fill="#eef5fa" font-size="12.5">
+    <tspan x="490">逐行归一化 + sha256 倒排</tspan>
+    <tspan x="490" dy="18">≥3 行命中 · 零误报</tspan>
+    <tspan x="490" dy="18">抓"逐字搬运"</tspan>
+  </text>
+
+  <rect x="385" y="295" width="210" height="105" rx="12" fill="#24476b"/>
+  <text x="490" y="325" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">语义层（TF-IDF）</text>
+  <text x="490" y="350" text-anchor="middle" fill="#eef5fa" font-size="12.5">
+    <tspan x="490">字符 2-3 gram + 余弦</tspan>
+    <tspan x="490" dy="18">双阈值 · 影子线/拦截线</tspan>
+    <tspan x="490" dy="18">抓"换说法改写"</tspan>
+  </text>
+
+  <!-- 连线 -->
+  <line x1="260" y1="285" x2="380" y2="230" stroke="#3a6491" stroke-width="2" marker-end="url(#d)"/>
+  <line x1="260" y1="285" x2="380" y2="345" stroke="#3a6491" stroke-width="2" marker-end="url(#d)"/>
+  <line x1="260" y1="385" x2="380" y2="240" stroke="#3a6491" stroke-width="2" marker-end="url(#d)"/>
+  <line x1="260" y1="385" x2="380" y2="355" stroke="#3a6491" stroke-width="2" marker-end="url(#d)"/>
+
+  <!-- 判定结果（右） -->
+  <rect x="700" y="200" width="230" height="80" rx="12" fill="#4a7a52"/>
+  <text x="815" y="232" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">未命中 → 正常放行</text>
+  <text x="815" y="256" text-anchor="middle" fill="#e6f0e7" font-size="12.5">使用技能完成任务不受影响</text>
+
+  <rect x="700" y="300" width="230" height="90" rx="12" fill="#a35c3e"/>
+  <text x="815" y="330" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">命中 → 返回策略措辞</text>
+  <text x="815" y="354" text-anchor="middle" fill="#f6e7e0" font-size="12.5">
+    <tspan x="815">不是报错，是清晰说明</tspan>
+    <tspan x="815" dy="17">模型如实转告用户</tspan>
+  </text>
+
+  <line x1="595" y1="227" x2="695" y2="235" stroke="#3a6491" stroke-width="2" marker-end="url(#d)"/>
+  <line x1="595" y1="347" x2="695" y2="340" stroke="#3a6491" stroke-width="2" marker-end="url(#d)"/>
+
+  <!-- 底部两句 -->
+  <rect x="700" y="420" width="440" height="90" rx="12" fill="#e4edf5" stroke="#b9cbdc" stroke-width="1.5"/>
+  <text x="720" y="450" font-size="14" font-weight="700" fill="#3f5d7d">两条铁律</text>
+  <text x="720" y="476" font-size="13" fill="#4a6784">· fail-open：检测代码自身异常一律放行，不拖垮正常功能</text>
+  <text x="720" y="498" font-size="13" fill="#4a6784">· kill switch 走配置：误伤可秒级关闭，不用发版</text>
+
+  <text x="60" y="470" font-size="13" fill="#6b87a3">另有一道 read 审计线：</text>
+  <text x="60" y="493" font-size="13" fill="#6b87a3">记录谁在读技能正文，</text>
+  <text x="60" y="516" font-size="13" fill="#6b87a3">爆发式读取累计告警。</text>
+</svg>
