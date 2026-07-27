@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="620" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="cut" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#a35c3e"/>
+    </marker>
+  </defs>
+
+  <text x="600" y="48" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">致命三角：三个条件同时成立才危险</text>
+  <text x="600" y="76" text-anchor="middle" font-size="14" fill="#6b87a3">注入拦不住（那是语义问题），但可以让它拦不住也没关系——拆掉任意一条边</text>
+
+  <!-- 三角形 -->
+  <polygon points="600,150 320,470 880,470" fill="none" stroke="#a35c3e" stroke-width="3"/>
+
+  <!-- 顶点 1 -->
+  <circle cx="600" cy="150" r="8" fill="#a35c3e"/>
+  <rect x="425" y="96" width="350" height="46" rx="10" fill="#3a6491"/>
+  <text x="600" y="126" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">① 能访问私密数据</text>
+
+  <!-- 顶点 2 -->
+  <circle cx="320" cy="470" r="8" fill="#a35c3e"/>
+  <rect x="130" y="486" width="380" height="46" rx="10" fill="#3a6491"/>
+  <text x="320" y="516" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">② 接触不可信内容</text>
+
+  <!-- 顶点 3 -->
+  <circle cx="880" cy="470" r="8" fill="#a35c3e"/>
+  <rect x="690" y="486" width="380" height="46" rx="10" fill="#3a6491"/>
+  <text x="880" y="516" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">③ 能对外通信</text>
+
+  <!-- 中心 -->
+  <text x="600" y="345" text-anchor="middle" font-size="18" font-weight="700" fill="#a35c3e">三条同时成立</text>
+  <text x="600" y="372" text-anchor="middle" font-size="14" fill="#8a6a58">数据可被带走</text>
+
+  <!-- 拆边说明 -->
+  <g font-size="13.5" fill="#4a6784">
+    <rect x="120" y="180" width="270" height="118" rx="12" fill="#e4edf5" stroke="#b9cbdc" stroke-width="1.5"/>
+    <text x="140" y="206" font-weight="700" fill="#3f5d7d">拆 ③：不给对外能力</text>
+    <text x="140" y="230">本次运行不挂任何能发出</text>
+    <text x="140" y="250">请求的工具；或出口只放行</text>
+    <text x="140" y="270">白名单域名</text>
+    <text x="140" y="290" fill="#8a6a58">代价：查不了资料</text>
+
+    <rect x="810" y="180" width="270" height="118" rx="12" fill="#e4edf5" stroke="#b9cbdc" stroke-width="1.5"/>
+    <text x="830" y="206" font-weight="700" fill="#3f5d7d">拆 ①②的共存</text>
+    <text x="830" y="230">把处理不可信内容那一步</text>
+    <text x="830" y="250">隔离到一个看不到私密</text>
+    <text x="830" y="270">数据的地方</text>
+    <text x="830" y="290" fill="#8a6a58">代价：需要拆分流程</text>
+
+    <rect x="440" y="560" width="320" height="44" rx="10" fill="#e4edf5" stroke="#b9cbdc" stroke-width="1.5"/>
+    <text x="600" y="588" text-anchor="middle" font-weight="700" fill="#3f5d7d">拆 ②：多数场景做不到</text>
+  </g>
+
+  <!-- 剪刀线 -->
+  <line x1="392" y1="240" x2="470" y2="290" stroke="#a35c3e" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#cut)"/>
+  <line x1="808" y1="240" x2="730" y2="290" stroke="#a35c3e" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#cut)"/>
+
+  <text x="600" y="424" text-anchor="middle" font-size="13" fill="#6b87a3">注意：URL 本身就是外发通道（把内容拼进查询参数），"我没给它发信工具"不构成保护</text>
+</svg>
