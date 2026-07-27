@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="640" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="ray" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <path d="M0,0 L9,3.5 L0,7 z" fill="#8fa9c2"/>
+    </marker>
+  </defs>
+
+  <text x="600" y="48" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">七个角度不是七个独立事实</text>
+  <text x="600" y="76" text-anchor="middle" font-size="14" fill="#6b87a3">它们是「共享不共享内核」这一个决策，在七个方向上的投影</text>
+
+  <!-- 中心决策 -->
+  <circle cx="600" cy="345" r="96" fill="#24476b"/>
+  <text x="600" y="330" text-anchor="middle" fill="#ffffff" font-size="19" font-weight="700">共享内核</text>
+  <text x="600" y="360" text-anchor="middle" fill="#ffffff" font-size="19" font-weight="700">还是不共享</text>
+  <text x="600" y="388" text-anchor="middle" fill="#a9c4dc" font-size="13">唯一的那个决策</text>
+
+  <!-- 七个投影 -->
+  <g font-size="14">
+    <!-- 左上 隔离 -->
+    <rect x="60" y="120" width="230" height="76" rx="12" fill="#5b88b0"/>
+    <text x="175" y="148" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">隔离强度</text>
+    <text x="175" y="172" text-anchor="middle" fill="#eef5fa" font-size="13">共享 → 弱｜独立 → 硬件边界</text>
+
+    <!-- 左中 启动 -->
+    <rect x="40" y="240" width="230" height="76" rx="12" fill="#5b88b0"/>
+    <text x="155" y="268" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">启动延迟</text>
+    <text x="155" y="292" text-anchor="middle" fill="#eef5fa" font-size="13">共享 → 快｜独立 → 要引导内核</text>
+
+    <!-- 左下 资源 -->
+    <rect x="40" y="380" width="230" height="76" rx="12" fill="#5b88b0"/>
+    <text x="155" y="408" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">资源模型</text>
+    <text x="155" y="432" text-anchor="middle" fill="#eef5fa" font-size="13">共享 → 软限额｜独立 → 硬分区</text>
+
+    <!-- 左下角 存储 -->
+    <rect x="60" y="500" width="230" height="76" rx="12" fill="#5b88b0"/>
+    <text x="175" y="528" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">存储与镜像</text>
+    <text x="175" y="552" text-anchor="middle" fill="#eef5fa" font-size="13">共享 → 原生分层｜独立 → 自己拼</text>
+
+    <!-- 右上 调度 -->
+    <rect x="910" y="120" width="230" height="76" rx="12" fill="#3a6491"/>
+    <text x="1025" y="148" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">调度与迁移</text>
+    <text x="1025" y="172" text-anchor="middle" fill="#eef5fa" font-size="13">共享 → 任意节点｜独立 → 专用池</text>
+
+    <!-- 右中 网络 -->
+    <rect x="930" y="290" width="230" height="76" rx="12" fill="#3a6491"/>
+    <text x="1045" y="318" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">网络与可观测</text>
+    <text x="1045" y="342" text-anchor="middle" fill="#eef5fa" font-size="13">共享 → 透明｜独立 → 默认黑盒</text>
+
+    <!-- 右下 威胁 -->
+    <rect x="910" y="460" width="230" height="76" rx="12" fill="#a35c3e"/>
+    <text x="1025" y="488" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">暴露面</text>
+    <text x="1025" y="512" text-anchor="middle" fill="#f6e7e0" font-size="13">共享 → 内核漏洞直接打穿</text>
+  </g>
+
+  <!-- 射线 -->
+  <g stroke="#8fa9c2" stroke-width="2" marker-end="url(#ray)" fill="none">
+    <line x1="520" y1="290" x2="295" y2="180"/>
+    <line x1="506" y1="322" x2="275" y2="285"/>
+    <line x1="506" y1="372" x2="275" y2="410"/>
+    <line x1="522" y1="404" x2="295" y2="512"/>
+    <line x1="680" y1="290" x2="905" y2="180"/>
+    <line x1="694" y1="340" x2="925" y2="328"/>
+    <line x1="678" y1="400" x2="905" y2="490"/>
+  </g>
+
+  <!-- 底部一句 -->
+  <text x="600" y="612" text-anchor="middle" font-size="14.5" fill="#3f5d7d" font-weight="600">遇到第八个、第九个新维度时，先问「这跟共享不共享内核有什么关系」，而不是从零积累新的独立事实</text>
+</svg>
