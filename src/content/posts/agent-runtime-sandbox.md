@@ -1,6 +1,6 @@
 ---
 title: 沙箱系列（番外）：Agent Runtime 落地——引擎选型、会话持久化与 Facade
-published: 2026-07-20
+published: 2026-07-18
 description: 沙箱系列讲完了机制，这一篇讲工程落地：怎么选引擎、会话如何跨崩溃存活、E2B 与 Vercel Eve 各自的答案，以及为什么最终收敛到一个 Facade。
 tags: [沙箱, AI Agent, AI Infra, 学习笔记]
 category: 学习笔记

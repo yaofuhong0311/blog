@@ -1,6 +1,6 @@
 ---
 title: 沙箱系列（六）：「2 核 4G」在两种沙箱里不是同一件事
-published: 2026-07-22
+published: 2026-07-19
 description: 同样一句"给这个沙箱分 2 核 4G"，容器里它是一个可以随时改写、可以超卖的策略数字，microVM 里它是开机时铸死的虚拟硬件。这个差别决定了超限时会发生什么、运行中还能不能改。
 tags: [沙箱, Kubernetes, AI Infra, 学习笔记]
 category: 学习笔记

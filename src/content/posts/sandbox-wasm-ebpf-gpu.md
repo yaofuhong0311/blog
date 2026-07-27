@@ -1,6 +1,6 @@
 ---
 title: 沙箱系列（五·完）：Wasm、eBPF 与 GPU 的三种"例外"
-published: 2026-07-19
+published: 2026-07-18
 description: 系列收尾。这三个话题各自代表了一种前面主线之外的独立思路：能力从未存在、验证后信任、以及内核根本管不着的资源。
 tags: [沙箱, WebAssembly, eBPF, GPU, 学习笔记]
 category: 学习笔记

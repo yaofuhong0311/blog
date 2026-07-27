@@ -1,6 +1,6 @@
 ---
 title: Agent 工程（二）：工具面设计是在给自己的 harness 预留钩子
-published: 2026-07-27
+published: 2026-07-22
 description: 暴露什么工具、在哪里执行，是两个正交问题。而"该不该把某个动作提升为专用工具"的判据只有一句：harness 是否需要对这个动作做点特别的事。
 tags: [AI Agent, MCP, AI Infra, 学习笔记]
 category: 学习笔记

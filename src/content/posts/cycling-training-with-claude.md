@@ -1,6 +1,6 @@
 ---
 title: 用 Claude 分析骑行训练：把数据链打通之后
-published: 2026-07-21
+published: 2026-07-18
 description: 小米秤、Zwift、Garmin、intervals.icu 的数据各自为政，直到用一个自写小工具加一个 MCP 服务把链路串起来——训练分析从"打开三个 App 各看一眼"变成一句话的事。
 tags: [AI Coding, MCP, Claude Code, 骑行]
 category: AI Coding

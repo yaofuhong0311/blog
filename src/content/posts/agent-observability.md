@@ -1,6 +1,6 @@
 ---
 title: Agent 工程（十一）：一次运行是一棵树，不是一串行
-published: 2026-07-27
+published: 2026-07-26
 description: 日志是一串离散事件，而 agent 的一次运行有结构。但在上 OTel 之前，先问一个更小的问题：能不能把某一次运行的全部记录，从混在一起的日志里完整取出。
 tags: [AI Agent, 可观测性, OpenTelemetry, 学习笔记]
 category: 学习笔记

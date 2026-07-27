@@ -1,6 +1,6 @@
 ---
 title: 沙箱系列（四）：K8s 的声明式世界观
-published: 2026-07-18
+published: 2026-07-17
 description: 从"下一道命令"到"声明一个期望状态，让一个持续运行的循环兜底"——理解了 reconcile loop，CRD、Controller、Service 就都不神秘了。
 tags: [沙箱, Kubernetes, AI Infra, 学习笔记]
 category: 学习笔记
