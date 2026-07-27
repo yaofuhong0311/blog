@@ -1,6 +1,6 @@
 ---
 title: Agent 工程（九）：注入拦不住，但可以让它拦不住也没关系
-published: 2026-08-05
+published: 2026-07-27
 description: prompt injection 不像 SQL 注入那样可以根治，因为模型没有可依赖的语法层把指令和数据分开。真实的注入也不是"明显越界"，而是"看起来在任务范围内"。
 tags: [AI Agent, 安全, LLM, 学习笔记]
 category: 学习笔记

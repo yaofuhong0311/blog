@@ -1,6 +1,6 @@
 ---
 title: Agent 工程（七）：harness 的盲区始终只有语义
-published: 2026-08-03
+published: 2026-07-27
 description: 打转判不了、完成判不了，根子是同一个——harness 手里只有结构信号，没有语义。所以设计上的功夫全花在同一件事：把语义目标翻译成它看得懂的结构信号。
 tags: [AI Agent, AI Infra, 可靠性, 学习笔记]
 category: 学习笔记

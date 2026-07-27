@@ -1,6 +1,6 @@
 ---
 title: Agent 工程（六）：前缀缓存与那些不报错、只是悄悄变贵的失效
-published: 2026-08-02
+published: 2026-07-27
 description: 每轮重发完整历史本该带来平方级的成本增长。它没有，靠的是前缀缓存。而这套机制的失效方式有一个共同点——全都不报错。
 tags: [AI Agent, LLM, 性能, 学习笔记]
 category: 学习笔记

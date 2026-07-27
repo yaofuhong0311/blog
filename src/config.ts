@@ -39,11 +39,15 @@ export const siteConfig: SiteConfig = {
 export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
-		LinkPreset.Archive,
+		{
+			name: "系列",
+			url: "/series/",
+		},
 		{
 			name: "工具",
 			url: "/tools/", // Internal links should not include the base path, as it is automatically added
 		},
+		LinkPreset.Archive,
 		LinkPreset.About,
 	],
 };

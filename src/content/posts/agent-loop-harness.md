@@ -1,6 +1,6 @@
 ---
 title: Agent 工程（一）：harness 不是外面那层，它就是 agent 本体
-published: 2026-07-28
+published: 2026-07-27
 description: 模型是一个无状态函数，一次请求只能推进一步。理解了这两条，循环的必然性、tool_result 的配对规则、stop_reason 的成因分类、以及"哪些能力根本不可能属于模型"，全都能推出来。
 tags: [AI Agent, AI Infra, LLM, 学习笔记]
 category: 学习笔记

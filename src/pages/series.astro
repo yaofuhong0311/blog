@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import { seriesList } from "../constants/series";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { url } from "../utils/url-utils";
+
+const posts = await getCollection("posts");
+const bySlug = new Map(posts.map((p) => [p.slug, p]));
+
+// 缺失的 slug 直接跳过，避免文章改名后整页构建失败
+const series = seriesList.map((s) => ({
+	...s,
+	entries: s.posts
+		.map((slug) => bySlug.get(slug))
+		.filter((p) => p !== undefined),
+}));
+---
+
+<MainGridLayout title="系列" description="成体系的长文合集，按阅读顺序排列">
+    <div class="flex flex-col gap-4">
+        {
+            series.map((s) => (
+                <div class="card-base px-9 py-6 rounded-[var(--radius-large)]">
+                    <div class="text-2xl font-bold text-90">{s.title}</div>
+                    <div class="text-50 mt-2 mb-1">{s.description}</div>
+                    <div class="text-sm text-30 mb-5">共 {s.entries.length} 篇</div>
+
+                    <div class="flex flex-col">
+                        {s.entries.map((post, i) => (
+                            <a
+                                href={url(`/posts/${post.slug}/`)}
+                                class="group flex gap-4 items-baseline py-3 border-t border-[var(--line-divider)] hover:bg-[var(--btn-plain-bg-hover)] transition rounded-md px-2 -mx-2"
+                            >
+                                <span class="text-sm text-30 font-mono shrink-0 w-6 text-right">
+                                    {String(i + 1).padStart(2, "0")}
+                                </span>
+                                <span class="flex-1">
+                                    <span class="text-90 font-medium group-hover:text-[var(--primary)] transition">
+                                        {post.data.title}
+                                    </span>
+                                    <span class="block text-sm text-50 mt-1">
+                                        {post.data.description}
+                                    </span>
+                                </span>
+                                <Icon
+                                    name="material-symbols:chevron-right-rounded"
+                                    class="text-[1.25rem] text-[var(--primary)] shrink-0 opacity-0 group-hover:opacity-100 transition"
+                                />
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</MainGridLayout>

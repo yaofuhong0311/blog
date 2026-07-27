@@ -8,9 +8,19 @@
 
 **这个站点放什么**：
 
+- [系列](/series/)：成体系的长文，目前两条主线——沙箱底层机制、Agent 工程
 - [工具与 Demo](/tools/)：自己写的小工具和练手 Demo，附说明和源码
-- 学习笔记：系统学习后的整理输出
 - AI Coding 实践：AI 辅助编程在真实工程里的经验
+
+## 如果你第一次来
+
+站内多数文章属于两个长系列，建议从这几篇进：
+
+- [给 AI Agent 选沙箱：七个角度、一条隔离阶梯和两条主线](/posts/sandbox-deep-dive/)——沙箱系列的开篇，也是"不看参数表、沿着底层机制提问"这套方法的示范
+- [Agent 工程（一）：harness 不是外面那层，它就是 agent 本体](/posts/agent-loop-harness/)——Agent 系列的地基，后面十一篇的结论都是这一篇那条判据的推论
+- [沙箱系列（十一·完）：七个角度其实是一个决策的七个投影](/posts/sandbox-one-decision/)——如果只想看结论，直接读这篇收束
+- [我的 AI Coding 工作流：从"管住它"到"验证它"](/posts/ai-coding-workflow-2026/)——三层防御的实践，配套开源了 [staged-verify](/tools/staged-verify/)
+- [用 Claude 分析骑行训练：把数据链打通之后](/posts/cycling-training-with-claude/)——一个把自动化与模型分工用在自己身上的小例子
 
 工作之外骑公路车，坚持晨间训练。
 
