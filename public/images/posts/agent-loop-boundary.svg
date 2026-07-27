@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="600" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="al" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/>
+    </marker>
+  </defs>
+
+  <text x="600" y="46" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">一次 API 请求 = 模型的一个回合</text>
+  <text x="600" y="74" text-anchor="middle" font-size="14" fill="#6b87a3">模型只提议、不执行；要推进 N 步就需要 N 次请求——循环是结构性约束，不是风格选择</text>
+
+  <!-- harness 大框 -->
+  <rect x="60" y="105" width="1080" height="400" rx="16" fill="none" stroke="#3a6491" stroke-width="2.5" stroke-dasharray="8 6"/>
+  <text x="82" y="132" font-size="15" font-weight="700" fill="#3a6491">harness（这才是 agent 的本体）</text>
+
+  <!-- 模型 -->
+  <rect x="470" y="160" width="260" height="110" rx="14" fill="#24476b"/>
+  <text x="600" y="196" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">模型</text>
+  <text x="600" y="222" text-anchor="middle" fill="#a9c4dc" font-size="13">
+    <tspan x="600">无状态函数：给定历史</tspan>
+    <tspan x="600" dy="20">返回「下一步想做什么」</tspan>
+  </text>
+  <text x="600" y="288" text-anchor="middle" fill="#6b87a3" font-size="12.5">仅此一行是模型</text>
+
+  <!-- messages -->
+  <rect x="90" y="175" width="230" height="90" rx="12" fill="#5b88b0"/>
+  <text x="205" y="207" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">messages 数组</text>
+  <text x="205" y="232" text-anchor="middle" fill="#eef5fa" font-size="12.5">
+    <tspan x="205">只增不减</tspan>
+    <tspan x="205" dy="18">每轮完整重发</tspan>
+  </text>
+
+  <!-- execute -->
+  <rect x="880" y="175" width="230" height="90" rx="12" fill="#5b88b0"/>
+  <text x="995" y="207" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">execute()</text>
+  <text x="995" y="232" text-anchor="middle" fill="#eef5fa" font-size="12.5">
+    <tspan x="995">唯一真正「动手」的位置</tspan>
+    <tspan x="995" dy="18">本地子进程 / 远程沙箱</tspan>
+  </text>
+
+  <!-- 环形箭头 -->
+  <line x1="325" y1="205" x2="465" y2="205" stroke="#3a6491" stroke-width="2.5" marker-end="url(#al)"/>
+  <text x="395" y="194" text-anchor="middle" font-size="12.5" fill="#3f5d7d">发送全部历史</text>
+
+  <line x1="735" y1="205" x2="875" y2="205" stroke="#3a6491" stroke-width="2.5" marker-end="url(#al)"/>
+  <text x="805" y="194" text-anchor="middle" font-size="12.5" fill="#3f5d7d">tool_use 块</text>
+
+  <path d="M 995 265 L 995 330 L 205 330 L 205 270" fill="none" stroke="#3a6491" stroke-width="2.5" marker-end="url(#al)"/>
+  <text x="600" y="352" text-anchor="middle" font-size="13" fill="#3f5d7d" font-weight="600">tool_result 以 user 角色写回历史，靠 tool_use_id 配对 → 进入下一轮</text>
+
+  <!-- harness 职责 -->
+  <rect x="90" y="380" width="1020" height="100" rx="12" fill="#e4edf5" stroke="#b9cbdc" stroke-width="1.5"/>
+  <text x="112" y="408" font-size="14.5" font-weight="700" fill="#3f5d7d">凡是需要跨请求、跨线程才能做到的事，必然在 harness：</text>
+  <g font-size="13.5" fill="#4a6784">
+    <text x="112" y="434">· 记住上一轮说过什么（重发历史 + checkpoint）</text>
+    <text x="620" y="434">· 知晓子 thread 是否仍在运行</text>
+    <text x="112" y="458">· 打断时连带停止子 thread</text>
+    <text x="620" y="458">· 判定整个会话是否仍在运行</text>
+  </g>
+
+  <text x="600" y="545" text-anchor="middle" font-size="15" fill="#24476b" font-weight="700">模型只能看到本次请求中塞给它的内容——这是划分职责的通用判据</text>
+  <text x="600" y="572" text-anchor="middle" font-size="13" fill="#6b87a3">「让模型知道存在某项能力」，其物理实现就是往 tools 数组里加一项，没有其它机制</text>
+</svg>
