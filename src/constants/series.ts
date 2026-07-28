@@ -27,6 +27,8 @@ export const seriesList: SeriesDef[] = [
 			"sandbox-network-egress",
 			"sandbox-scheduling-observability",
 			"sandbox-one-decision",
+			"sandbox-agentenv-case",
+			"sandbox-cow-fork",
 		],
 	},
 	{
