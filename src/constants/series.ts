@@ -50,6 +50,7 @@ export const seriesList: SeriesDef[] = [
 			"agent-observability",
 			"agent-memory-layers",
 			"agent-serverside-anatomy",
+			"agent-tools-execution-plane",
 		],
 	},
 ];

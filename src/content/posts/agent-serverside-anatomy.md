@@ -24,7 +24,25 @@ category: 学习笔记
 
 ## 一、①②③：无状态副本的准确含义
 
-它的 Agent 对象是**每次请求现场构造、请求结束即丢弃**的。构造时的七项参数——名称、系统提示、模型客户端、工具集、上下文配置、中间件、工作区——**没有一项由 Agent 自身产生**，全部来自数据库或现场装配。
+它的 Agent 对象是**每次请求现场构造、请求结束即丢弃**的：
+
+```python
+agent_state = session_record.state          # ① 从存储读出状态
+agent_state.session_id = session_id
+agent = self._agent_cls(
+    name=agent_record.data.name,            # ② 定义来自 DB
+    system_prompt=agent_record.data.system_prompt,
+    model=model,                            # ③ 模型客户端现造
+    toolkit=toolkit,                        # ④ 工具集现装
+    context_config=agent_record.data.context_config,
+    react_config=agent_record.data.react_config,
+    state=agent_state,                      # ⑤ 状态注入
+    middlewares=middlewares,                # ⑥ 中间件现装
+    offloader=workspace,                    # ⑦ 工作区现连
+)
+```
+
+**七项参数没有一项由 Agent 自身产生**——全部来自数据库或现场装配。
 
 这里有个措辞需要精确：**"无状态副本"指的是副本不持有不可替代的权威状态，而不是"每次请求都从零重建对象"**。事实上副本仍会缓存部分构件。区别在于——缓存丢了只是慢一点，权威状态丢了才是数据丢失。
 
@@ -63,11 +81,41 @@ category: 学习笔记
 
 ### 结构性消除竞争，而不是加锁
 
-更值得学的是并发启动那个问题的解法。全系统**只有一处**调用"启动会话运行"——一个每进程一个的唤醒调度器，所有触发都经过这个串行消费者。
+更值得学的是并发启动那个问题的解法。调度器的类注释直接说明了它为什么存在：
 
-源码注释用的措辞是 **"structurally impossible"**，而不是"概率降低"：**竞争路径不存在，所以不需要为它加锁。**
+```text
+Single per-process dispatcher for all cross-session run triggers.
 
-而"会话是否在运行"的判定依据是 **Redis 分布式锁，不是本地任务表**——本地表对其它副本不可见。锁的实现是标准做法但细节到位：随机 token + 原子占用 + 心跳续期 + 释放时校验 token（**绝不删掉一个 value 不是自己的键**，否则会误释放别人刚拿到的锁）。租约默认十分钟、每五分钟续期，所以持有者进程崩溃后最多十分钟锁自动释放，其它副本接管——**这是滚动升级和故障接管能够成立的机制基础**。
+One asyncio task per process. Subscribes to the shared trigger signal
+channel and drains the durable trigger queue on each signal. It is the
+**sole** site that spawns ``ChatService.run`` into the shared
+``ChatRunRegistry``, which is what makes concurrent-spawn races (two
+writers contending for one session's run slot → a spurious "already has
+an active chat run" 409) structurally impossible: every run trigger
+funnels through this one serial consumer.
+```
+
+注意措辞是 **"structurally impossible"**，不是"概率降低"。全系统**只有这一处**调用"启动会话运行"，所有触发都经过这个串行消费者——**竞争路径不存在，所以不需要为它加锁。**
+
+而"会话是否在运行"的判定依据是 **Redis 分布式锁，不是本地任务表**——本地表对其它副本不可见。锁的 docstring 把设计意图交代得很完整：
+
+```python
+async def acquire_lock(self, key: str, *, ttl_secs: int = 600):
+    """Acquire ``key`` as a distributed mutex.
+
+    - ``SET key <random-token> NX EX ttl_secs`` to claim the lock
+      atomically. Retries every ``_LOCK_RETRY_DELAY_SECS`` until acquired.
+    - A heartbeat task renews the TTL every ``ttl_secs / 2`` seconds while
+      the body runs, so a long-running holder does not lose the lease.
+    - On exit, the heartbeat is cancelled and the lock is released by
+      GET-then-DEL guarded on the random token — we never delete a key
+      whose value isn't ours, so a process whose lease has already expired
+      (and been re-acquired by someone else) cannot accidentally release
+      the new holder's lock.
+    """
+```
+
+四个要点各自对应一类故障：**原子占用**防两个副本同时拿到；**心跳续期**防长任务把自己的锁跑丢；**随机 token 守卫释放**防"我的租约已过期、锁被别人拿走了，而我退出时把别人的锁删了"；**十分钟租约**保证持有者进程崩溃后锁能自动释放——**这是滚动升级和故障接管能够成立的机制基础**。
 
 ### 同一个事实，在两种触发下含义相反
 
@@ -93,7 +141,21 @@ category: 学习笔记
               直接发请求会被 API 拒绝
 ```
 
-这正是[第三篇](/posts/agent-checkpoint-chain/)讲过的**配对不变量**，在一个真实框架里的具体形态。所以它的循环入口接受**五种输入**：
+这正是[第三篇](/posts/agent-checkpoint-chain/)讲过的**配对不变量**，在一个真实框架里的具体形态。所以它的循环入口接受**五种输入**——这个签名本身就是判据：
+
+```python
+async def reply(
+    self,
+    inputs: Msg
+          | list[Msg]
+          | UserConfirmResultEvent          # ← 停在「等待确认」后的续跑
+          | UserInterruptEvent              # ← 打断
+          | ExternalExecutionResultEvent    # ← 停在「等待外部返回」后的续跑
+          | None = None,
+    structured_schema: Type[BaseModel] | None = None,
+) -> Msg:
+```
+
 
 | 输入 | 对应上一轮怎么结束的 |
 |---|---|
@@ -172,3 +234,5 @@ t8  leader 读到上报，继续
 读一个真实框架的最大收获，不是学到某个具体实现，而是看到那些**只有在服务端形态下才会浮现的问题**：会话锁、唤醒队列、中断状态修补、多副本装配。这些在单机 agent 里一个都不存在。
 
 而它们能被逐条对上前面十二篇的讨论，也说明那些讨论确实落在真问题上。
+
+下一篇继续读同一份源码，转到工具体系与执行面：为什么参数 schema 从头到尾没被用于校验、执行面为什么只有三个原语、以及沙箱里的网关为什么只绑回环地址。
