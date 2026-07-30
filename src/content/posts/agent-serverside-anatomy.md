@@ -1,12 +1,12 @@
 ---
-title: Agent 工程（十三）：怎么判断一个 agent 系统是不是面向服务端的
+title: AgentScope 源码调研（一）：面向服务端的 Agent 如何组织会话状态
 published: 2026-07-29
-description: 五条判据。只满足前两条的系统很常见——把状态存进数据库，但循环入口只接受用户消息。那是"可重启的单机 agent"，不是服务端 agent。
-tags: [AI Agent, AI Infra, 架构, 学习笔记]
-category: 学习笔记
+description: 从进程重启、多副本路由、跨机器续跑、外部事件唤醒和可持久化中断五个方面，分析 AgentScope 的服务端会话设计。
+tags: [AgentScope, AI Agent, AI Infra, 源码分析]
+category: 源码调研
 ---
 
-> 本文是「Agent 工程」系列第 13 篇。前十二篇讲的是**该怎么设计**，这一篇换个方向：读一个真实开源框架的源码，看它**实际怎么做的**。对象是 [AgentScope](https://github.com/agentscope-ai/agentscope)——它自身是"框架层 + 服务层"两层结构，服务层是一个可直接运行的 loop 服务，不是示例代码。
+> 本文是「AgentScope 源码调研」系列第 1 篇。研究对象是 [AgentScope](https://github.com/agentscope-ai/agentscope) 的框架层与服务层实现。本篇分析服务端会话设计，后续文章继续讨论工具执行与模型协议适配。
 
 先把结论放前面。判断一个 agent 系统是否真的面向服务端，有五条判据：
 
@@ -235,4 +235,4 @@ t8  leader 读到上报，继续
 
 而它们能被逐条对上前面十二篇的讨论，也说明那些讨论确实落在真问题上。
 
-下一篇继续读同一份源码，转到工具体系与执行面：为什么参数 schema 从头到尾没被用于校验、执行面为什么只有三个原语、以及沙箱里的网关为什么只绑回环地址。
+[下一篇](/posts/agent-tools-execution-plane/)继续分析工具体系与执行面：参数 schema 的实际用途、执行面的三个原语，以及沙箱网关只监听回环地址的原因。

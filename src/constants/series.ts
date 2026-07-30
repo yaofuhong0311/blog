@@ -49,8 +49,17 @@ export const seriesList: SeriesDef[] = [
 			"agent-planning-patterns",
 			"agent-observability",
 			"agent-memory-layers",
+		],
+	},
+	{
+		slug: "agentscope",
+		title: "AgentScope 源码调研",
+		description:
+			"沿着 AgentScope 源码分析服务端会话、工具执行与模型协议适配等关键模块，关注实现证据、职责边界，以及可以迁移到其他 Agent 系统的工程判断。",
+		posts: [
 			"agent-serverside-anatomy",
 			"agent-tools-execution-plane",
+			"agentscope-formatter-boundary",
 		],
 	},
 ];

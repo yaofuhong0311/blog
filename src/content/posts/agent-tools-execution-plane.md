@@ -1,12 +1,12 @@
 ---
-title: Agent 工程（十四）：工具、执行面，与几个只有读源码才会发现的细节
+title: AgentScope 源码调研（二）：工具体系与执行面的职责边界
 published: 2026-07-29
-description: input_schema 从头到尾没被用于校验；执行面只有三个原语；沙箱里的网关只绑回环地址；上下文压缩的切分点要靠不动点循环修出来。接着上一篇继续读源码。
-tags: [AI Agent, AI Infra, 架构, 学习笔记]
-category: 学习笔记
+description: 从 input_schema、工具执行位置、沙箱原语、网关监听范围与上下文压缩切分点，分析 AgentScope 工具体系的职责划分。
+tags: [AgentScope, AI Agent, AI Infra, 源码分析]
+category: 源码调研
 ---
 
-> 本文是「Agent 工程」系列第 14 篇，接着[上一篇](/posts/agent-serverside-anatomy/)继续读 [AgentScope](https://github.com/agentscope-ai/agentscope) 的源码。上一篇讲服务层怎么驱动会话，这一篇讲工具体系与执行面——**这部分细节多，所以尽量把代码摆出来**，很多结论光看描述是不成立的。
+> 本文是「AgentScope 源码调研」系列第 2 篇，接着[上一篇](/posts/agent-serverside-anatomy/)分析 [AgentScope](https://github.com/agentscope-ai/agentscope) 的源码。上一篇讨论服务层如何驱动会话，本篇转向工具体系与执行面，并以源码片段作为主要论据。
 
 ## 一、工具的字段：三个给模型，其余全给 harness
 
@@ -293,3 +293,5 @@ while True:
 两篇读下来，最想留的一句话是：**这些机制没有一个是"AI 特有"的**——分布式锁、乐观并发、消息队列、门面模式、不动点迭代，全是分布式系统与工程实践里的老东西。
 
 Agent 系统的新意不在于发明了新机制，而在于**它把一批老问题重新摆到了一起**：一个会跑几分钟、随时可能停下等人、状态必须跨进程存活、还要在不可信环境里执行任意代码的东西——每一条单独都不新，凑在一起就需要重新做一遍设计取舍。
+
+[下一篇](/posts/agentscope-formatter-boundary/)分析 Formatter：统一内部消息如何转换成 OpenAI、Anthropic 与 Gemini 的不同协议结构。
