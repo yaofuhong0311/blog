@@ -113,12 +113,7 @@ const featuredItems = [
             </div>
         </section>
 
-        <div class="flex items-center gap-3 px-1 pt-3">
-            <div class="h-px flex-1 bg-[var(--line-divider)]"></div>
-            <div class="text-xs font-semibold tracking-[0.16em] text-30">LATEST NOTES</div>
-            <div class="h-px flex-1 bg-[var(--line-divider)]"></div>
-        </div>
     </div>}
-    <PostPage page={page}></PostPage>
-    <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
+    {!isHome && <PostPage page={page}></PostPage>}
+    {!isHome && <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>}
 </MainGridLayout>
