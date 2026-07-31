@@ -60,6 +60,7 @@ export const seriesList: SeriesDef[] = [
 			"agent-serverside-anatomy",
 			"agent-tools-execution-plane",
 			"agentscope-formatter-boundary",
+			"agentscope-session-recovery",
 		],
 	},
 ];

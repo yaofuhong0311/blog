@@ -314,3 +314,5 @@ Formatter 保护的不是“以后可以少写几次字段映射”，而是内�
 > **内部表示负责保存稳定语义，Formatter 负责吸收外部协议变化；二者之间的边界越清晰，模型供应商的变化就越难扩散到 Agent 主循环。**
 
 这也解释了 Formatter 中大量看似细小的兼容分支。它们不是附加处理，而是协议边界存在的主要原因。
+
+[下一篇](/posts/agentscope-session-recovery/)分析 Session 执行控制与 Tool 恢复：CAS、Pub/Sub、checkpoint 和幂等性分别解决什么问题。
