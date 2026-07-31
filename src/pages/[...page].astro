@@ -1,10 +1,12 @@
 ---
 import type { GetStaticPaths } from "astro";
+import { Icon } from "astro-icon/components";
 import Pagination from "../components/control/Pagination.astro";
 import PostPage from "../components/PostPage.astro";
 import { PAGE_SIZE } from "../constants/constants";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { getSortedPosts } from "../utils/content-utils";
+import { url } from "../utils/url-utils";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const allBlogPosts = await getSortedPosts();
@@ -15,9 +17,108 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 
 const len = page.data.length;
+const isHome = page.currentPage === 1;
+const featuredItems = [
+	{
+		kicker: "TOOLS",
+		title: "我做的小工具",
+		description:
+			"把日常问题做成可以直接使用的桌面工具、自动化脚本与 Agent skill。",
+		url: "/tools/",
+		icon: "material-symbols:build-outline-rounded",
+	},
+	{
+		kicker: "SOURCE RESEARCH",
+		title: "AgentScope 源码调研",
+		description: "沿着服务端会话、工具执行、协议适配与恢复机制阅读真实源码。",
+		url: "/series/",
+		icon: "material-symbols:account-tree-outline-rounded",
+	},
+	{
+		kicker: "SYSTEMS",
+		title: "沙箱底层机制",
+		description: "从隔离、缺页、存储到调度，整理沙箱系统的机制与选型判断。",
+		url: "/series/",
+		icon: "material-symbols:layers-outline-rounded",
+	},
+];
 ---
 
 <MainGridLayout>
+    {isHome && <div class="mb-5 flex flex-col gap-4">
+        <section class="card-base relative overflow-hidden px-6 py-7 md:px-9 md:py-9">
+            <div class="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[oklch(0.92_0.04_var(--hue))] opacity-70 dark:bg-[oklch(0.28_0.04_var(--hue))]"></div>
+            <div class="relative grid gap-8 md:grid-cols-[minmax(0,1fr)_15rem] md:items-end">
+                <div>
+                    <div class="mb-4 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-[var(--primary)]">
+                        <span class="h-1.5 w-8 rounded-full bg-[var(--primary)]"></span>
+                        ENGINEERING NOTES
+                    </div>
+                    <h1 class="max-w-3xl text-3xl font-bold leading-tight text-90 md:text-5xl md:leading-[1.08]">
+                        把工程实践，整理成可以复用的知识。
+                    </h1>
+                    <p class="mt-5 max-w-2xl text-base leading-7 text-60 md:text-lg">
+                        后端工程师，关注 Agent 基础设施、沙箱隔离与 AI Coding 工程化。这里记录做过的工具、源码调研与学习笔记。
+                    </p>
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <a href={url("/tools/")} class="btn-regular rounded-lg px-4 py-2.5 font-semibold transition hover:-translate-y-0.5">
+                            查看我的工具
+                            <Icon name="material-symbols:arrow-forward-rounded" class="ml-1 inline text-lg align-[-3px]"></Icon>
+                        </a>
+                        <a href={url("/about/")} class="btn-plain rounded-lg px-4 py-2.5 font-semibold">
+                            了解我
+                            <Icon name="material-symbols:arrow-forward-rounded" class="ml-1 inline text-lg align-[-3px]"></Icon>
+                        </a>
+                    </div>
+                </div>
+                <div class="border-l border-[var(--line-divider)] pl-5 md:pb-1">
+                    <div class="mb-3 text-xs font-semibold tracking-[0.16em] text-30">FOCUS</div>
+                    <div class="space-y-2 text-sm font-medium text-70">
+                        <div>AGENT INFRASTRUCTURE</div>
+                        <div>SANDBOX SYSTEMS</div>
+                        <div>AI CODING</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="featured-heading">
+            <div class="mb-3 flex items-end justify-between px-1">
+                <div>
+                    <div class="text-xs font-semibold tracking-[0.16em] text-[var(--primary)]">START HERE</div>
+                    <h2 id="featured-heading" class="mt-1 text-2xl font-bold text-90">从三个方向开始</h2>
+                </div>
+                <a href={url("/series/")} class="hidden text-sm font-medium text-[var(--primary)] hover:underline sm:block">
+                    查看全部系列 →
+                </a>
+            </div>
+            <div class="grid gap-3 md:grid-cols-3">
+                {featuredItems.map((item) => (
+                    <a
+                        href={url(item.url)}
+                        class="group card-base flex min-h-44 flex-col justify-between px-5 py-5 transition hover:-translate-y-0.5 hover:bg-[var(--btn-plain-bg-hover)] md:min-h-48 md:px-6 md:py-6"
+                    >
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="text-xs font-semibold tracking-[0.14em] text-[var(--primary)]">{item.kicker}</div>
+                            <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--btn-regular-bg)]">
+                                <Icon name={item.icon} class="text-xl text-[var(--primary)] transition group-hover:translate-x-0.5"></Icon>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-90 md:text-xl">{item.title}</h3>
+                            <p class="mt-2 text-sm leading-6 text-50 md:text-[0.9375rem]">{item.description}</p>
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </section>
+
+        <div class="flex items-center gap-3 px-1 pt-3">
+            <div class="h-px flex-1 bg-[var(--line-divider)]"></div>
+            <div class="text-xs font-semibold tracking-[0.16em] text-30">LATEST NOTES</div>
+            <div class="h-px flex-1 bg-[var(--line-divider)]"></div>
+        </div>
+    </div>}
     <PostPage page={page}></PostPage>
     <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
 </MainGridLayout>
