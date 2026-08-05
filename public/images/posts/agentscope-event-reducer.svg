@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">AgentScope Event 归并为 AssistantMsg</title>
+  <desc id="desc">运行时事件经过 append_event 归并为结构化 AssistantMsg，随后用于实时发布、持久化和恢复。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5b8def"/>
+    </marker>
+    <style>
+      .title { font: 700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #182230; }
+      .label { font: 700 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #182230; }
+      .text { font: 500 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #52606d; }
+      .small { font: 600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #5b8def; letter-spacing: 1px; }
+    </style>
+  </defs>
+  <rect width="1200" height="520" rx="28" fill="#f2f6fa"/>
+  <text x="56" y="62" class="title">Event 是修改指令，AssistantMsg 是可恢复快照</text>
+
+  <rect x="56" y="108" width="250" height="340" rx="20" fill="#ffffff" stroke="#dce6f2"/>
+  <text x="82" y="144" class="small">RUNTIME EVENTS</text>
+  <g class="text">
+    <rect x="82" y="170" width="198" height="42" rx="10" fill="#eaf2ff"/><text x="101" y="196">ReplyStartEvent</text>
+    <rect x="82" y="226" width="198" height="42" rx="10" fill="#eaf2ff"/><text x="101" y="252">Block Start / Delta / End</text>
+    <rect x="82" y="282" width="198" height="42" rx="10" fill="#eaf2ff"/><text x="101" y="308">ToolCall / ToolResult</text>
+    <rect x="82" y="338" width="198" height="42" rx="10" fill="#eaf2ff"/><text x="101" y="364">ModelCallEndEvent</text>
+    <rect x="82" y="394" width="198" height="42" rx="10" fill="#eaf2ff"/><text x="101" y="420">ReplyEndEvent</text>
+  </g>
+
+  <line x1="326" y1="278" x2="425" y2="278" stroke="#5b8def" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="345" y="254" class="small">APPLY</text>
+
+  <rect x="445" y="150" width="310" height="256" rx="24" fill="#dfeaff" stroke="#9bbcf7" stroke-width="2"/>
+  <text x="478" y="196" class="small">REDUCER</text>
+  <text x="478" y="232" class="label">Msg.append_event()</text>
+  <text x="478" y="270" class="text">reply_id 校验</text>
+  <text x="478" y="301" class="text">block_id / tool_call_id 定位</text>
+  <text x="478" y="332" class="text">状态迁移与增量归并</text>
+  <text x="478" y="363" class="text">usage / finished_reason 更新</text>
+
+  <line x1="775" y1="278" x2="874" y2="278" stroke="#5b8def" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="789" y="254" class="small">SNAPSHOT</text>
+
+  <rect x="894" y="108" width="250" height="340" rx="20" fill="#ffffff" stroke="#dce6f2"/>
+  <text x="920" y="144" class="small">ASSISTANT MSG</text>
+  <text x="920" y="184" class="label">结构化消息快照</text>
+  <g class="text">
+    <text x="920" y="226">TextBlock</text>
+    <text x="920" y="258">ThinkingBlock</text>
+    <text x="920" y="290">ToolCallBlock</text>
+    <text x="920" y="322">ToolResultBlock</text>
+    <text x="920" y="354">DataBlock / HintBlock</text>
+  </g>
+  <line x1="920" y1="378" x2="1118" y2="378" stroke="#dce6f2"/>
+  <text x="920" y="410" class="small">PUBLISH · PERSIST · RESUME</text>
+</svg>
