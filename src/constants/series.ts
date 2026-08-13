@@ -63,6 +63,7 @@ export const seriesList: SeriesDef[] = [
 			"agentscope-session-recovery",
 			"agentscope-event-reducer",
 			"agentscope-storage-boundary",
+			"agentscope-runtime-ownership",
 		],
 	},
 ];

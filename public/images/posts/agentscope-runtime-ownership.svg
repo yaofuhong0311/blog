@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">从 Session Lock 到可验证的执行所有权</title>
+  <desc id="desc">展示租约过期后旧副本与新副本重叠时，所有权令牌和 Store Fence 如何阻止旧执行者写入。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#5b8def"/>
+    </marker>
+    <marker id="danger-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#d46a6a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#26466d" flood-opacity=".10"/>
+    </filter>
+    <style>
+      .title { font: 700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1f3349; }
+      .label { font: 700 20px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #20354d; }
+      .sub { font: 400 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #60758d; }
+      .code { font: 600 15px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #42658b; }
+      .small { font: 500 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #6e8298; }
+      .danger { fill: #b84f4f; }
+      .success { fill: #327a63; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="720" rx="28" fill="#f2f6fa"/>
+  <text x="600" y="55" text-anchor="middle" class="title">从 Session Lock 到可验证的执行所有权</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="100" width="300" height="120" rx="20" fill="#ffffff" stroke="#d9aaaa" stroke-width="2"/>
+    <text x="220" y="140" text-anchor="middle" class="label">旧执行者 A</text>
+    <text x="220" y="170" text-anchor="middle" class="code">owner_epoch = 17</text>
+    <text x="220" y="197" text-anchor="middle" class="sub">租约过期后恢复运行</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="830" y="100" width="300" height="120" rx="20" fill="#ffffff" stroke="#9fcab9" stroke-width="2"/>
+    <text x="980" y="140" text-anchor="middle" class="label">新执行者 B</text>
+    <text x="980" y="170" text-anchor="middle" class="code">owner_epoch = 18</text>
+    <text x="980" y="197" text-anchor="middle" class="sub">获得新的执行所有权</text>
+  </g>
+
+  <path d="M370 160 L500 160" stroke="#d46a6a" stroke-width="3" marker-end="url(#danger-arrow)"/>
+  <path d="M830 160 L700 160" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="500" y="105" width="200" height="110" rx="18" fill="#e7f0ff" stroke="#78a7eb" stroke-width="2"/>
+    <text x="600" y="143" text-anchor="middle" class="label">Turn Guard</text>
+    <text x="600" y="172" text-anchor="middle" class="sub">当前 Owner</text>
+    <text x="600" y="198" text-anchor="middle" class="code">epoch = 18</text>
+  </g>
+
+  <path d="M600 215 L600 286" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="620" y="258" class="small">推进所有权版本</text>
+
+  <g filter="url(#shadow)">
+    <rect x="190" y="295" width="820" height="118" rx="20" fill="#ffffff" stroke="#b9d0ee" stroke-width="2"/>
+    <text x="600" y="334" text-anchor="middle" class="label">Store Fence</text>
+    <text x="600" y="364" text-anchor="middle" class="sub">Checkpoint · Memory · Approval · Workspace</text>
+    <text x="600" y="393" text-anchor="middle" class="code">request.owner_epoch == current.owner_epoch</text>
+  </g>
+
+  <path d="M350 413 L350 493" stroke="#d46a6a" stroke-width="3" marker-end="url(#danger-arrow)"/>
+  <path d="M850 413 L850 493" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="145" y="500" width="410" height="112" rx="19" fill="#fff4f4" stroke="#d9aaaa" stroke-width="2"/>
+    <text x="350" y="540" text-anchor="middle" class="label danger">拒绝旧 Owner 写入</text>
+    <text x="350" y="570" text-anchor="middle" class="code">17 != 18</text>
+    <text x="350" y="595" text-anchor="middle" class="sub">旧内存状态不能覆盖新状态</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="645" y="500" width="410" height="112" rx="19" fill="#eff9f5" stroke="#9fcab9" stroke-width="2"/>
+    <text x="850" y="540" text-anchor="middle" class="label success">允许当前 Owner 写入</text>
+    <text x="850" y="570" text-anchor="middle" class="code">18 == 18</text>
+    <text x="850" y="595" text-anchor="middle" class="sub">执行权与持久化资格保持一致</text>
+  </g>
+
+  <rect x="210" y="650" width="780" height="42" rx="14" fill="#dfeaf7"/>
+  <text x="600" y="677" text-anchor="middle" class="small">分布式锁决定谁应该执行；Store Fence 决定谁仍然能够写入</text>
+</svg>
