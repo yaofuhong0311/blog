@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Agent 流式响应的三层断线恢复</title>
+  <desc id="desc">Producer 独立执行，协议适配层把产品事件写入共享 Stream，浏览器携带 Last-Event-ID 从断点继续读取。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#5b8def"/>
+    </marker>
+    <marker id="return-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#56a189"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#26466d" flood-opacity=".10"/>
+    </filter>
+    <style>
+      .title { font: 700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1f3349; }
+      .label { font: 700 20px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #20354d; }
+      .sub { font: 400 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #60758d; }
+      .code { font: 600 15px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #42658b; }
+      .small { font: 500 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #6e8298; }
+      .success { fill: #327a63; }
+      .danger { fill: #b84f4f; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" rx="28" fill="#f2f6fa"/>
+  <text x="600" y="55" text-anchor="middle" class="title">Agent 流式响应的三层断线恢复</text>
+
+  <g filter="url(#shadow)">
+    <rect x="80" y="112" width="285" height="126" rx="20" fill="#ffffff" stroke="#b9d0ee" stroke-width="2"/>
+    <text x="222" y="150" text-anchor="middle" class="label">1. Producer</text>
+    <text x="222" y="181" text-anchor="middle" class="sub">驱动 Agent 与 Tool</text>
+    <text x="222" y="210" text-anchor="middle" class="code">独立于 HTTP 连接</text>
+  </g>
+
+  <path d="M365 175 L455 175" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="455" y="112" width="290" height="126" rx="20" fill="#ffffff" stroke="#b9d0ee" stroke-width="2"/>
+    <text x="600" y="150" text-anchor="middle" class="label">2. Protocol Adapter</text>
+    <text x="600" y="181" text-anchor="middle" class="sub">合并、节流、协议转换</text>
+    <text x="600" y="210" text-anchor="middle" class="code">Internal Event → UI Event</text>
+  </g>
+
+  <path d="M745 175 L835 175" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="835" y="112" width="285" height="126" rx="20" fill="#e7f0ff" stroke="#78a7eb" stroke-width="2"/>
+    <text x="978" y="150" text-anchor="middle" class="label">3. Shared Stream</text>
+    <text x="978" y="181" text-anchor="middle" class="sub">保存产品 Event</text>
+    <text x="978" y="210" text-anchor="middle" class="code">XADD → Stream ID</text>
+  </g>
+
+  <path d="M978 238 L978 326" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="800" y="334" width="320" height="118" rx="20" fill="#ffffff" stroke="#9fcab9" stroke-width="2"/>
+    <text x="960" y="372" text-anchor="middle" class="label">Browser Subscription</text>
+    <text x="960" y="402" text-anchor="middle" class="sub">展示实时 Event</text>
+    <text x="960" y="430" text-anchor="middle" class="code">SSE id = Stream ID</text>
+  </g>
+
+  <path d="M800 393 C680 393 670 510 565 510" fill="none" stroke="#d46a6a" stroke-width="3" stroke-dasharray="9 7"/>
+  <text x="680" y="472" text-anchor="middle" class="small danger">网络断开：只移除 Subscription</text>
+
+  <g filter="url(#shadow)">
+    <rect x="80" y="334" width="385" height="118" rx="20" fill="#fff4f4" stroke="#d9aaaa" stroke-width="2"/>
+    <text x="272" y="372" text-anchor="middle" class="label danger">连接中断</text>
+    <text x="272" y="402" text-anchor="middle" class="sub">Producer 继续执行并写入 Stream</text>
+    <text x="272" y="430" text-anchor="middle" class="code">last received = 1723-0</text>
+  </g>
+
+  <path d="M272 452 L272 540" stroke="#56a189" stroke-width="3" marker-end="url(#return-arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="80" y="548" width="385" height="118" rx="20" fill="#eff9f5" stroke="#9fcab9" stroke-width="2"/>
+    <text x="272" y="586" text-anchor="middle" class="label success">重新连接</text>
+    <text x="272" y="616" text-anchor="middle" class="sub">恢复观察，不重新运行 Agent</text>
+    <text x="272" y="644" text-anchor="middle" class="code">Last-Event-ID: 1723-0</text>
+  </g>
+
+  <path d="M465 607 C650 607 725 512 890 452" fill="none" stroke="#56a189" stroke-width="3" marker-end="url(#return-arrow)"/>
+  <text x="665" y="570" text-anchor="middle" class="small success">从游标之后补发，再追随新事件</text>
+
+  <g>
+    <rect x="570" y="334" width="175" height="118" rx="18" fill="#dfeaf7"/>
+    <text x="657" y="370" text-anchor="middle" class="label">XREAD</text>
+    <text x="657" y="400" text-anchor="middle" class="small">ID &gt; 1723-0</text>
+    <text x="657" y="428" text-anchor="middle" class="small">任意副本可读取</text>
+  </g>
+
+  <rect x="185" y="704" width="830" height="40" rx="14" fill="#dfeaf7"/>
+  <text x="600" y="730" text-anchor="middle" class="small">Event Replay 恢复界面观察；Message 保存长期历史；Checkpoint 恢复 Agent 执行</text>
+</svg>
