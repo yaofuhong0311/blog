@@ -3,7 +3,7 @@ title: Agent 工程（八）：评估集的定位是防回归，不是证明好
 published: 2026-07-25
 description: 单测是断言，agent 评估是测量。承认这个差别之后，"跑几个例子看看"为什么不成立、评估集该怎么定位、以及"好"到底由谁定义，才有得谈。
 tags: [AI Agent, 评估, AI Infra, 学习笔记]
-category: 学习笔记
+category: Agent 工程
 ---
 
 > 本文是「Agent 工程」系列第 8 篇。[上一篇](/posts/agent-reliability/)的结论是"完成"必须被改造成可检验的。这一篇是它的放大版：当范围从"单次任务是否完成"扩大到"整个系统是否变好"，同样的困难会以更大的规模重现。

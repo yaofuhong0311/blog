@@ -3,7 +3,7 @@ title: Agent 工程（三）：checkpoint 是一条链，不是一个存档
 published: 2026-07-23
 description: 存储可以有版本，世界没有。理解了这句话，崩溃与打断的区别、续跑与重放为什么必须是两条代码路径、落盘该落在哪一步，就都清楚了。
 tags: [AI Agent, AI Infra, 学习笔记]
-category: 学习笔记
+category: Agent 工程
 ---
 
 > 本文是「Agent 工程」系列第 3 篇。[第一篇](/posts/agent-loop-harness/)说过，会话状态物理上就是那个只增不减的 messages 数组。这一篇讨论它该由谁持有，以及持久化它的正确形态。

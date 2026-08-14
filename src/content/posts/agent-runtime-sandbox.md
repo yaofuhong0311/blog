@@ -3,7 +3,7 @@ title: 沙箱系列（番外）：Agent Runtime 落地——引擎选型、会�
 published: 2026-07-18
 description: 沙箱系列讲完了机制，这一篇讲工程落地：怎么选引擎、会话如何跨崩溃存活、E2B 与 Vercel Eve 各自的答案，以及为什么最终收敛到一个 Facade。
 tags: [沙箱, AI Agent, AI Infra, 学习笔记]
-category: 学习笔记
+category: 工程实践
 ---
 
 > [沙箱系列](/posts/sandbox-deep-dive/)五篇讲的是机制：隔离、缺页、逃逸、编排。这一篇是番外，视角换到工程决策——假设你要搭一个"让 Agent 在沙箱里跑起来"的服务，引擎怎么选、会话如何跨崩溃存活、哪些现成方案可以借鉴。内容来自一次围绕 E2B、CubeSandbox、OpenSandbox 与 Vercel Eve 的调研。

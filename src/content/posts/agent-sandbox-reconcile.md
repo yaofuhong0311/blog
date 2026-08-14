@@ -3,7 +3,7 @@ title: Agent Sandbox 工程实践（一）：为什么控制面需要状态收�
 published: 2026-08-14
 description: 从期望状态、观测状态与业务状态的差异出发，分析 Sandbox 消失后为什么不能直接重建，以及控制面如何做出可恢复、失败或待确认的决策。
 tags: [Agent Sandbox, Kubernetes, 故障恢复]
-category: 学习笔记
+category: 工程实践
 ---
 
 > 本文是「Agent Sandbox 工程实践」系列第 1 篇。这个系列不再重复介绍沙箱的基础隔离机制，而是讨论控制面如何把运行时、存储和任务状态组织成可恢复的平台能力。

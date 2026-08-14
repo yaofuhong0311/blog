@@ -1,4 +1,5 @@
 import { type CollectionEntry, getCollection } from "astro:content";
+import { CATEGORY_ORDER } from "@constants/categories";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { getCategoryUrl } from "@utils/url-utils.ts";
@@ -99,6 +100,11 @@ export async function getCategoryList(): Promise<Category[]> {
 	});
 
 	const lst = Object.keys(count).sort((a, b) => {
+		const indexA = CATEGORY_ORDER.indexOf(a as (typeof CATEGORY_ORDER)[number]);
+		const indexB = CATEGORY_ORDER.indexOf(b as (typeof CATEGORY_ORDER)[number]);
+		if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+		if (indexA !== -1) return -1;
+		if (indexB !== -1) return 1;
 		return a.toLowerCase().localeCompare(b.toLowerCase());
 	});
 

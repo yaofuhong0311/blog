@@ -11,7 +11,19 @@ export let sortedPosts: Post[] = [];
 
 const params = new URLSearchParams(window.location.search);
 tags = params.has("tag") ? params.getAll("tag") : [];
-categories = params.has("category") ? params.getAll("category") : [];
+const legacyCategoryAliases: Record<string, string[]> = {
+	学习笔记: ["Agent 工程", "沙箱系统", "工程实践"],
+	杂谈: ["随笔"],
+};
+categories = params.has("category")
+	? [
+			...new Set(
+				params
+					.getAll("category")
+					.flatMap((category) => legacyCategoryAliases[category] ?? [category]),
+			),
+		]
+	: [];
 const uncategorized = params.get("uncategorized");
 
 interface Post {

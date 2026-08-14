@@ -3,7 +3,7 @@ title: Agent 工程（十二）：四类记忆，以及为什么该统一的是�
 published: 2026-07-27
 description: 把"长期记忆"当成一个东西做，会让情景淹没语义、让本该常驻的程序记忆被做成"要检索才有"。四类的读写模式完全不同，判据不是"怎么标"，是"怎么查"。
 tags: [AI Agent, LLM, 学习笔记]
-category: 学习笔记
+category: Agent 工程
 ---
 
 > 本文是「Agent 工程」系列第 12 篇。[第五篇](/posts/agent-context-engineering/)把 memory 讲成了"跨会话沉淀"一件事，**这是一处窄化**——按 CoALA 框架（普林斯顿，2023）的划分实为四类，那一篇主要覆盖的只是其中的语义记忆。

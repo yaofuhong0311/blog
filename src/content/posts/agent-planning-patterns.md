@@ -3,7 +3,7 @@ title: Agent 工程（十）：规划模式，以及一个比"属于哪种模式
 published: 2026-07-26
 description: 五种规划模式描述的是倾向而非互斥分类。真正逐段重复出现的设计决策只有一个：这一步做完之后，要不要回到模型再决策。
 tags: [AI Agent, LLM, 学习笔记]
-category: 学习笔记
+category: Agent 工程
 ---
 
 > 本文是「Agent 工程」系列第 10 篇。
