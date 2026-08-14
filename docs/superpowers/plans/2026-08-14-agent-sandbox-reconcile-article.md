@@ -235,3 +235,25 @@ pnpm build
 ```
 
 Expected: 首页构建成功，桌面端四张卡片同行显示，移动端卡片不产生横向溢出。
+
+### Task 7: 强化个人工程判断
+
+**Files:**
+- Modify: `src/content/posts/agent-sandbox-reconcile.md`
+- Modify: `src/content/tools/skill-hub.md`
+- Modify: `src/content/tools/staged-verify.md`
+- Modify: `src/content/tools/sticky-markdown-note.md`
+- Modify: `src/content/spec/about.md`
+- Modify: `docs/SDD.md`
+
+- [ ] **Step 1: 补充文章中的个人选择**
+
+明确状态来源、恢复职责、共享幂等和 Checkpoint 分层的当前选择、代价与升级条件。
+
+- [ ] **Step 2: 补充工具适用边界**
+
+只修改缺少边界说明的工具页，不重复已有“为什么做”和设计取舍。
+
+- [ ] **Step 3: 更新内容规范与导航**
+
+将“事实—判断—代价—触发条件”写入 SDD，并同步 About 页的四个重点系列入口。
