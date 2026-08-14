@@ -41,6 +41,14 @@ const featuredItems = [
 		url: "/series/",
 		icon: "material-symbols:layers-outline-rounded",
 	},
+	{
+		kicker: "PLATFORM PRACTICE",
+		title: "Agent Sandbox 工程实践",
+		description:
+			"从状态收敛、动作恢复与运行时选型出发，整理 Sandbox 控制面的工程判断。",
+		url: "/posts/agent-sandbox-reconcile/",
+		icon: "material-symbols:sync-rounded",
+	},
 ];
 ---
 
@@ -86,13 +94,13 @@ const featuredItems = [
             <div class="mb-3 flex items-end justify-between px-1">
                 <div>
                     <div class="text-xs font-semibold tracking-[0.16em] text-[var(--primary)]">START HERE</div>
-                    <h2 id="featured-heading" class="mt-1 text-2xl font-bold text-90">从三个方向开始</h2>
+                    <h2 id="featured-heading" class="mt-1 text-2xl font-bold text-90">从四个方向开始</h2>
                 </div>
                 <a href={url("/series/")} class="hidden text-sm font-medium text-[var(--primary)] hover:underline sm:block">
                     查看全部系列 →
                 </a>
             </div>
-            <div class="grid gap-3 md:grid-cols-3">
+            <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
                 {featuredItems.map((item) => (
                     <a
                         href={url(item.url)}
