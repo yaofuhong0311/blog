@@ -3,7 +3,7 @@ title: Agent 工程（四）：只追加的表，与不能删的中间节点
 published: 2026-07-23
 description: checkpoint 的实现层朴素得出人意料——核心是一张只 INSERT 从不 UPDATE 的表。但由此派生的几个约束并不显然：中间节点删不得、全量快照是平方级增长、并发会让分叉从功能变成故障。
 tags: [AI Agent, AI Infra, 学习笔记]
-category: 学习笔记
+category: Agent 工程
 ---
 
 > 本文是「Agent 工程」系列第 4 篇，接着[上一篇](/posts/agent-checkpoint-chain/)讲 checkpoint，但转到实现层。

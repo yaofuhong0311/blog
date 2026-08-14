@@ -3,7 +3,7 @@ title: Agent 工程（二）：工具面设计是在给自己的 harness 预留�
 published: 2026-07-22
 description: 暴露什么工具、在哪里执行，是两个正交问题。而"该不该把某个动作提升为专用工具"的判据只有一句：harness 是否需要对这个动作做点特别的事。
 tags: [AI Agent, MCP, AI Infra, 学习笔记]
-category: 学习笔记
+category: Agent 工程
 ---
 
 > 本文是「Agent 工程」系列第 2 篇。[上一篇](/posts/agent-loop-harness/)讲 loop 内部机制，落点是那行 `execute()`——整个 agent 唯一真正"动手"的位置。这一篇把它拆开。

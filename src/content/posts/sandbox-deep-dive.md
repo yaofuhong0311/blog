@@ -3,7 +3,7 @@ title: 给 AI Agent 选沙箱：七个角度、一条隔离阶梯和两条主线
 published: 2026-07-16
 description: 一轮源码级的沙箱引擎调研沉淀：不要停留在参数对比，从七个角度提问；隔离的本质是四种哲学；引擎在商品化，价值在 facade。
 tags: [沙箱, AI Infra, Kubernetes, 学习笔记]
-category: 学习笔记
+category: 沙箱系统
 ---
 
 > 本文是「沙箱底层机制」系列第 1 篇（总览）。后续各篇会展开：缺页中断与 CoW 家族、逃逸案例复盘、K8s 声明式模型、Wasm/eBPF/GPU 三个编外话题。

@@ -3,7 +3,7 @@ title: 沙箱系列（五·完）：Wasm、eBPF 与 GPU 的三种"例外"
 published: 2026-07-18
 description: 系列收尾。这三个话题各自代表了一种前面主线之外的独立思路：能力从未存在、验证后信任、以及内核根本管不着的资源。
 tags: [沙箱, WebAssembly, eBPF, GPU, 学习笔记]
-category: 学习笔记
+category: 沙箱系统
 ---
 
 > 本文是「沙箱底层机制」系列第 5 篇，也是收尾。前四篇沿着[隔离](/posts/sandbox-deep-dive/)、[缺页](/posts/sandbox-page-fault/)、[逃逸](/posts/sandbox-escape/)、[编排](/posts/sandbox-declarative-k8s/)四条线，把主流沙箱的机制讲了一遍。这一篇收三个"编外"话题——它们各自代表了一种前面主线之外的独立思路，恰好也是理解整个领域全貌的三块拼图。

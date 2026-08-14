@@ -3,7 +3,7 @@ title: 写在前面
 published: 2026-07-15
 description: 这个站点是干嘛的，以及接下来会写什么。
 tags: [杂谈]
-category: 杂谈
+category: 随笔
 ---
 
 这是我的个人站点，域名 [yaofuhong.me](https://yaofuhong.me)，主要放三类内容：

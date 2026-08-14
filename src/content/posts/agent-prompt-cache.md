@@ -3,7 +3,7 @@ title: Agent 工程（六）：前缀缓存与那些不报错、只是悄悄变�
 published: 2026-07-24
 description: 每轮重发完整历史本该带来平方级的成本增长。它没有，靠的是前缀缓存。而这套机制的失效方式有一个共同点——全都不报错。
 tags: [AI Agent, LLM, 性能, 学习笔记]
-category: 学习笔记
+category: Agent 工程
 ---
 
 > 本文是「Agent 工程」系列第 6 篇。[第一篇](/posts/agent-loop-harness/)确立了"模型无状态、每轮重发完整历史"这条规则，按它计算，跑 30 轮的会话在第 30 轮要把前 29 轮内容全部重传，朴素估计是平方级的消耗（与 [checkpoint 全量快照](/posts/agent-checkpoint-storage/)同形）。长会话没有因此贵到不可用，靠的就是这一篇要讲的机制。
