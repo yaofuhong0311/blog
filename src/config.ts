@@ -9,7 +9,7 @@ import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "福鸿的博客",
-	subtitle: "小工具 · 学习笔记 · AI Coding",
+	subtitle: "工具作品 · 系统研究 · 工程实践",
 	lang: "zh_CN", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	themeColor: {
 		hue: 215, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
@@ -56,7 +56,7 @@ export const profileConfig: ProfileConfig = {
 	avatar: "", // 留空则侧栏不显示头像；相对 /src 目录，以 / 开头则相对 /public 目录
 
 	name: "福鸿",
-	bio: "写点小工具，记点学习笔记，分享 AI Coding 经验。",
+	bio: "记录工具作品、系统研究与工程实践。",
 	links: [
 		{
 			name: "GitHub",
