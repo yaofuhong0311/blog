@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Sandbox 控制面的状态收敛循环</title>
+  <desc id="desc">控制面读取任务依据与 Sandbox 观测状态，比较差异并分类处理，然后进入下一轮持续对账。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#5b8def"/>
+    </marker>
+    <marker id="return-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#56a189"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#26466d" flood-opacity=".10"/>
+    </filter>
+    <style>
+      .title { font: 700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1f3349; }
+      .label { font: 700 20px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #20354d; }
+      .sub { font: 400 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #60758d; }
+      .code { font: 600 15px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #42658b; }
+      .small { font: 500 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #6e8298; }
+      .success { fill: #327a63; }
+      .warn { fill: #a66a2c; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="720" rx="28" fill="#f2f6fa"/>
+  <text x="600" y="55" text-anchor="middle" class="title">Agent Sandbox 控制面的状态收敛循环</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="120" width="285" height="132" rx="20" fill="#ffffff" stroke="#b9d0ee" stroke-width="2"/>
+    <text x="212" y="160" text-anchor="middle" class="label">任务依据</text>
+    <text x="212" y="193" text-anchor="middle" class="sub">任务仍需执行到什么阶段</text>
+    <text x="212" y="224" text-anchor="middle" class="code">desired state</text>
+  </g>
+
+  <path d="M355 186 L445 186" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="445" y="120" width="310" height="132" rx="20" fill="#ffffff" stroke="#b9d0ee" stroke-width="2"/>
+    <text x="600" y="160" text-anchor="middle" class="label">查询运行环境</text>
+    <text x="600" y="193" text-anchor="middle" class="sub">Sandbox、Workspace、TTL</text>
+    <text x="600" y="224" text-anchor="middle" class="code">observed state</text>
+  </g>
+
+  <path d="M755 186 L845 186" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="845" y="120" width="285" height="132" rx="20" fill="#e7f0ff" stroke="#78a7eb" stroke-width="2"/>
+    <text x="987" y="160" text-anchor="middle" class="label">比较差异</text>
+    <text x="987" y="193" text-anchor="middle" class="sub">一致、过渡中或已经偏离</text>
+    <text x="987" y="224" text-anchor="middle" class="code">classify delta</text>
+  </g>
+
+  <path d="M987 252 L987 332" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="785" y="340" width="345" height="150" rx="20" fill="#ffffff" stroke="#9fcab9" stroke-width="2"/>
+    <text x="957" y="382" text-anchor="middle" class="label">分类处理</text>
+    <text x="957" y="418" text-anchor="middle" class="sub">继续等待 · 更新记录</text>
+    <text x="957" y="450" text-anchor="middle" class="sub">进入恢复决策 · 明确失败</text>
+    <text x="957" y="476" text-anchor="middle" class="code">business state</text>
+  </g>
+
+  <path d="M785 414 L672 414" stroke="#56a189" stroke-width="3" marker-end="url(#return-arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="295" y="340" width="375" height="150" rx="20" fill="#eff9f5" stroke="#9fcab9" stroke-width="2"/>
+    <text x="482" y="382" text-anchor="middle" class="label success">记录结果与下一次检查</text>
+    <text x="482" y="418" text-anchor="middle" class="sub">状态变化通过持久化依据保留</text>
+    <text x="482" y="450" text-anchor="middle" class="sub">单次请求结束，控制面仍可继续</text>
+    <text x="482" y="476" text-anchor="middle" class="code">requeue / watch event</text>
+  </g>
+
+  <path d="M482 340 C482 285 370 292 212 252" fill="none" stroke="#56a189" stroke-width="3" marker-end="url(#return-arrow)"/>
+  <text x="345" y="300" text-anchor="middle" class="small success">下一轮再次读取，而不是依赖旧请求上下文</text>
+
+  <g>
+    <rect x="145" y="555" width="910" height="92" rx="18" fill="#fff6e9" stroke="#e6c491" stroke-width="2"/>
+    <text x="600" y="590" text-anchor="middle" class="label warn">职责边界</text>
+    <text x="600" y="622" text-anchor="middle" class="sub">Reconcile 负责识别和分类差异；业务动作能否安全重做，必须由恢复语义单独判断。</text>
+  </g>
+</svg>

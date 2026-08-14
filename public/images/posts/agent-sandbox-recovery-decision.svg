@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Sandbox 消失后的恢复决策</title>
+  <desc id="desc">先确认 Sandbox 与动作结果，再根据失败状态和幂等保证决定继续、重试、失败或等待人工确认。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#5b8def"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#26466d" flood-opacity=".10"/>
+    </filter>
+    <style>
+      .title { font: 700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1f3349; }
+      .label { font: 700 19px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #20354d; }
+      .sub { font: 400 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #60758d; }
+      .edge { font: 600 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #42658b; }
+      .success { fill: #327a63; }
+      .danger { fill: #b84f4f; }
+      .warn { fill: #a66a2c; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" rx="28" fill="#f2f6fa"/>
+  <text x="600" y="52" text-anchor="middle" class="title">Sandbox 消失后的恢复决策</text>
+
+  <g filter="url(#shadow)">
+    <rect x="435" y="88" width="330" height="82" rx="18" fill="#ffffff" stroke="#b9d0ee" stroke-width="2"/>
+    <text x="600" y="126" text-anchor="middle" class="label">Sandbox 仍然存在吗？</text>
+    <text x="600" y="151" text-anchor="middle" class="sub">先查询真实运行状态</text>
+  </g>
+
+  <path d="M435 129 L255 129 L255 222" fill="none" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="338" y="115" text-anchor="middle" class="edge">存在</text>
+
+  <g filter="url(#shadow)">
+    <rect x="80" y="230" width="350" height="92" rx="18" fill="#eff9f5" stroke="#9fcab9" stroke-width="2"/>
+    <text x="255" y="270" text-anchor="middle" class="label success">继续查询或执行</text>
+    <text x="255" y="298" text-anchor="middle" class="sub">沿用原 sandbox_id，不创建替代实例</text>
+  </g>
+
+  <path d="M765 129 L940 129 L940 222" fill="none" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="855" y="115" text-anchor="middle" class="edge">不存在</text>
+
+  <g filter="url(#shadow)">
+    <rect x="770" y="230" width="340" height="92" rx="18" fill="#ffffff" stroke="#b9d0ee" stroke-width="2"/>
+    <text x="940" y="270" text-anchor="middle" class="label">上次动作结果可确认吗？</text>
+    <text x="940" y="298" text-anchor="middle" class="sub">查询动作记录或外部系统</text>
+  </g>
+
+  <path d="M770 276 L620 276 L620 384" fill="none" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="696" y="261" text-anchor="middle" class="edge">确认成功</text>
+
+  <g filter="url(#shadow)">
+    <rect x="440" y="392" width="360" height="92" rx="18" fill="#eff9f5" stroke="#9fcab9" stroke-width="2"/>
+    <text x="620" y="432" text-anchor="middle" class="label success">从下一个明确步骤继续</text>
+    <text x="620" y="460" text-anchor="middle" class="sub">不重新执行已经成功的外部动作</text>
+  </g>
+
+  <path d="M940 322 L940 384" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="985" y="360" class="edge">确认失败</text>
+
+  <g filter="url(#shadow)">
+    <rect x="805" y="392" width="305" height="92" rx="18" fill="#fff6e9" stroke="#e6c491" stroke-width="2"/>
+    <text x="957" y="432" text-anchor="middle" class="label warn">按任务策略重试或终止</text>
+    <text x="957" y="460" text-anchor="middle" class="sub">失败已经明确，不存在重复成功歧义</text>
+  </g>
+
+  <path d="M940 322 C940 515 375 470 375 544" fill="none" stroke="#5b8def" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#arrow)"/>
+  <text x="650" y="522" text-anchor="middle" class="edge">无法确认</text>
+
+  <g filter="url(#shadow)">
+    <rect x="205" y="552" width="340" height="92" rx="18" fill="#ffffff" stroke="#b9d0ee" stroke-width="2"/>
+    <text x="375" y="592" text-anchor="middle" class="label">动作具备强幂等吗？</text>
+    <text x="375" y="620" text-anchor="middle" class="sub">同键是否保证取得同一结果</text>
+  </g>
+
+  <path d="M205 598 L90 598 L90 690" fill="none" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="145" y="584" text-anchor="middle" class="edge">具备</text>
+
+  <g filter="url(#shadow)">
+    <rect x="28" y="690" width="360" height="58" rx="16" fill="#eff9f5" stroke="#9fcab9" stroke-width="2"/>
+    <text x="208" y="726" text-anchor="middle" class="label success">从步骤起点重新执行</text>
+  </g>
+
+  <path d="M545 598 L720 598 L720 682" fill="none" stroke="#5b8def" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="635" y="584" text-anchor="middle" class="edge">不具备或未知</text>
+
+  <g filter="url(#shadow)">
+    <rect x="545" y="690" width="625" height="58" rx="16" fill="#fff1f1" stroke="#d9aaaa" stroke-width="2"/>
+    <text x="857" y="726" text-anchor="middle" class="label danger">标记失败，或等待人工确认后再继续</text>
+  </g>
+</svg>
