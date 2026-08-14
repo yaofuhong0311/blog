@@ -14,7 +14,7 @@
 - 区分通用机制、当前工程事实和基于现有证据无法确认的部分。
 - 不公开内部服务名、私有仓库路径、提交哈希、部署参数或组织信息。
 - 不重复展开“沙箱底层机制”中已经发布的基础原理。
-- 本次只创建第一篇文章及专题入口，不修改首页和页面组件。
+- 首页核心入口必须同步新增“Agent Sandbox 工程实践”，并保持移动端单列、中屏两列、宽屏四列。
 - 未经用户明确要求，不执行 Git commit 或 push。
 
 ---
@@ -206,3 +206,32 @@ Expected: `http://127.0.0.1:4321/posts/agent-sandbox-reconcile/` 返回 200。
 - 两张 SVG 均完整加载，文字没有裁切。
 - H2 层级清楚，表格和清单没有横向溢出。
 - 系列页出现“Agent Sandbox 工程实践”及第一篇入口。
+
+### Task 6: 同步首页专题入口
+
+**Files:**
+- Modify: `src/pages/[...page].astro`
+
+**Interfaces:**
+- Consumes: 第一篇文章路由 `/posts/agent-sandbox-reconcile/`。
+- Produces: 首页第四个核心入口卡片。
+
+- [ ] **Step 1: 新增专题卡片**
+
+新增 `Agent Sandbox 工程实践` 卡片，说明状态收敛、动作恢复与运行时选型，并直达第一篇文章。
+
+- [ ] **Step 2: 调整响应式布局**
+
+将标题改为“从四个方向开始”，卡片网格使用移动端单列、中屏两列、宽屏四列。
+
+- [ ] **Step 3: 验证首页**
+
+Run:
+
+```bash
+pnpm astro check &&
+pnpm exec biome ci ./src &&
+pnpm build
+```
+
+Expected: 首页构建成功，桌面端四张卡片同行显示，移动端卡片不产生横向溢出。
