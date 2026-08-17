@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">一次 Sandbox 创建请求的逐层转换</title>
+  <desc id="desc">展示 Agent 请求经过 sandbox-service、OpenSandbox、BatchSandbox Controller、Kubernetes 节点，最终形成可执行 Sandbox 的过程。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#6b9cf4"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .stage { font: 700 21px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .label { font: 600 16px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; letter-spacing: 1px; }
+      .body { font: 400 16px Inter, "Noto Sans SC", sans-serif; fill: #566176; }
+      .small { font: 400 14px Inter, "Noto Sans SC", sans-serif; fill: #7a8598; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" rx="28" fill="#f2f6fa"/>
+  <text x="62" y="70" class="title">一次 Sandbox 创建请求的逐层转换</text>
+  <text x="62" y="102" class="subtitle">每一层把上层意图转换为自己能够执行或收敛的对象</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="154" width="238" height="178" rx="20" fill="#ffffff"/>
+    <rect x="323" y="154" width="238" height="178" rx="20" fill="#ffffff"/>
+    <rect x="584" y="154" width="238" height="178" rx="20" fill="#ffffff"/>
+    <rect x="845" y="154" width="293" height="178" rx="20" fill="#ffffff"/>
+  </g>
+
+  <text x="88" y="190" class="label">01 · BUSINESS</text>
+  <text x="88" y="229" class="stage">Agent 请求</text>
+  <text x="88" y="264" class="body">镜像、资源、目录</text>
+  <text x="88" y="291" class="body">网络与生命周期</text>
+
+  <text x="349" y="190" class="label">02 · CONTRACT</text>
+  <text x="349" y="229" class="stage">sandbox-service</text>
+  <text x="349" y="264" class="body">补充产品策略</text>
+  <text x="349" y="291" class="body">预留幂等键</text>
+
+  <text x="610" y="190" class="label">03 · DESIRED STATE</text>
+  <text x="610" y="229" class="stage">OpenSandbox</text>
+  <text x="610" y="264" class="body">校验创建合同</text>
+  <text x="610" y="291" class="body">生成 BatchSandbox CR</text>
+
+  <text x="871" y="190" class="label">04 · RECONCILE</text>
+  <text x="871" y="229" class="stage">BatchSandbox Controller</text>
+  <text x="871" y="264" class="body">持续读取期望状态</text>
+  <text x="871" y="291" class="body">创建、更新或删除 Pod</text>
+
+  <line x1="300" y1="243" x2="316" y2="243" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="561" y1="243" x2="577" y2="243" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="822" y1="243" x2="838" y2="243" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <path d="M991 332 V380 H208 V421" fill="none" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="430" width="300" height="196" rx="20" fill="#ffffff"/>
+    <rect x="390" y="430" width="338" height="196" rx="20" fill="#ffffff"/>
+    <rect x="756" y="430" width="382" height="196" rx="20" fill="#ffffff"/>
+  </g>
+
+  <text x="88" y="468" class="label">05 · SCHEDULING</text>
+  <text x="88" y="507" class="stage">scheduler + kubelet</text>
+  <text x="88" y="542" class="body">选择节点并准备工作负载</text>
+  <text x="88" y="569" class="body">协调镜像、卷与运行时</text>
+
+  <text x="416" y="468" class="label">06 · ISOLATION</text>
+  <text x="416" y="507" class="stage">container runtime</text>
+  <text x="416" y="542" class="body">namespace · cgroup · mount</text>
+  <text x="416" y="569" class="body">在节点上创建隔离进程</text>
+
+  <text x="782" y="468" class="label">07 · EXECUTION</text>
+  <text x="782" y="507" class="stage">Sandbox + execd</text>
+  <text x="782" y="542" class="body">主进程运行并建立命令执行通道</text>
+  <text x="782" y="569" class="body">健康检查通过后进入 Agent Ready</text>
+
+  <line x1="362" y1="528" x2="383" y2="528" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="728" y1="528" x2="749" y2="528" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="62" y="666" width="1076" height="52" rx="14" fill="#e3edfd"/>
+  <text x="88" y="699" class="small">完成边界：Accepted（CR 已写入） → Provisioned（工作负载运行） → Connected（execd 健康） → Agent Ready（业务前置条件完成）</text>
+</svg>
