@@ -72,6 +72,6 @@ export const seriesList: SeriesDef[] = [
 		title: "Agent Sandbox 工程实践",
 		description:
 			"从状态收敛、动作恢复、隔离选型与冷启动优化出发，分析 Agent Sandbox 控制面如何把底层机制组织成可恢复、可运营的平台能力。",
-		posts: ["agent-sandbox-reconcile"],
+		posts: ["agent-sandbox-reconcile", "agent-sandbox-create-path"],
 	},
 ];
