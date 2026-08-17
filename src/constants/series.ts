@@ -65,6 +65,7 @@ export const seriesList: SeriesDef[] = [
 			"agentscope-storage-boundary",
 			"agentscope-runtime-ownership",
 			"agentscope-sse-replay",
+			"agentscope-trusted-execution",
 		],
 	},
 	{

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">从 Tool Visibility 到可信执行边界</title>
+  <desc id="desc">展示模型提议经过工具可见性、风险策略与人工审批后，分别进入 Sandbox 和 Tool Gateway，最后由 Verifier 验证真实结果的完整链路。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#6b9cf4"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .label { font: 700 15px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; letter-spacing: 1px; }
+      .stage { font: 700 20px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .body { font: 400 15px Inter, "Noto Sans SC", sans-serif; fill: #59657a; }
+      .small { font: 400 14px Inter, "Noto Sans SC", sans-serif; fill: #748096; }
+      .lane { font: 700 16px Inter, "Noto Sans SC", sans-serif; fill: #ffffff; }
+      .verify { font: 700 19px Inter, "Noto Sans SC", sans-serif; fill: #244f8c; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="820" rx="28" fill="#f2f6fa"/>
+  <text x="62" y="68" class="title">从 Tool Visibility 到可信执行边界</text>
+  <text x="62" y="101" class="subtitle">Model 负责提出动作，可信控制面负责授权、执行与结果确认</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="150" width="238" height="146" rx="20" fill="#ffffff"/>
+    <rect x="338" y="150" width="238" height="146" rx="20" fill="#ffffff"/>
+    <rect x="614" y="150" width="238" height="146" rx="20" fill="#ffffff"/>
+    <rect x="890" y="150" width="248" height="146" rx="20" fill="#fff1e6"/>
+  </g>
+
+  <text x="88" y="186" class="label">01 · PROPOSE</text>
+  <text x="88" y="225" class="stage">Model</text>
+  <text x="88" y="256" class="body">选择 Tool，生成业务参数</text>
+  <text x="364" y="186" class="label">02 · EXPOSE</text>
+  <text x="364" y="225" class="stage">Tool Visibility</text>
+  <text x="364" y="256" class="body">过滤本轮候选能力</text>
+  <text x="640" y="186" class="label">03 · AUTHORIZE</text>
+  <text x="640" y="225" class="stage">Risk Policy</text>
+  <text x="640" y="256" class="body">ALLOW · DENY · APPROVAL</text>
+  <text x="916" y="186" class="label">04 · APPROVE</text>
+  <text x="916" y="225" class="stage">HITL（必要时）</text>
+  <text x="916" y="256" class="body">批准绑定具体 Action</text>
+
+  <line x1="300" y1="223" x2="330" y2="223" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="576" y1="223" x2="606" y2="223" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="852" y1="223" x2="882" y2="223" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <path d="M733 296 V336 H600 V366" fill="none" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M1014 296 V336 H600" fill="none" stroke="#6b9cf4" stroke-width="3"/>
+  <text x="754" y="327" class="small">ALLOW 或审批通过</text>
+
+  <rect x="62" y="378" width="1076" height="58" rx="16" fill="#356bb8"/>
+  <text x="88" y="414" class="lane">TRUSTED EXECUTION · 可信 Request Context、参数校验、资源级鉴权、短期凭证与审计</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="478" width="500" height="148" rx="20" fill="#ffffff"/>
+    <rect x="638" y="478" width="500" height="148" rx="20" fill="#ffffff"/>
+  </g>
+
+  <text x="90" y="516" class="label">UNTRUSTED COMPUTE</text>
+  <text x="90" y="555" class="stage">Sandbox</text>
+  <text x="90" y="586" class="body">Shell · 用户代码 · Workspace · 浏览器 · 不可信文件</text>
+  <text x="90" y="612" class="small">限制文件、网络、进程、系统调用、资源与运行时间</text>
+
+  <text x="666" y="516" class="label">TRUSTED BUSINESS ACCESS</text>
+  <text x="666" y="555" class="stage">Tool Gateway</text>
+  <text x="666" y="586" class="body">订单 · 消息 · 数据库 · 训练平台 · 内部服务</text>
+  <text x="666" y="612" class="small">持有凭证，执行资源级鉴权、结果脱敏与审计</text>
+
+  <path d="M360 436 V469" fill="none" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M840 436 V469" fill="none" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <path d="M312 626 V662 H600" fill="none" stroke="#6b9cf4" stroke-width="3"/>
+  <path d="M888 626 V662 H600 V685" fill="none" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="218" y="696" width="764" height="70" rx="18" fill="#dce9ff"/>
+  </g>
+  <text x="252" y="738" class="verify">05 · VERIFIER　读取文件系统、数据库或业务回执，确认真实结果</text>
+
+  <text x="242" y="796" class="small">完整边界：Model 提议 → Policy 授权 → Executor 执行 → Verifier 证明；可见性与人工确认都不能取代执行端鉴权。</text>
+</svg>
