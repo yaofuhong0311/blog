@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Sandbox 创建链路的阶段指标</title>
+  <desc id="desc">展示创建请求从入队、领取、资源创建、调度、容器启动到执行服务健康的六个时间点，以及各阶段延迟对应的排查方向。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#6b9cf4"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .time { font: 700 16px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; }
+      .stage { font: 700 18px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .metric { font: 600 15px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; }
+      .body { font: 400 15px Inter, "Noto Sans SC", sans-serif; fill: #59657a; }
+      .small { font: 400 14px Inter, "Noto Sans SC", sans-serif; fill: #748096; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" rx="28" fill="#f2f6fa"/>
+  <text x="62" y="68" class="title">Agent Sandbox 创建链路的阶段指标</text>
+  <text x="62" y="101" class="subtitle">端到端 Ready 延迟回答用户等了多久，阶段时间点回答时间消耗在哪里</text>
+
+  <line x1="118" y1="250" x2="1082" y2="250" stroke="#b6c9e8" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="156" width="158" height="146" rx="18" fill="#ffffff"/>
+    <rect x="246" y="156" width="158" height="146" rx="18" fill="#ffffff"/>
+    <rect x="430" y="156" width="158" height="146" rx="18" fill="#ffffff"/>
+    <rect x="614" y="156" width="158" height="146" rx="18" fill="#ffffff"/>
+    <rect x="798" y="156" width="158" height="146" rx="18" fill="#ffffff"/>
+    <rect x="980" y="156" width="158" height="146" rx="18" fill="#ffffff"/>
+  </g>
+
+  <text x="84" y="190" class="time">t0 · ENQUEUE</text>
+  <text x="84" y="228" class="stage">请求入队</text>
+  <text x="84" y="276" class="small">持久化创建意图</text>
+
+  <text x="268" y="190" class="time">t1 · CLAIM</text>
+  <text x="268" y="228" class="stage">Worker 领取</text>
+  <text x="268" y="276" class="small">获得处理所有权</text>
+
+  <text x="452" y="190" class="time">t2 · CREATE</text>
+  <text x="452" y="228" class="stage">资源已创建</text>
+  <text x="452" y="276" class="small">期望状态已落地</text>
+
+  <text x="636" y="190" class="time">t3 · SCHEDULE</text>
+  <text x="636" y="228" class="stage">Pod 已调度</text>
+  <text x="636" y="276" class="small">节点选择完成</text>
+
+  <text x="820" y="190" class="time">t4 · START</text>
+  <text x="820" y="228" class="stage">容器已启动</text>
+  <text x="820" y="276" class="small">主进程开始运行</text>
+
+  <text x="1002" y="190" class="time">t5 · READY</text>
+  <text x="1002" y="228" class="stage">execd 健康</text>
+  <text x="1002" y="276" class="small">进入 Agent Ready</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="370" width="205" height="174" rx="18" fill="#ffffff"/>
+    <rect x="280" y="370" width="205" height="174" rx="18" fill="#ffffff"/>
+    <rect x="498" y="370" width="205" height="174" rx="18" fill="#ffffff"/>
+    <rect x="716" y="370" width="205" height="174" rx="18" fill="#ffffff"/>
+    <rect x="934" y="370" width="204" height="174" rx="18" fill="#ffffff"/>
+  </g>
+
+  <text x="84" y="408" class="metric">queue_wait · t1 − t0</text>
+  <text x="84" y="444" class="body">背压 · Worker 吞吐</text>
+  <text x="84" y="472" class="body">平台容量</text>
+
+  <text x="302" y="408" class="metric">resource_create · t2 − t1</text>
+  <text x="302" y="444" class="body">API Server</text>
+  <text x="302" y="472" class="body">Controller 处理</text>
+
+  <text x="520" y="408" class="metric">schedule_wait · t3 − t2</text>
+  <text x="520" y="444" class="body">资源碎片 · 规格约束</text>
+  <text x="520" y="472" class="body">GPU 可用性</text>
+
+  <text x="738" y="408" class="metric">container_start · t4 − t3</text>
+  <text x="738" y="444" class="body">镜像仓库 · 节点缓存</text>
+  <text x="738" y="472" class="body">卷挂载</text>
+
+  <text x="956" y="408" class="metric">health_wait · t5 − t4</text>
+  <text x="956" y="444" class="body">entrypoint · 依赖</text>
+  <text x="956" y="472" class="body">execd 启动</text>
+
+  <rect x="62" y="602" width="1076" height="92" rx="18" fill="#dce9ff"/>
+  <text x="88" y="638" class="metric">ready_latency = t5 − t0</text>
+  <text x="88" y="670" class="body">保留端到端结果作为用户体验指标；使用阶段耗时、Pod Condition 与 Kubernetes Event 解释变化原因。</text>
+</svg>
