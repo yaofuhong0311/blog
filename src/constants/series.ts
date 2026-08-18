@@ -66,6 +66,7 @@ export const seriesList: SeriesDef[] = [
 			"agentscope-runtime-ownership",
 			"agentscope-sse-replay",
 			"agentscope-trusted-execution",
+			"agentscope-memory-lifecycle",
 		],
 	},
 	{

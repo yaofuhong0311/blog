@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Message、AgentState、Long-term Memory 与 RAG 的边界</title>
+  <desc id="desc">对比四类信息保存的对象、生命周期和进入模型上下文的方式，说明它们都可能进入 Context，但不属于同一种状态。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#6b9cf4"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .label { font: 700 15px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; letter-spacing: 1px; }
+      .stage { font: 700 20px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .body { font: 400 15px Inter, "Noto Sans SC", sans-serif; fill: #59657a; }
+      .small { font: 400 14px Inter, "Noto Sans SC", sans-serif; fill: #748096; }
+      .context { font: 700 20px Inter, "Noto Sans SC", sans-serif; fill: #244f8c; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" rx="28" fill="#f2f6fa"/>
+  <text x="62" y="68" class="title">四类信息都可能进入 Context，但恢复对象不同</text>
+  <text x="62" y="101" class="subtitle">判断边界时先问“系统希望恢复什么”，而不是只看数据是否持久化</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="156" width="244" height="224" rx="20" fill="#ffffff"/>
+    <rect x="338" y="156" width="244" height="224" rx="20" fill="#ffffff"/>
+    <rect x="614" y="156" width="244" height="224" rx="20" fill="#ffffff"/>
+    <rect x="890" y="156" width="248" height="224" rx="20" fill="#ffffff"/>
+  </g>
+
+  <text x="88" y="194" class="label">CONVERSATION</text>
+  <text x="88" y="234" class="stage">Message History</text>
+  <text x="88" y="270" class="body">原始对话与 ToolResult</text>
+  <text x="88" y="304" class="small">恢复：用户和 Agent 说过什么</text>
+  <text x="88" y="334" class="small">周期：当前 Session</text>
+
+  <text x="364" y="194" class="label">EXECUTION</text>
+  <text x="364" y="234" class="stage">AgentState</text>
+  <text x="364" y="270" class="body">Reply、任务、工具与权限状态</text>
+  <text x="364" y="304" class="small">恢复：执行到哪里、如何继续</text>
+  <text x="364" y="334" class="small">周期：任务或 Reply</text>
+
+  <text x="640" y="194" class="label">EXPERIENCE</text>
+  <text x="640" y="234" class="stage">Long-term Memory</text>
+  <text x="640" y="270" class="body">稳定事实、偏好与经验</text>
+  <text x="640" y="304" class="small">恢复：跨 Session 可复用信息</text>
+  <text x="640" y="334" class="small">周期：长期，可更新与遗忘</text>
+
+  <text x="916" y="194" class="label">KNOWLEDGE</text>
+  <text x="916" y="234" class="stage">RAG</text>
+  <text x="916" y="270" class="body">文档、代码与制度</text>
+  <text x="916" y="304" class="small">恢复：外部专业知识</text>
+  <text x="916" y="334" class="small">周期：独立知识库</text>
+
+  <path d="M184 380 V438 H600" fill="none" stroke="#6b9cf4" stroke-width="3"/>
+  <path d="M460 380 V438 H600" fill="none" stroke="#6b9cf4" stroke-width="3"/>
+  <path d="M736 380 V438 H600" fill="none" stroke="#6b9cf4" stroke-width="3"/>
+  <path d="M1014 380 V438 H600 V482" fill="none" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="218" y="494" width="764" height="120" rx="22" fill="#dce9ff"/>
+  </g>
+  <text x="252" y="540" class="context">MODEL CONTEXT · 本轮模型实际可见的信息</text>
+  <text x="252" y="576" class="body">Formatter 统一转换输入，但不会消除来源、生命周期和可信度差异</text>
+
+  <rect x="218" y="654" width="764" height="52" rx="14" fill="#ffffff"/>
+  <text x="252" y="687" class="small">进入同一个 Context ≠ 属于同一种 Memory；存储与治理必须保持边界。</text>
+</svg>
