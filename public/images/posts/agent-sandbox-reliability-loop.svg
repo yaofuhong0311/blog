@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">从执行权到 SLO 的控制面可靠性闭环</title>
+  <desc id="desc">展示 Leader Election、Reconcile 与幂等、阶段指标、SLI 和 SLO 的不同职责，以及服务目标未达标后如何回到阶段指标定位原因。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#6b9cf4"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .label { font: 700 15px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; letter-spacing: 1px; }
+      .stage { font: 700 21px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .body { font: 400 15px Inter, "Noto Sans SC", sans-serif; fill: #59657a; }
+      .small { font: 400 14px Inter, "Noto Sans SC", sans-serif; fill: #748096; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" rx="28" fill="#f2f6fa"/>
+  <text x="62" y="68" class="title">从执行权到 SLO 的控制面可靠性闭环</text>
+  <text x="62" y="101" class="subtitle">四类机制分别约束执行、正确性、诊断和用户目标，不能互相替代</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="158" width="244" height="168" rx="20" fill="#ffffff"/>
+    <rect x="338" y="158" width="244" height="168" rx="20" fill="#ffffff"/>
+    <rect x="614" y="158" width="244" height="168" rx="20" fill="#ffffff"/>
+    <rect x="890" y="158" width="248" height="168" rx="20" fill="#ffffff"/>
+  </g>
+
+  <text x="88" y="196" class="label">01 · AUTHORITY</text>
+  <text x="88" y="236" class="stage">Leader Election</text>
+  <text x="88" y="270" class="body">决定当前谁有权执行</text>
+  <text x="88" y="297" class="small">不保证副作用只发生一次</text>
+
+  <text x="364" y="196" class="label">02 · CORRECTNESS</text>
+  <text x="364" y="236" class="stage">Reconcile + 幂等</text>
+  <text x="364" y="270" class="body">向统一期望状态收敛</text>
+  <text x="364" y="297" class="small">允许接管、重试与安全重复</text>
+
+  <text x="640" y="196" class="label">03 · DIAGNOSIS</text>
+  <text x="640" y="236" class="stage">阶段指标</text>
+  <text x="640" y="270" class="body">解释延迟和失败位置</text>
+  <text x="640" y="297" class="small">关联状态、事件与 Trace</text>
+
+  <text x="916" y="196" class="label">04 · OBJECTIVE</text>
+  <text x="916" y="236" class="stage">SLI / SLO</text>
+  <text x="916" y="270" class="body">衡量实际体验与目标</text>
+  <text x="916" y="297" class="small">约束统计口径和服务承诺</text>
+
+  <line x1="306" y1="242" x2="330" y2="242" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="582" y1="242" x2="606" y2="242" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="858" y1="242" x2="882" y2="242" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <path d="M1014 326 V372 H736 V408" fill="none" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="790" y="363" class="small">SLO 未达标时回到阶段证据</text>
+
+  <g filter="url(#shadow)">
+    <rect x="130" y="424" width="940" height="204" rx="22" fill="#ffffff"/>
+  </g>
+  <text x="164" y="466" class="label">EVIDENCE-BASED RESPONSE</text>
+  <text x="164" y="510" class="stage">先确认瓶颈，再选择治理动作</text>
+  <text x="164" y="550" class="body">队列等待高 → Worker 吞吐、背压或容量　　调度等待高 → 资源碎片或规格缺口</text>
+  <text x="164" y="584" class="body">容器启动慢 → 镜像与缓存　　　　　　　健康检查慢 → entrypoint、依赖或 execd</text>
+
+  <rect x="130" y="665" width="940" height="52" rx="14" fill="#e3edfd"/>
+  <text x="164" y="698" class="small">扩容只是治理动作之一；只有阶段证据指向容量不足时，扩容才与问题相匹配。</text>
+</svg>
