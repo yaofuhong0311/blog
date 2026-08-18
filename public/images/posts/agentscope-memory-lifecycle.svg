@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">AgentScope Memory Middleware 的读写生命周期</title>
+  <desc id="desc">展示新请求进入 on_reply 后先检索记忆，在 ReplyStartEvent 后注入上下文，经过 ReAct 执行并形成最终回复后写回长期记忆的过程。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#6b9cf4"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .label { font: 700 15px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; letter-spacing: 1px; }
+      .stage { font: 700 20px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .body { font: 400 15px Inter, "Noto Sans SC", sans-serif; fill: #59657a; }
+      .small { font: 400 14px Inter, "Noto Sans SC", sans-serif; fill: #748096; }
+      .lane { font: 700 16px Inter, "Noto Sans SC", sans-serif; fill: #ffffff; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="820" rx="28" fill="#f2f6fa"/>
+  <text x="62" y="68" class="title">AgentScope Memory Middleware 的读写生命周期</text>
+  <text x="62" y="101" class="subtitle">检索服务当前 Reply，写回服务后续 Reply；一次 ReAct 内部不重复自动查询</text>
+
+  <rect x="62" y="142" width="1076" height="54" rx="15" fill="#356bb8"/>
+  <text x="88" y="176" class="lane">ON_REPLY · 一次完整 Reply 是长期记忆的自动读写边界</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="236" width="190" height="154" rx="20" fill="#ffffff"/>
+    <rect x="283" y="236" width="190" height="154" rx="20" fill="#ffffff"/>
+    <rect x="504" y="236" width="190" height="154" rx="20" fill="#ffffff"/>
+    <rect x="725" y="236" width="190" height="154" rx="20" fill="#ffffff"/>
+    <rect x="946" y="236" width="192" height="154" rx="20" fill="#ffffff"/>
+  </g>
+
+  <text x="86" y="272" class="label">01 · QUERY</text>
+  <text x="86" y="311" class="stage">提取新请求</text>
+  <text x="86" y="346" class="body">形成检索文本</text>
+
+  <text x="307" y="272" class="label">02 · RETRIEVE</text>
+  <text x="307" y="311" class="stage">检索 Memory</text>
+  <text x="307" y="346" class="body">user / agent scope</text>
+
+  <text x="528" y="272" class="label">03 · INJECT</text>
+  <text x="528" y="311" class="stage">ReplyStartEvent</text>
+  <text x="528" y="346" class="body">追加 HintBlock</text>
+
+  <text x="749" y="272" class="label">04 · RUN</text>
+  <text x="749" y="311" class="stage">ReAct 执行</text>
+  <text x="749" y="346" class="body">Model ↔ Tool</text>
+
+  <text x="970" y="272" class="label">05 · FINALIZE</text>
+  <text x="970" y="311" class="stage">最终回复</text>
+  <text x="970" y="346" class="body">捕获 AssistantMsg</text>
+
+  <line x1="252" y1="313" x2="275" y2="313" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="473" y1="313" x2="496" y2="313" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="694" y1="313" x2="717" y2="313" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="915" y1="313" x2="938" y2="313" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <path d="M1042 390 V452 H600 V488" fill="none" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="218" y="500" width="764" height="126" rx="22" fill="#dce9ff"/>
+  </g>
+  <text x="252" y="542" class="label">06 · WRITE BACK</text>
+  <text x="252" y="580" class="stage">存在查询文本与最终 AssistantMsg → 写入本轮交互</text>
+  <text x="252" y="607" class="small">await_write=true 时等待写入；false 时提交后台任务并在日志中处理失败</text>
+
+  <path d="M1042 390 V682 H982" fill="none" stroke="#c4cfdf" stroke-width="3" marker-end="url(#arrow)"/>
+  <g filter="url(#shadow)">
+    <rect x="218" y="674" width="764" height="84" rx="18" fill="#ffffff"/>
+  </g>
+  <text x="252" y="710" class="stage">没有最终 AssistantMsg</text>
+  <text x="252" y="739" class="body">不执行该次自动写回；未完成执行应由 AgentState / Checkpoint 处理</text>
+</svg>
