@@ -6,6 +6,25 @@ tags: [AI Coding, Claude Code, 工程实践, 学习笔记]
 category: AI Coding
 ---
 
+> **结论先行：** agent 真正容易出问题的地方，不是把逻辑写错，而是对需求的理解本身就缺一块，而缺口大多在边界上。这决定了从代码出发的检查为什么必然漏，也决定了这条流水线该长什么样。
+
+## 快速阅读
+
+### 一、起因：出问题的不是编码，是理解
+
+用 agent 写代码写多了会发现一件事：它真正容易出问题的地方，不是把逻辑写错，而是对需求的理解本身就缺了一块，而缺口大多落在边界上——某个入参为空没考虑、某个越权场景没想到、某个失败分支没处理、某个并发情况没想过。
+
+### 四、三个设计，都在攻同一个根因
+
+既然问题出在"那份理解可能有缺口"，那 review 就必须在一个没有那份理解的地方进行。子代理天然满足——它只看到你在 prompt 里显式给它的东西。
+
+### 六、它补的是哪一块
+
+我之前写过我的 AI Coding 工作流，那套是三层防御：软约束（写进规则文件）、硬执行（钩子机械触发）、后置记录（经验沉淀）。
+
+<details>
+<summary>展开完整分析与实现依据</summary>
+
 我把自己在用的一个 skill 开源了：[staged-verify](https://github.com/yaofuhong0311/staged-verify)，一条给 AI 编码 agent 用的分阶段代码验证流水线。这篇讲它为什么长成这样。
 
 ## 一、起因：出问题的不是编码，是理解
@@ -119,3 +138,5 @@ Phase 1          Phase 2                   Phase 3                     Phase 4
 ---
 
 仓库在 [github.com/yaofuhong0311/staged-verify](https://github.com/yaofuhong0311/staged-verify)，四个 Markdown 文件，没有可执行代码也没有依赖。Claude Code 直接复制进 `~/.claude/skills/` 就能用，其它支持 skill 机制的 agent 按自己的方式装载即可。
+
+</details>
