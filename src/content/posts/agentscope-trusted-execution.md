@@ -7,6 +7,27 @@ category: 源码调研
 draft: false
 ---
 
+> **结论先行：** 从工具可见性、风险策略、HITL、Sandbox、Tool Gateway 与 Verifier 的职责出发，分析为什么模型能够选择工具，不代表它已经获得执行授权。
+
+![从 Tool Visibility 到可信执行边界](/images/posts/agentscope-trusted-execution.svg)
+
+## 快速阅读
+
+### 一、Tool Visibility 只决定模型可以看到什么
+
+在系列第二篇中，AgentScope 的 ToolBase 已经展示了两个不同的信息平面：
+
+### 六、Sandbox 与 Tool Gateway 解决不同风险
+
+将所有 Tool 都放入同一个 Sandbox，并不能形成完整的安全边界。
+
+### 结语
+
+Agent 的工具安全不能由单个组件承担。
+
+<details>
+<summary>展开完整分析与实现依据</summary>
+
 > 本文是「AgentScope 源码调研」系列第 9 篇，接着[上一篇](/posts/agentscope-sse-replay/)对执行与客户端连接的分析，讨论 Agent 获得工具能力之后，平台应如何建立可信执行边界。AgentScope 源码仍固定在提交 [`698297b`](https://github.com/agentscope-ai/agentscope/commit/698297b4c084e1c3954e35f06fa737a96a515275)；部署侧对照使用 Meta Agent 快照 `a250fe1`。
 
 工具调用容易被简化为以下过程：
@@ -26,8 +47,6 @@ Model 选择 Tool
 - 执行结果由谁验证？
 
 这些问题不能交给 Model 自己判断。更完整的执行路径需要把能力暴露、风险决策、动作执行和结果验证拆成相互独立的职责。
-
-![从 Tool Visibility 到可信执行边界](/images/posts/agentscope-trusted-execution.svg)
 
 ## 一、Tool Visibility 只决定模型可以看到什么
 
@@ -375,3 +394,5 @@ Model 提议
 ```
 
 其中任何一步缺失，都会让“模型能够调用工具”被错误解释为“系统已经安全地完成动作”。源码调研的价值正在于把静态接口、当前部署状态和面向生产的工程要求分别确认，而不是从一个配置项推导整套能力已经成立。
+
+</details>
