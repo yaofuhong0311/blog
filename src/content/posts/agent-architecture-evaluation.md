@@ -1,5 +1,5 @@
 ---
-title: Agent 工程（十三）：比较架构时，先看它如何失败
+title: Agent 工程（十三）：用故障合同比较 Agent 架构
 published: 2026-08-19
 description: 功能清单只能说明系统具有什么，故障场景才能说明架构是否可靠。用四个生产问题比较两类 Agent 架构，并给出我的演进判断。
 tags: [AI Agent, AI Infra, 架构, 故障恢复]
@@ -7,13 +7,9 @@ category: Agent 工程
 draft: false
 ---
 
-> 本文是「Agent 工程」系列第 13 篇。它只回答一个问题：**应该如何比较两套 Agent 架构？**
+> 比较两套 Agent 架构时，我不再先看功能清单，而是让它们面对相同故障，再检查谁负责恢复、依据什么状态恢复。功能名称只能说明控制点存在，故障合同才能说明它们是否形成闭环。
 
-我最初整理了一张功能表：模型、工具、Memory、Checkpoint、Sandbox、分布式部署。后来发现，这种比较很难支持架构决策——两个系统都可以写着“支持会话恢复”，但一个恢复历史消息，另一个恢复尚未完成的 ToolCall，含义完全不同。
-
-因此，我现在采用的判断方法是：
-
-> 不先比较系统具有什么，而是让它们面对相同故障，再检查谁负责恢复、依据什么状态恢复。
+模型、工具、Memory、Checkpoint、Sandbox 和分布式部署都可以出现在功能表中，但同一个“支持会话恢复”，既可能只恢复历史消息，也可能覆盖尚未完成的 ToolCall。两者名称相同，生产语义完全不同。
 
 由此得到的结论也很明确：**不需要在两类架构中选择一类并整体替换。更合理的方向，是保留已经接入生产环境的基础设施，同时吸收框架对稳定合同的组织方式。**
 
@@ -93,4 +89,3 @@ Lock、CAS 与 Fencing Token 也不能合并成一个概念：Lock 控制当前�
 - [AgentScope：State / Session Management](https://doc.agentscope.io/tutorial/task_state.html)
 - [AgentScope：Tool](https://doc.agentscope.io/tutorial/task_tool.html)
 - [AgentScope：Core Agent and Workspace](https://github.com/agentscope-ai/agentscope/blob/main/CONTRIBUTING.md)
-
