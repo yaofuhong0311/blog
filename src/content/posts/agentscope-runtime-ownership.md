@@ -6,6 +6,27 @@ tags: [AgentScope, AI Agent, AI Infra, 分布式系统]
 category: 源码调研
 ---
 
+> **结论先行：** 以 AgentScope 的 Session Lock 为起点，讨论多副本 Agent Runtime 为什么还需要所有权令牌、写入 Fence、每轮重建与跨副本取消。
+
+![从 Session Lock 到可验证的执行所有权](/images/posts/agentscope-runtime-ownership.svg)
+
+## 快速阅读
+
+### 一、先统一两套 Runtime 的术语
+
+不同 Agent 框架对相似对象使用不同名称。比较实现之前，需要先比较语义：
+
+### 七、HITL 需要可持久化的消费权
+
+等待用户确认或外部结果时，系统需要保存的不只是 actionid，还包括：
+
+### 十二、最终判断
+
+AgentScope 当前实现的优势是概念集中：Session Lock、Message Bus、AgentState 与 ToolCallState 构成了相对清晰的控制模型，适合理解一个可恢复 Agent Runtime 的主要组成。
+
+<details>
+<summary>展开完整分析与实现依据</summary>
+
 > 本文是「AgentScope 源码调研」系列第 7 篇，接着[第 4 篇](/posts/agentscope-session-recovery/)对 Session 执行控制的分析，将 AgentScope 放入更严格的生产运行时约束中重新审视。AgentScope 源码仍固定在提交 [`698297b`](https://github.com/agentscope-ai/agentscope/commit/698297b4c084e1c3954e35f06fa737a96a515275)。
 
 上一篇讨论了 Message 与 Session 如何持久化。这一篇回到多副本执行中更基础的问题：
@@ -15,8 +36,6 @@ category: 源码调研
 原因在于，锁描述的是共享协调系统当前承认谁拥有执行资格，却不能立即终止旧副本中的计算，也不能自动阻止旧副本继续访问数据库、Workspace 或外部 Tool。
 
 当租约过期、网络恢复或进程暂时停顿时，旧执行者与新执行者可能短暂重叠。生产级 Agent Runtime 因此不能只维护“锁是否存在”，还要让所有权成为一组可核验、可传递并能约束写入的状态。
-
-![从 Session Lock 到可验证的执行所有权](/images/posts/agentscope-runtime-ownership.svg)
 
 ## 一、先统一两套 Runtime 的术语
 
@@ -338,3 +357,5 @@ AgentScope 当前实现的优势是概念集中：Session Lock、Message Bus、A
 ```
 
 系统是否需要走到最后一层，不应由组件数量决定，而应由故障模型决定：如果旧副本可能在租约过期后恢复写入，仅有分布式锁就不足以构成完整的执行所有权。
+
+</details>
