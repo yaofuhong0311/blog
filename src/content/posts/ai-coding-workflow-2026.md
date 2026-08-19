@@ -8,6 +8,8 @@ category: AI Coding
 
 > 使用 AI Coding Agent 半年后，我最重要的调整是：**不再把“告诉 Agent 应该怎么做”当作质量保证。行为规则只能降低出错概率，结果仍需独立验证。**
 
+**项目入口：** [GitHub 源码](https://github.com/yaofuhong0311/ai-coding-workflow) · [工具说明](/tools/ai-coding-workflow/)
+
 早期我不断增加 Prompt 与项目规则，希望 Agent 先读代码、控制改动范围并主动测试。规则确实有用，但任务复杂后仍会出现遗漏调用方、误解边界和只验证正常路径的问题。
 
 现在的工作流分成两层：行为约束负责减少问题发生，验证流水线负责发现已经发生的问题。
