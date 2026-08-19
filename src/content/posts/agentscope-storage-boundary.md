@@ -6,6 +6,27 @@ tags: [AgentScope, AI Agent, AI Infra, 源码分析]
 category: 源码调研
 ---
 
+> **结论先行：** 从 StorageBase、RedisStorage 与 SQLStorage 的实现出发，分析 AgentScope 如何划分会话状态和消息数据，并将流式回复的内存快照转化为可恢复的持久化记录。
+
+![AgentScope Storage 的职责边界](/images/posts/agentscope-storage-boundary.svg)
+
+## 快速阅读
+
+### 一、StorageBase 是业务层的持久化端口
+
+ChatService 不直接构造 SQL，也不感知 Redis List。它只调用 StorageBase 定义的业务操作：
+
+### 四、同一个 upsert，在 Redis 与 SQL 中并不完全相同
+
+Redis 使用 List 保存一个 Session 的消息。执行 upsertmessage() 时，它只检查 List 尾部：
+
+### 七、从这段实现可以提取的设计判断
+
+Agent 系统设计存储层时，可以先按以下顺序判断：
+
+<details>
+<summary>展开完整分析与实现依据</summary>
+
 > 本文是「AgentScope 源码调研」系列第 6 篇，接着[上一篇](/posts/agentscope-event-reducer/)分析归并完成的 `AssistantMsg` 如何进入持久化层。源码固定在 AgentScope 主分支提交 [`698297b`](https://github.com/agentscope-ai/agentscope/commit/698297b4c084e1c3954e35f06fa737a96a515275)。
 
 上一篇讨论了 Event 如何持续修改同一条 `AssistantMsg`。但内存中形成完整消息，并不意味着它已经可以跨进程恢复。服务端还需要回答三个问题：
@@ -25,8 +46,6 @@ StorageBase
 ```
 
 其中，`StorageBase` 向业务层提供会话、消息、用户与 Agent 配置等操作；Redis 和 SQL 实现负责把这些操作映射到各自的数据结构。这个边界将“业务要保存什么”与“存储系统如何保存”分开。
-
-![AgentScope Storage 的职责边界](/images/posts/agentscope-storage-boundary.svg)
 
 ## 一、StorageBase 是业务层的持久化端口
 
@@ -229,3 +248,5 @@ Storage Adapter   表达具体存储系统的实现约束
 ```
 
 这些边界使流式执行可以逐步变化，也使服务端能够在请求结束、取消或恢复时找到稳定的持久化对象。
+
+</details>
