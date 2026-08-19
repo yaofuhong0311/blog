@@ -449,7 +449,7 @@ For every article listed below, execute all five actions before moving to the ne
   git status --short --branch
   ```
 
-  Expected: one worktree-isolation commit, one documentation commit, and 44 article commits, all authored with `yaofuhong0311@gmail.com`; the worktree is clean.
+  Expected: one worktree-isolation commit, documentation commits, and 44 article commits, all authored with `yaofuhong0311@gmail.com`; the worktree is clean.
 
 - [ ] **Step 6: Publish without squashing after explicit approval**
 
