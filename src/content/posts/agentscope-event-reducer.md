@@ -6,6 +6,27 @@ tags: [AgentScope, AI Agent, AI Infra, 源码分析]
 category: 源码调研
 ---
 
+> **结论先行：** 从 append_event() 与 ChatService 的执行顺序出发，分析 AgentScope 如何把流式 Event 归并为结构化 AssistantMsg，并支持持久化、刷新与同一轮恢复。
+
+![Event 归并为 AssistantMsg](/images/posts/agentscope-event-reducer.svg)
+
+## 快速阅读
+
+### 一、AssistantMsg 是结构化快照
+
+源码中的 AssistantMsg() 是一个工厂函数，最终返回 role="assistant" 的 Msg。它的 content 不是单个字符串，而是由多种 ContentBlock 组成：
+
+### 五、模型用量与回复结束属于消息级状态
+
+不是所有 Event 都修改 content。
+
+### 八、可以迁移的工程判断
+
+这套实现可以抽象成一个 Reducer：
+
+<details>
+<summary>展开完整分析与实现依据</summary>
+
 > 本文是「AgentScope 源码调研」系列第 5 篇，接着[上一篇](/posts/agentscope-session-recovery/)分析 [AgentScope](https://github.com/agentscope-ai/agentscope) 的消息恢复机制。源码固定在 AgentScope 主分支提交 [`698297b`](https://github.com/agentscope-ai/agentscope/commit/698297b4c084e1c3954e35f06fa737a96a515275)。
 
 一次 Agent 回复在运行时不是一条完整消息，而是一组按时间到达的 Event：文本开始、文本增量、工具调用、工具结果、模型用量与回复结束。客户端需要消费这些 Event 实时渲染，存储层却需要一条可以查询、刷新和恢复的 `AssistantMsg`。
@@ -18,8 +39,6 @@ category: 源码调研
 | AssistantMsg | 查询、持久化、刷新、恢复 | 长期、持续更新 |
 
 AgentScope 没有把 Event 原样保存为消息数组，而是让每个 Event 作为一次状态修改，持续更新同一个 `AssistantMsg`。`Msg.append_event()` 就是这条归并链路的核心。
-
-![Event 归并为 AssistantMsg](/images/posts/agentscope-event-reducer.svg)
 
 ## 一、AssistantMsg 是结构化快照
 
@@ -200,3 +219,4 @@ Agent 产生 Event
 
 > **Event 是运行时的状态修改，AssistantMsg 是这些修改归并后的可恢复快照；恢复能力来自稳定标识、确定性归并和持久化顺序，而不是来自流式传输本身。**
 
+</details>
