@@ -6,6 +6,25 @@ tags: [AgentScope, AI Agent, AI Infra, 源码分析]
 category: 源码调研
 ---
 
+> **结论先行：** 从 input_schema、工具执行位置、沙箱原语、网关监听范围与上下文压缩切分点，分析 AgentScope 工具体系的职责划分。
+
+## 快速阅读
+
+### 一、工具的字段：三个给模型，其余全给 harness
+
+字段数量对应 harness 的决策点数量。 每当循环需要对一个工具做一次判断——能否并行、要不要弹确认、在哪执行、是否注入状态、权限怎么归类——就需要工具提供一个对应的声明。
+
+### 四、执行面只有三个原语
+
+就这三个。而这三个必须同时实现，这是个有实际后果的约束：
+
+### 七、上下文压缩：切分点要靠不动点循环修
+
+最后一个细节，是第五篇讲压缩时没展开的那部分：切在哪。
+
+<details>
+<summary>展开完整分析与实现依据</summary>
+
 > 本文是「AgentScope 源码调研」系列第 2 篇，接着[上一篇](/posts/agent-serverside-anatomy/)分析 [AgentScope](https://github.com/agentscope-ai/agentscope) 的源码。上一篇讨论服务层如何驱动会话，本篇转向工具体系与执行面，并以源码片段作为主要论据。
 
 ## 一、工具的字段：三个给模型，其余全给 harness
@@ -295,3 +314,5 @@ while True:
 Agent 系统的新意不在于发明了新机制，而在于**它把一批老问题重新摆到了一起**：一个会跑几分钟、随时可能停下等人、状态必须跨进程存活、还要在不可信环境里执行任意代码的东西——每一条单独都不新，凑在一起就需要重新做一遍设计取舍。
 
 [下一篇](/posts/agentscope-formatter-boundary/)分析 Formatter：统一内部消息如何转换成 OpenAI、Anthropic 与 Gemini 的不同协议结构。
+
+</details>
