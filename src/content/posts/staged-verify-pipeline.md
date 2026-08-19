@@ -8,6 +8,8 @@ category: AI Coding
 
 > 我设计 staged-verify 的原因，不是 Agent 经常写出无法运行的代码，而是它可能在一份不完整的需求理解上，连续完成实现、测试和自我审查。验证必须引入独立信息源，才能发现这种共同盲区。
 
+**项目入口：** [GitHub 源码](https://github.com/yaofuhong0311/staged-verify) · [工具说明](/tools/staged-verify/)
+
 ![分阶段验证的四道质量门](/images/posts/staged-verify.svg)
 
 ## 根因是理解缺口会贯穿全部产出
