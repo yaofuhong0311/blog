@@ -6,6 +6,27 @@ tags: [AgentScope, AI Agent, AI Infra, SSE, Redis Stream]
 category: 源码调研
 ---
 
+> **结论先行：** 从 Producer、共享事件流与浏览器游标三个层次分析 Agent 流式响应的断线恢复，并区分事件重放、消息历史与执行状态恢复。
+
+![Agent 流式响应的三层断线恢复](/images/posts/agentscope-sse-replay.svg)
+
+## 快速阅读
+
+### 一、SSE 连接不是 Agent 执行
+
+一次流式请求通常同时包含两种生命周期：
+
+### 六、没有游标时不应该默认重放全部历史
+
+游标存在时，服务可以确定客户端最后收到的位置。没有游标时，含义并不明确：
+
+### 十一、最终判断
+
+Agent 流式响应的断线恢复不是一个 HTTP 重连功能，而是一条跨越 Runtime、事件存储与客户端状态的协议：
+
+<details>
+<summary>展开完整分析与实现依据</summary>
+
 > 本文是「AgentScope 源码调研」系列第 8 篇，接着[上一篇](/posts/agentscope-runtime-ownership/)讨论执行所有权之后，继续分析客户端断线时 Agent Runtime 应该保存什么。AgentScope 源码固定在提交 [`698297b`](https://github.com/agentscope-ai/agentscope/commit/698297b4c084e1c3954e35f06fa737a96a515275)。
 
 Agent 正在输出文本或执行 Tool 时，浏览器可能刷新页面、切换网络或进入休眠。连接恢复之后，用户通常希望继续看到遗漏的内容。
@@ -17,8 +38,6 @@ Agent 正在输出文本或执行 Tool 时，浏览器可能刷新页面、切�
 1. **Producer 是否继续执行**：浏览器离开以后，Agent 任务是否仍然存在？
 2. **Event 是否可以补发**：断线期间产生的展示事件保存在哪里？
 3. **Subscriber 从哪里继续**：客户端如何准确表达自己最后收到的事件？
-
-![Agent 流式响应的三层断线恢复](/images/posts/agentscope-sse-replay.svg)
 
 ## 一、SSE 连接不是 Agent 执行
 
@@ -329,3 +348,5 @@ Agent 流式响应的断线恢复不是一个 HTTP 重连功能，而是一条�
 > 重新连接只恢复观察，不应重新执行业务。
 
 只有把 Producer、Event Replay、Message History 和 Agent Checkpoint 分开，系统才能在浏览器断线、服务切换和执行副本故障三类场景中分别给出准确保证。
+
+</details>

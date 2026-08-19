@@ -7,6 +7,27 @@ category: 工程实践
 draft: false
 ---
 
+> **结论先行：** 从 Leader Election、创建阶段指标与 SLI/SLO 的职责出发，分析 Agent Sandbox 控制面如何从“能够创建”走向“能够解释、定位和治理”。
+
+![Agent Sandbox 创建链路的阶段指标](/images/posts/agent-sandbox-stage-metrics.svg)
+
+## 快速阅读
+
+### 一、Leader Election 只约束执行权
+
+Autoscaler 或后台控制器通常需要部署多个副本，以避免单个进程故障后失去扩缩容能力。但多个副本同时运行，也会产生新的问题：谁可以修改同一个目标容量？
+
+### 五、失败分类决定 SLI 是否可信
+
+如果分母和失败原因没有定义清楚，成功率会失去解释价值。
+
+### 结语
+
+一个可运营的 Sandbox 平台，需要同时回答四个问题：
+
+<details>
+<summary>展开完整分析与实现依据</summary>
+
 > 本文是「Agent Sandbox 工程实践」系列第 3 篇。上一篇沿着[一次真实的创建链路](/posts/agent-sandbox-create-path/)，区分了创建操作、Sandbox 生命周期和三类时间约束；这一篇继续讨论创建链路进入生产环境后，平台如何判断服务是否达标，以及如何定位没有达标的原因。
 
 当一个 Sandbox 最终进入 Agent Ready，控制面已经完成了队列消费、资源创建、Pod 调度、容器启动和执行服务检查等多个阶段。
@@ -23,8 +44,6 @@ draft: false
 - 多副本控制器是否可能对同一目标重复执行扩缩容？
 
 因此，创建控制面的生产能力不能只由“请求是否成功”描述。它还需要执行权约束、状态正确性、阶段可观测性和面向用户的服务目标。
-
-![Agent Sandbox 创建链路的阶段指标](/images/posts/agent-sandbox-stage-metrics.svg)
 
 ## 一、Leader Election 只约束执行权
 
@@ -262,3 +281,5 @@ Leader Election、状态机、阶段指标和 SLI/SLO 分别回答这些问题�
 - [Agent Sandbox 工程实践（二）：创建 Sandbox 不是一次 HTTP 请求](/posts/agent-sandbox-create-path/)
 - [沙箱资源模型：从 cgroup 到 GPU 调度](/posts/sandbox-resource-model/)
 - [沙箱调度与可观测性](/posts/sandbox-scheduling-observability/)
+
+</details>

@@ -7,6 +7,27 @@ category: 源码调研
 draft: false
 ---
 
+> **结论先行：** 从 AgentState 与 Long-term Memory Middleware 的源码出发，区分 Message、Checkpoint、Memory 和 RAG，并分析记忆检索、上下文注入与写回的真实生命周期。
+
+![Message、AgentState、Long-term Memory 与 RAG 的边界](/images/posts/agentscope-memory-boundaries.svg)
+
+## 快速阅读
+
+### 一、四类信息恢复的对象不同
+
+最直接的判断方法不是看“它能否进入 Context”，而是问：
+
+### 五、三种控制模式改变谁来决定读写
+
+Mem0Middleware 提供三种 mode：
+
+### 结语
+
+Memory 与历史消息的区别，不在于是否持久化，而在于系统希望跨越什么边界恢复信息。
+
+<details>
+<summary>展开完整分析与实现依据</summary>
+
 > 本文是「AgentScope 源码调研」系列第 10 篇。上一篇讨论了[从 Tool Visibility 到可信执行边界](/posts/agentscope-trusted-execution/)，这一篇转向另一个容易混淆的边界：Agent 看到过的信息，是否都应该成为长期记忆？
 
 本文源码固定在 AgentScope 提交 [`698297b`](https://github.com/agentscope-ai/agentscope/commit/698297b4c084e1c3954e35f06fa737a96a515275)。
@@ -21,8 +42,6 @@ draft: false
 它们最终都可能表现为模型输入，因此容易被统称为“Memory”。但从系统设计角度看，它们保存的对象、生命周期、更新规则和可信度并不相同。
 
 如果把这些状态合并成一个存储层，短期结果会重复进入上下文，未确认推断可能被固化为事实，外部知识与用户偏好也会失去独立的更新周期。
-
-![Message、AgentState、Long-term Memory 与 RAG 的边界](/images/posts/agentscope-memory-boundaries.svg)
 
 ## 一、四类信息恢复的对象不同
 
@@ -267,3 +286,5 @@ AgentScope 通过 Middleware 把长期记忆放在 Reply 的前后边界：开�
 - [`Agent` Middleware 装配](https://github.com/agentscope-ai/agentscope/blob/698297b4c084e1c3954e35f06fa737a96a515275/src/agentscope/agent/_agent.py)
 - [`Mem0Middleware`](https://github.com/agentscope-ai/agentscope/blob/698297b4c084e1c3954e35f06fa737a96a515275/src/agentscope/middleware/_longterm_memory/_mem0/_middleware.py)
 - [Long-term Memory Middleware 目录](https://github.com/agentscope-ai/agentscope/tree/698297b4c084e1c3954e35f06fa737a96a515275/src/agentscope/middleware/_longterm_memory)
+
+</details>
