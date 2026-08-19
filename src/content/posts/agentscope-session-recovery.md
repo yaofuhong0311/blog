@@ -6,6 +6,21 @@ tags: [AgentScope, AI Agent, AI Infra, 源码分析]
 category: 源码调研
 ---
 
+> **结论先行：** 从 Session、Q&A 与 Worker 的生命周期划分出发，分析 AgentScope 如何用分布式锁、Pub/Sub、checkpoint 与 Tool 状态处理并发执行、中断和故障恢复。
+
+## 快速阅读
+
+### 一、问题不是“如何保存”，而是“谁有资格执行”
+
+checkpoint 解决的是 Agent 上次保存了什么；它不能直接阻止两个副本同时执行同一个 Session。
+
+### 六、UNKNOWN 不是 ToolResultState，而是恢复层的判断
+
+文档中使用 UNKNOWN 表示一种非常重要的情况：
+
+<details>
+<summary>展开完整分析与实现依据</summary>
+
 > 本文是「AgentScope 源码调研」系列第 4 篇，接着[上一篇](/posts/agentscope-formatter-boundary/)继续分析 [AgentScope](https://github.com/agentscope-ai/agentscope) 的服务端实现。本篇讨论 Session 执行控制与 Tool 恢复，源码固定在 AgentScope 主分支提交 [`698297b`](https://github.com/agentscope-ai/agentscope/commit/698297b4c084e1c3954e35f06fa737a96a515275)。
 
 Agent 服务进入多副本运行后，“一次请求是否执行过”不再是单进程内的变量。客户端超时可能重新提交，同一 Session 可能被多个设备使用，消息也可能因为故障转移再次进入调度队列。
@@ -318,3 +333,5 @@ Worker 崩溃
 > **Run Lock 决定谁可以执行，Pub/Sub 负责通知，checkpoint 恢复 Agent 记忆，Tool 状态记录执行阶段，幂等与对账负责外部副作用。**
 
 这几项机制可以共同使用 Redis，却不能因为存储介质相同就合并职责。可靠性来自边界清晰，而不是来自状态字段数量增加。
+
+</details>
