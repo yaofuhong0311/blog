@@ -6,6 +6,25 @@ tags: [AgentScope, AI Agent, 源码分析, 架构]
 category: 源码调研
 ---
 
+> **结论先行：** 从 Msg、ContentBlock 与三家模型协议的转换路径出发，分析 AgentScope Formatter 的职责边界，以及 Facade、Adapter、Strategy 三种设计视角。
+
+## 快速阅读
+
+### 一、先稳定内部语义，再适配外部协议
+
+AgentScope 在内部统一使用 Msg。一条消息主要包含 name、role 与 content，其中 content 不是单一字符串，而是一组具有明确语义的 ContentBlock：
+
+### 四、兼容性规则也是协议的一部分
+
+供应商协议的差异不仅体现在正常结构上，还体现在拒绝条件上。Formatter 中有大量分支并非业务逻辑，而是目标 API 的合法性约束。
+
+### 七、这层抽象真正保护的是什么
+
+Formatter 保护的不是“以后可以少写几次字段映射”，而是内部语义模型的稳定性。
+
+<details>
+<summary>展开完整分析与实现依据</summary>
+
 > 本文是「AgentScope 源码调研」系列第 3 篇，接着[上一篇](/posts/agent-tools-execution-plane/)继续分析 [AgentScope](https://github.com/agentscope-ai/agentscope) 的源码。前两篇分别讨论服务端会话与工具执行，本篇关注模型请求发出前的最后一层转换：Formatter。
 
 Formatter 容易被理解为一组字段映射函数：OpenAI 使用 `tool_calls`，Anthropic 使用 `tool_use`，Gemini 使用 `function_call`，逐一改名即可。
@@ -316,3 +335,5 @@ Formatter 保护的不是“以后可以少写几次字段映射”，而是内�
 这也解释了 Formatter 中大量看似细小的兼容分支。它们不是附加处理，而是协议边界存在的主要原因。
 
 [下一篇](/posts/agentscope-session-recovery/)分析 Session 执行控制与 Tool 恢复：CAS、Pub/Sub、checkpoint 和幂等性分别解决什么问题。
+
+</details>
