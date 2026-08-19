@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">两类 Agent 架构重心如何汇聚到稳定合同</title>
+  <desc id="desc">左侧展示合同优先的架构，右侧展示基础设施集成优先的架构，两者通过双向 Adapter 汇聚到稳定 Agent Contract，并共同支撑 Agent Loop。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#6b9cf4"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .eyebrow { font: 700 14px Inter, "Noto Sans SC", sans-serif; letter-spacing: 1.6px; fill: #5f91ea; }
+      .heading { font: 700 23px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .label { font: 700 16px Inter, "Noto Sans SC", sans-serif; fill: #315b91; }
+      .body { font: 400 15px Inter, "Noto Sans SC", sans-serif; fill: #5e6a80; }
+      .small { font: 400 14px Inter, "Noto Sans SC", sans-serif; fill: #778399; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="720" fill="#f2f6fa"/>
+  <text x="70" y="70" class="title">稳定合同与基础设施深度不是替换关系</text>
+  <text x="70" y="104" class="subtitle">两类设计重心通过双向 Adapter 汇聚，并由同一组故障语义检验</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="145" width="330" height="342" rx="24" fill="#ffffff"/>
+    <rect x="800" y="145" width="330" height="342" rx="24" fill="#ffffff"/>
+  </g>
+
+  <text x="102" y="187" class="eyebrow">CONTRACT FIRST</text>
+  <text x="102" y="224" class="heading">合同优先</text>
+  <text x="102" y="258" class="body">先固定上层语义，再替换底层实现</text>
+
+  <g>
+    <rect x="102" y="290" width="126" height="52" rx="14" fill="#e8f1ff"/>
+    <rect x="242" y="290" width="126" height="52" rx="14" fill="#e8f1ff"/>
+    <rect x="102" y="356" width="126" height="52" rx="14" fill="#e8f1ff"/>
+    <rect x="242" y="356" width="126" height="52" rx="14" fill="#e8f1ff"/>
+    <text x="165" y="322" text-anchor="middle" class="label">Model</text>
+    <text x="305" y="322" text-anchor="middle" class="label">Tool</text>
+    <text x="165" y="388" text-anchor="middle" class="label">State</text>
+    <text x="305" y="388" text-anchor="middle" class="label">Workspace</text>
+  </g>
+  <text x="102" y="448" class="small">优势：替换、组合与恢复路径更统一</text>
+
+  <text x="832" y="187" class="eyebrow">INTEGRATION FIRST</text>
+  <text x="832" y="224" class="heading">基础设施集成优先</text>
+  <text x="832" y="258" class="body">先复用生产系统，再接入 Agent Loop</text>
+
+  <g>
+    <rect x="832" y="290" width="126" height="52" rx="14" fill="#e8f1ff"/>
+    <rect x="972" y="290" width="126" height="52" rx="14" fill="#e8f1ff"/>
+    <rect x="832" y="356" width="126" height="52" rx="14" fill="#e8f1ff"/>
+    <rect x="972" y="356" width="126" height="52" rx="14" fill="#e8f1ff"/>
+    <text x="895" y="322" text-anchor="middle" class="label">Scheduler</text>
+    <text x="1035" y="322" text-anchor="middle" class="label">MCP Runtime</text>
+    <text x="895" y="388" text-anchor="middle" class="label">Sandbox</text>
+    <text x="1035" y="388" text-anchor="middle" class="label">IAM / Store</text>
+  </g>
+  <text x="832" y="448" class="small">优势：隔离、权限与业务状态更接近现实</text>
+
+  <line x1="400" y1="317" x2="477" y2="317" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="800" y1="317" x2="723" y2="317" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="477" y="215" width="246" height="204" rx="24" fill="#dce9ff"/>
+  </g>
+  <text x="600" y="258" text-anchor="middle" class="eyebrow">BIDIRECTIONAL ADAPTER</text>
+  <text x="600" y="303" text-anchor="middle" class="heading">Stable Agent Contract</text>
+  <text x="600" y="340" text-anchor="middle" class="body">身份 · 状态 · 事件 · 错误</text>
+  <text x="600" y="370" text-anchor="middle" class="body">幂等 · 恢复 · 权限 · 生命周期</text>
+
+  <line x1="600" y1="419" x2="600" y2="500" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="250" y="510" width="700" height="122" rx="24" fill="#ffffff"/>
+  </g>
+  <text x="600" y="552" text-anchor="middle" class="eyebrow">STABLE AGENT LOOP</text>
+  <text x="600" y="590" text-anchor="middle" class="heading">规划 → 调用 → 观察 → 恢复</text>
+  <text x="600" y="617" text-anchor="middle" class="small">实现可以变化，故障下的行为合同必须保持一致</text>
+</svg>
+
