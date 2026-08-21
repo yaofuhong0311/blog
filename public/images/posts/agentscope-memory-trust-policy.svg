@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">从对话到生效 Memory 的治理链路</title>
+  <desc id="desc">模型从 Message 中提取结构化候选，确定性 Policy 根据证据、作用域和有效期决定激活、保留候选或拒绝。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#6b9cf4"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .label { font: 700 14px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; letter-spacing: 1px; }
+      .stage { font: 700 20px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .body { font: 400 15px Inter, "Noto Sans SC", sans-serif; fill: #59657a; }
+      .small { font: 400 13px Inter, "Noto Sans SC", sans-serif; fill: #748096; }
+      .result { font: 700 16px Inter, "Noto Sans SC", sans-serif; fill: #244f8c; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="680" rx="28" fill="#f2f6fa"/>
+  <text x="62" y="68" class="title">模型提取候选，Policy 决定是否长期生效</text>
+  <text x="62" y="101" class="subtitle">Memory 是派生状态；证据、作用域与有效期必须保持可追踪</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="166" width="220" height="222" rx="20" fill="#ffffff"/>
+    <rect x="340" y="166" width="220" height="222" rx="20" fill="#ffffff"/>
+    <rect x="618" y="166" width="248" height="222" rx="20" fill="#ffffff"/>
+    <rect x="924" y="166" width="214" height="222" rx="20" fill="#ffffff"/>
+  </g>
+
+  <text x="88" y="204" class="label">SOURCE</text>
+  <text x="88" y="244" class="stage">Message / ToolResult</text>
+  <text x="88" y="282" class="body">本轮真实输入与结果</text>
+  <text x="88" y="316" class="small">当前 Session 的事实来源</text>
+  <text x="88" y="344" class="small">保留原始证据引用</text>
+
+  <text x="366" y="204" class="label">EXTRACTOR</text>
+  <text x="366" y="244" class="stage">结构化候选</text>
+  <text x="366" y="282" class="body">类型 · 时间 · 可信度</text>
+  <text x="366" y="316" class="small">模型理解语义并提名</text>
+  <text x="366" y="344" class="small">不能直接写入生效区</text>
+
+  <text x="644" y="204" class="label">DETERMINISTIC POLICY</text>
+  <text x="644" y="244" class="stage">规则裁决</text>
+  <text x="644" y="282" class="body">主体 · 租户 · 作用域 · 敏感性</text>
+  <text x="644" y="316" class="small">检查冲突、来源和有效期</text>
+  <text x="644" y="344" class="small">代码负责最终状态转换</text>
+
+  <text x="950" y="204" class="label">MEMORY STATE</text>
+  <text x="950" y="244" class="result">ACTIVE</text>
+  <text x="950" y="280" class="result">CANDIDATE</text>
+  <text x="950" y="316" class="result">REJECT</text>
+  <text x="950" y="350" class="small">按作用域和预算召回</text>
+
+  <path d="M282 277 H328" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M560 277 H606" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M866 277 H912" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="176" y="466" width="848" height="126" rx="22" fill="#dce9ff"/>
+  </g>
+  <text x="210" y="506" class="label">CONSISTENCY BOUNDARY</text>
+  <text x="210" y="542" class="stage">当前轮依赖 Message 与 AgentState；异步 Memory 主要服务后续轮次</text>
+  <text x="210" y="574" class="body">权限、任务终态和外部副作用必须进入权威业务存储，不能只依赖最终一致的 Memory。</text>
+</svg>
