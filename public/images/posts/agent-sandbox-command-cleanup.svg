@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Command、Sandbox 与 PID 1 的清理边界</title>
+  <desc id="desc">一次 Command 使用进程组完成协同终止，整个 Sandbox 由容器或虚拟机完成最终回收，PID 1 负责容器进程生命周期。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#6b9cf4"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .label { font: 700 15px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; letter-spacing: 1px; }
+      .stage { font: 700 22px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .body { font: 400 15px Inter, "Noto Sans SC", sans-serif; fill: #59657a; }
+      .small { font: 400 14px Inter, "Noto Sans SC", sans-serif; fill: #748096; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="680" rx="28" fill="#f2f6fa"/>
+  <text x="62" y="68" class="title">清理机制必须与对象范围一致</text>
+  <text x="62" y="101" class="subtitle">一次执行、整个运行载体与进程空间生命周期是三个不同责任边界</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="154" width="318" height="318" rx="22" fill="#ffffff"/>
+    <rect x="441" y="154" width="318" height="318" rx="22" fill="#ffffff"/>
+    <rect x="820" y="154" width="318" height="318" rx="22" fill="#ffffff"/>
+  </g>
+
+  <text x="92" y="194" class="label">COMMAND</text>
+  <text x="92" y="236" class="stage">进程组</text>
+  <text x="92" y="274" class="body">只管理本次执行产生的进程</text>
+  <text x="92" y="316" class="small">SIGTERM → 宽限期 → SIGKILL</text>
+  <text x="92" y="348" class="small">保留 Sandbox 与其他命令</text>
+  <rect x="92" y="384" width="258" height="54" rx="14" fill="#edf4ff"/>
+  <text x="116" y="417" class="body">目标：局部取消，不扩大影响</text>
+
+  <text x="471" y="194" class="label">SANDBOX</text>
+  <text x="471" y="236" class="stage">容器 / MicroVM</text>
+  <text x="471" y="274" class="body">回收整个临时运行载体</text>
+  <text x="471" y="316" class="small">进程、cgroup、网络与临时文件</text>
+  <text x="471" y="348" class="small">持久化 Workspace 独立保留</text>
+  <rect x="471" y="384" width="258" height="54" rx="14" fill="#dce9ff"/>
+  <text x="495" y="417" class="body">目标：建立最终清理边界</text>
+
+  <text x="850" y="194" class="label">PID NAMESPACE</text>
+  <text x="850" y="236" class="stage">PID 1</text>
+  <text x="850" y="274" class="body">负责容器内进程生命周期</text>
+  <text x="850" y="316" class="small">信号转发、孤儿接管、子进程回收</text>
+  <text x="850" y="348" class="small">存活不代表 execd 功能健康</text>
+  <rect x="850" y="384" width="258" height="54" rx="14" fill="#edf4ff"/>
+  <text x="874" y="417" class="body">目标：维持进程空间完整性</text>
+
+  <path d="M380 313 H429" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M759 313 H808" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="176" y="522" width="848" height="92" rx="20" fill="#ffffff"/>
+  <text x="210" y="558" class="label">ENGINEERING RULE</text>
+  <text x="210" y="591" class="body">局部超时由进程组处理；最终安全边界由可整体销毁的 Sandbox 承担；健康检查验证功能而不是只看 PID 1。</text>
+</svg>

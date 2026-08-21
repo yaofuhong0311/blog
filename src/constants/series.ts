@@ -68,6 +68,7 @@ export const seriesList: SeriesDef[] = [
 			"agentscope-sse-replay",
 			"agentscope-trusted-execution",
 			"agentscope-memory-lifecycle",
+			"agentscope-memory-trust-policy",
 		],
 	},
 	{
@@ -79,6 +80,7 @@ export const seriesList: SeriesDef[] = [
 			"agent-sandbox-reconcile",
 			"agent-sandbox-create-path",
 			"agent-sandbox-observability-slo",
+			"agent-sandbox-command-cleanup",
 		],
 	},
 ];
