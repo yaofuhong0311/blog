@@ -50,6 +50,7 @@ export const seriesList: SeriesDef[] = [
 			"agent-observability",
 			"agent-memory-layers",
 			"agent-architecture-evaluation",
+			"agent-harness-logical-architecture",
 		],
 	},
 	{
@@ -69,6 +70,7 @@ export const seriesList: SeriesDef[] = [
 			"agentscope-trusted-execution",
 			"agentscope-memory-lifecycle",
 			"agentscope-memory-trust-policy",
+			"agentscope-memory-retrieval-boundary",
 		],
 	},
 	{
