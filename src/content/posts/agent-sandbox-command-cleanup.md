@@ -1,6 +1,7 @@
 ---
 title: Agent Sandbox 工程实践（四）：Command 超时不等于 Sandbox 回收
 published: 2026-08-21T09:00:00+08:00
+updated: 2026-08-25T09:00:00+08:00
 description: Command timeout 只应终止本次执行的进程集合；Sandbox 回收处理整个运行载体，PID 1 则负责容器内的进程生命周期。
 tags: [AI Agent, Sandbox, OpenSandbox, 进程管理]
 category: 工程实践
@@ -24,9 +25,11 @@ category: 工程实践
 
 ## 进程组负责一次 Command 的协同终止
 
-只终止最外层 Shell 可能留下继续运行的子进程。OpenSandbox 的 execd 为普通命令建立独立进程组；超时或中断时向整个进程组发送信号，先给进程正常退出的机会，超过宽限期后再使用 `SIGKILL`，并等待直接子进程退出。
+只终止最外层 Shell 可能留下继续运行的子进程。OpenSandbox 的 execd 为普通命令建立独立进程组；超时或中断时先发送可被进程处理的 `SIGTERM`，给它保存数据和关闭连接的机会，超过宽限期后再使用不可捕获的 `SIGKILL`。
 
-进程组负责协同清理，不是安全隔离，也不会回收网络、挂载和 cgroup。不可信代码的最终边界仍应是可整体销毁的运行载体。
+Shell 通常把信号终止显示为 `128 + 信号编号`：SIGTERM 常见为 143，SIGKILL 常见为 137。但 137 只能说明进程遭到强制终止，不能单独证明 OOM；Command timeout、人工中断或 Pod 终止都可能产生相同结果。
+
+进程组负责协同清理，不是安全隔离，也不会回收网络、挂载和 cgroup。不可信代码的最终边界仍应是可整体销毁的运行载体。判断终止原因必须结合 Command 状态、Pod reason 与事件，而不是只看 exit code。
 
 ## PID 1 管理生命周期，不代表 Sandbox 健康
 
