@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Harness 的逻辑职责与部署组件</title>
+  <desc id="desc">Session、Run、Event、Tool 与 State 合同连接 Agent Runtime、Memory、Tool Gateway、Sandbox、Store 和 Evaluation 等独立组件。</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .label { font: 700 14px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; letter-spacing: 1px; }
+      .stage { font: 700 18px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .body { font: 400 14px Inter, "Noto Sans SC", sans-serif; fill: #59657a; }
+      .contract { font: 700 16px Inter, "Noto Sans SC", sans-serif; fill: #244f8c; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="720" rx="28" fill="#f2f6fa"/>
+  <text x="62" y="68" class="title">Harness 是共同合同，不是固定部署拓扑</text>
+  <text x="62" y="101" class="subtitle">组件可以独立扩缩容，只要围绕稳定的 Session、Run、Event、Tool 与 State 语义协作</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="158" width="250" height="126" rx="20" fill="#ffffff"/>
+    <rect x="475" y="140" width="250" height="144" rx="20" fill="#dce9ff"/>
+    <rect x="888" y="158" width="250" height="126" rx="20" fill="#ffffff"/>
+    <rect x="62" y="470" width="250" height="126" rx="20" fill="#ffffff"/>
+    <rect x="475" y="470" width="250" height="126" rx="20" fill="#ffffff"/>
+    <rect x="888" y="470" width="250" height="126" rx="20" fill="#ffffff"/>
+  </g>
+
+  <text x="88" y="197" class="label">CONTEXT</text>
+  <text x="88" y="235" class="stage">Memory / RAG</text>
+  <text x="88" y="263" class="body">检索、治理与上下文材料</text>
+
+  <text x="501" y="181" class="label">CORE</text>
+  <text x="501" y="221" class="stage">Agent Runtime</text>
+  <text x="501" y="251" class="body">组装 Context · 驱动 Loop</text>
+
+  <text x="914" y="197" class="label">CAPABILITY</text>
+  <text x="914" y="235" class="stage">Tool Gateway</text>
+  <text x="914" y="263" class="body">授权、执行与外部副作用</text>
+
+  <text x="88" y="509" class="label">EXECUTION</text>
+  <text x="88" y="547" class="stage">Sandbox Service</text>
+  <text x="88" y="575" class="body">隔离代码与工作空间</text>
+
+  <text x="501" y="509" class="label">STATE</text>
+  <text x="501" y="547" class="stage">Store / Message Bus</text>
+  <text x="501" y="575" class="body">持久化、并发与事件传递</text>
+
+  <text x="914" y="509" class="label">QUALITY</text>
+  <text x="914" y="547" class="stage">Evaluation / Audit</text>
+  <text x="914" y="575" class="body">验证、观测与发布判断</text>
+
+  <rect x="338" y="330" width="524" height="82" rx="20" fill="#ffffff" filter="url(#shadow)"/>
+  <text x="372" y="362" class="label">SHARED CONTRACTS</text>
+  <text x="372" y="391" class="contract">SESSION · RUN · EVENT · TOOL · STATE</text>
+
+  <path d="M312 221 C382 221 382 350 338 350" fill="none" stroke="#6b9cf4" stroke-width="3"/>
+  <path d="M600 284 V330" fill="none" stroke="#6b9cf4" stroke-width="3"/>
+  <path d="M888 221 C818 221 818 350 862 350" fill="none" stroke="#6b9cf4" stroke-width="3"/>
+  <path d="M312 533 C382 533 382 392 338 392" fill="none" stroke="#6b9cf4" stroke-width="3"/>
+  <path d="M600 470 V412" fill="none" stroke="#6b9cf4" stroke-width="3"/>
+  <path d="M888 533 C818 533 818 392 862 392" fill="none" stroke="#6b9cf4" stroke-width="3"/>
+
+  <text x="298" y="665" class="body">同一进程是部署选择；共同合同才是 Harness 的架构边界。</text>
+</svg>
