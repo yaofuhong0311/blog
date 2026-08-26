@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Memory 从授权过滤到 Context 注入的链路</title>
+  <desc id="desc">先按租户用户项目进行硬过滤，再做混合召回、可信度判断和预算选择，最后向模型注入少量 Memory。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#6b9cf4"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .label { font: 700 14px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; letter-spacing: 1px; }
+      .stage { font: 700 19px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .body { font: 400 14px Inter, "Noto Sans SC", sans-serif; fill: #59657a; }
+      .small { font: 400 13px Inter, "Noto Sans SC", sans-serif; fill: #748096; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="680" rx="28" fill="#f2f6fa"/>
+  <text x="62" y="68" class="title">先确定允许搜索的集合，再讨论相关性</text>
+  <text x="62" y="101" class="subtitle">授权、召回、可信判断和 Context 预算是四个不能合并的阶段</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="164" width="230" height="260" rx="20" fill="#ffffff"/>
+    <rect x="344" y="164" width="230" height="260" rx="20" fill="#ffffff"/>
+    <rect x="626" y="164" width="230" height="260" rx="20" fill="#ffffff"/>
+    <rect x="908" y="164" width="230" height="260" rx="20" fill="#ffffff"/>
+  </g>
+
+  <text x="88" y="204" class="label">HARD FILTER</text>
+  <text x="88" y="244" class="stage">授权集合</text>
+  <text x="88" y="282" class="body">tenant · user · project</text>
+  <text x="88" y="316" class="small">先排除无权访问的数据</text>
+  <rect x="88" y="350" width="178" height="42" rx="12" fill="#dce9ff"/>
+  <text x="110" y="376" class="small">确定性安全边界</text>
+
+  <text x="370" y="204" class="label">RETRIEVAL</text>
+  <text x="370" y="244" class="stage">混合召回</text>
+  <text x="370" y="282" class="body">向量 · 关键词 · 实体</text>
+  <text x="370" y="316" class="small">寻找语义相关候选</text>
+  <rect x="370" y="350" width="178" height="42" rx="12" fill="#edf4ff"/>
+  <text x="394" y="376" class="small">概率相关性</text>
+
+  <text x="652" y="204" class="label">POLICY + RERANK</text>
+  <text x="652" y="244" class="stage">可信判断</text>
+  <text x="652" y="282" class="body">来源 · 时效 · 冲突</text>
+  <text x="652" y="316" class="small">重排不能绕过授权</text>
+  <rect x="652" y="350" width="178" height="42" rx="12" fill="#edf4ff"/>
+  <text x="676" y="376" class="small">业务使用条件</text>
+
+  <text x="934" y="204" class="label">CONTEXT BUILDER</text>
+  <text x="934" y="244" class="stage">预算选择</text>
+  <text x="934" y="282" class="body">压缩 · 格式化 · 引用</text>
+  <text x="934" y="316" class="small">只注入本轮必要内容</text>
+  <rect x="934" y="350" width="178" height="42" rx="12" fill="#dce9ff"/>
+  <text x="958" y="376" class="small">交给主 LLM</text>
+
+  <path d="M292 294 H332" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M574 294 H614" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M856 294 H896" stroke="#6b9cf4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="176" y="500" width="848" height="106" rx="20" fill="#ffffff"/>
+  <text x="210" y="540" class="label">KEY DISTINCTION</text>
+  <text x="210" y="576" class="body">相似度回答“是否相关”，授权回答“是否可见”，Policy 回答“是否可信有效”，Context Builder 回答“本轮是否值得使用”。</text>
+</svg>
