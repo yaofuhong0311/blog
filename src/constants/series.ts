@@ -51,6 +51,8 @@ export const seriesList: SeriesDef[] = [
 			"agent-memory-layers",
 			"agent-architecture-evaluation",
 			"agent-harness-logical-architecture",
+			"agent-run-versioned-recovery",
+			"agent-distributed-ordering-tokens",
 		],
 	},
 	{
@@ -83,6 +85,7 @@ export const seriesList: SeriesDef[] = [
 			"agent-sandbox-create-path",
 			"agent-sandbox-observability-slo",
 			"agent-sandbox-command-cleanup",
+			"agent-sandbox-file-consistency",
 		],
 	},
 ];
