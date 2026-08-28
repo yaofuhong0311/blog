@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">进程终止后的文件状态与恢复边界</title>
+  <desc id="desc">进程终止释放运行资源，但已写入文件仍由挂载和存储后端决定生命周期，恢复前需要完整性校验。</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0 L12 6 L0 12 Z" fill="#79a3d8"/>
+    </marker>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .label { font: 700 14px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; letter-spacing: 1px; }
+      .stage { font: 700 20px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .body { font: 400 15px Inter, "Noto Sans SC", sans-serif; fill: #59657a; }
+      .note { font: 600 16px Inter, "Noto Sans SC", sans-serif; fill: #244f8c; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="720" rx="28" fill="#f2f6fa"/>
+  <text x="62" y="68" class="title">进程结束，不代表文件回到执行前</text>
+  <text x="62" y="101" class="subtitle">运行资源、文件生命周期与产物完整性由三套机制分别负责</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="178" width="292" height="194" rx="22" fill="#ffffff"/>
+    <rect x="454" y="178" width="292" height="194" rx="22" fill="#dce9ff"/>
+    <rect x="846" y="178" width="292" height="194" rx="22" fill="#ffffff"/>
+  </g>
+
+  <text x="90" y="220" class="label">PROCESS</text>
+  <text x="90" y="260" class="stage">Signal 终止进程</text>
+  <text x="90" y="300" class="body">释放内存、FD 与 socket</text>
+  <text x="90" y="331" class="body">不撤销已经发生的写入</text>
+
+  <text x="482" y="220" class="label">STORAGE</text>
+  <text x="482" y="260" class="stage">Mount 决定寿命</text>
+  <text x="482" y="300" class="body">Workspace · RootFS · tmpfs</text>
+  <text x="482" y="331" class="body">保留范围各不相同</text>
+
+  <text x="874" y="220" class="label">RECOVERY</text>
+  <text x="874" y="260" class="stage">验证完整提交点</text>
+  <text x="874" y="300" class="body">版本 · 长度 · checksum</text>
+  <text x="874" y="331" class="body">拒绝使用半写产物</text>
+
+  <path d="M354 275 H438" stroke="#79a3d8" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M746 275 H830" stroke="#79a3d8" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <rect x="132" y="458" width="936" height="142" rx="22" fill="#ffffff" filter="url(#shadow)"/>
+  <text x="168" y="500" class="label">SAFE COMMIT</text>
+  <text x="168" y="543" class="note">临时文件 → fsync → 原子 rename → 校验后读取</text>
+  <text x="168" y="575" class="body">持久化回答“文件是否还在”，提交协议回答“文件是否完整”。</text>
+
+  <text x="330" y="665" class="body">Command 停止、Sandbox 删除与文件回滚是三个不同状态。</text>
+</svg>
