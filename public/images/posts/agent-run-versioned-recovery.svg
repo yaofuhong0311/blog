@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Run 的版本化恢复链路</title>
+  <desc id="desc">不可变 AgentVersion 与动态 RunRecord 共同支撑 Checkpoint 恢复，跨版本时还需要 Migration 和 Reconcile。</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0 L12 6 L0 12 Z" fill="#79a3d8"/>
+    </marker>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .label { font: 700 14px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; letter-spacing: 1px; }
+      .stage { font: 700 19px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .body { font: 400 14px Inter, "Noto Sans SC", sans-serif; fill: #59657a; }
+      .contract { font: 700 16px Inter, "Noto Sans SC", sans-serif; fill: #244f8c; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="720" rx="28" fill="#f2f6fa"/>
+  <text x="62" y="68" class="title">恢复需要合同、事实与兼容性证明</text>
+  <text x="62" y="101" class="subtitle">Checkpoint 只连接计算位置，不能独立证明新版仍可安全延续旧 Run</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="166" width="318" height="172" rx="22" fill="#dce9ff"/>
+    <rect x="820" y="166" width="318" height="172" rx="22" fill="#ffffff"/>
+    <rect x="356" y="438" width="488" height="142" rx="22" fill="#ffffff"/>
+  </g>
+
+  <text x="92" y="208" class="label">IMMUTABLE CONTRACT</text>
+  <text x="92" y="250" class="stage">AgentVersion</text>
+  <text x="92" y="286" class="body">代码 · Prompt · Model · ToolSet</text>
+  <text x="92" y="315" class="body">Memory Policy · 权限 · Image</text>
+
+  <text x="850" y="208" class="label">RUNTIME FACTS</text>
+  <text x="850" y="250" class="stage">RunRecord</text>
+  <text x="850" y="286" class="body">Message · ToolResult · Approval</text>
+  <text x="850" y="315" class="body">Action ID · 外部任务 · Sandbox</text>
+
+  <rect x="467" y="188" width="266" height="126" rx="20" fill="#ffffff" filter="url(#shadow)"/>
+  <text x="497" y="228" class="label">POSITION</text>
+  <text x="497" y="267" class="stage">Checkpoint</text>
+  <text x="497" y="295" class="body">记录暂停位置与状态版本</text>
+
+  <path d="M380 251 H451" stroke="#79a3d8" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M820 251 H749" stroke="#79a3d8" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M600 314 V422" stroke="#79a3d8" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <text x="392" y="480" class="label">CROSS-VERSION RECOVERY</text>
+  <text x="392" y="522" class="contract">Migration 解决合同兼容</text>
+  <text x="392" y="554" class="contract">Reconcile 证明外部副作用</text>
+
+  <text x="330" y="652" class="body">先证明过去发生了什么，再从版本兼容且状态确定的位置继续。</text>
+</svg>

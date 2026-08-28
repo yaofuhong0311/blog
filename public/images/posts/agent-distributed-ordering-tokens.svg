@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">多副本 Agent 的四种秩序标识</title>
+  <desc id="desc">event_id、status_version、owner_epoch 和 Resource Token 分别处理消息重复、状态乱序、旧 Owner 写入和资源重复分配。</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#315b91" flood-opacity=".08"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .subtitle { font: 400 17px Inter, "Noto Sans SC", sans-serif; fill: #67738a; }
+      .label { font: 700 13px Inter, "Noto Sans SC", sans-serif; fill: #356bb8; letter-spacing: .8px; }
+      .stage { font: 700 18px Inter, "Noto Sans SC", sans-serif; fill: #172033; }
+      .body { font: 400 14px Inter, "Noto Sans SC", sans-serif; fill: #59657a; }
+      .token { font: 700 17px Inter, "Noto Sans SC", monospace; fill: #244f8c; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="720" rx="28" fill="#f2f6fa"/>
+  <text x="62" y="68" class="title">四类故障，需要四种独立秩序</text>
+  <text x="62" y="101" class="subtitle">去重、状态顺序、执行所有权和物理资源分配不能由同一把锁替代</text>
+
+  <g filter="url(#shadow)">
+    <rect x="62" y="172" width="250" height="220" rx="22" fill="#ffffff"/>
+    <rect x="337" y="172" width="250" height="220" rx="22" fill="#ffffff"/>
+    <rect x="612" y="172" width="250" height="220" rx="22" fill="#dce9ff"/>
+    <rect x="887" y="172" width="250" height="220" rx="22" fill="#ffffff"/>
+  </g>
+
+  <text x="88" y="214" class="label">DUPLICATE EVENT</text>
+  <text x="88" y="257" class="token">event_id</text>
+  <text x="88" y="300" class="stage">Inbox 去重</text>
+  <text x="88" y="334" class="body">同一事件只产生一次</text>
+  <text x="88" y="361" class="body">有效业务结果</text>
+
+  <text x="363" y="214" class="label">OUT-OF-ORDER STATE</text>
+  <text x="363" y="257" class="token">status_version</text>
+  <text x="363" y="300" class="stage">拒绝状态回退</text>
+  <text x="363" y="334" class="body">单调版本 + 合法状态机</text>
+
+  <text x="638" y="214" class="label">STALE OWNER</text>
+  <text x="638" y="257" class="token">owner_epoch</text>
+  <text x="638" y="300" class="stage">Store Fence</text>
+  <text x="638" y="334" class="body">旧 Worker 恢复后</text>
+  <text x="638" y="361" class="body">不能继续写入</text>
+
+  <text x="913" y="214" class="label">SCARCE RESOURCE</text>
+  <text x="913" y="257" class="token">Resource Token</text>
+  <text x="913" y="300" class="stage">Lease + Reconcile</text>
+  <text x="913" y="334" class="body">逻辑回收之后还要确认</text>
+  <text x="913" y="361" class="body">GPU 进程已经停止</text>
+
+  <rect x="132" y="474" width="936" height="126" rx="22" fill="#ffffff" filter="url(#shadow)"/>
+  <text x="168" y="516" class="label">SHARED FOUNDATION</text>
+  <text x="168" y="558" class="stage">DB 保存事实 · Message Bus 及时通知 · CAS 收口并发 · 审计记录关联四种标识</text>
+
+  <text x="304" y="665" class="body">逻辑秩序避免重复结果，物理清理保证资源真正可以再次分配。</text>
+</svg>
