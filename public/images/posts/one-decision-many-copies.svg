@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="560" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="od" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="odr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">灰度能覆盖多少，取决于同一个判定有几份副本</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">只改了读判定的那一份，另一份自己查自己的——灰度就是假的</text>
+
+  <rect x="470" y="98" width="260" height="46" rx="9" fill="#5b88b0"/>
+  <text x="600" y="127" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">同一次用户请求</text>
+
+  <path d="M600,144 L230,168" stroke="#3a6491" stroke-width="2" marker-end="url(#od)"/>
+  <path d="M600,144 L600,168" stroke="#b5544a" stroke-width="2" marker-end="url(#odr)"/>
+  <path d="M600,144 L970,168" stroke="#b5544a" stroke-width="2" marker-end="url(#odr)"/>
+
+  <!-- 三个入口 -->
+  <rect x="60" y="176" width="340" height="238" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="230" y="202" text-anchor="middle" font-size="14.5" font-weight="700" fill="#24476b">聊天接口</text>
+  <rect x="92" y="218" width="276" height="62" rx="9" fill="#24476b"/>
+  <text x="230" y="242" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">读那份灰度判定</text>
+  <text x="230" y="264" text-anchor="middle" font-size="11.5" fill="#a9c4dc">一次请求只解析一次</text>
+  <rect x="92" y="292" width="276" height="42" rx="8" fill="#eef5fa"/>
+  <text x="230" y="318" text-anchor="middle" font-size="12.5" fill="#24476b">灰度生效</text>
+  <text x="230" y="366" text-anchor="middle" font-size="12" fill="#3a6491">改造时改的就是这一份</text>
+
+  <rect x="430" y="176" width="340" height="238" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="600" y="202" text-anchor="middle" font-size="14.5" font-weight="700" fill="#b5544a">取消接口</text>
+  <rect x="462" y="218" width="276" height="62" rx="9" fill="none" stroke="#b5544a" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="600" y="242" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b5544a">自己写了一份</text>
+  <text x="600" y="264" text-anchor="middle" font-size="11.5" fill="#8c4a42">直接去查容器，不读那份判定</text>
+  <rect x="462" y="292" width="276" height="42" rx="8" fill="#f6ebe9"/>
+  <text x="600" y="318" text-anchor="middle" font-size="12.5" fill="#8c4a42">灰度绕过去了</text>
+  <text x="600" y="366" text-anchor="middle" font-size="12" fill="#8c4a42">改造时没人想到它也在做同一个判断</text>
+
+  <rect x="800" y="176" width="340" height="238" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="970" y="202" text-anchor="middle" font-size="14.5" font-weight="700" fill="#b5544a">其他入口</text>
+  <rect x="832" y="218" width="276" height="62" rx="9" fill="none" stroke="#b5544a" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="970" y="242" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b5544a">还有几份？</text>
+  <text x="970" y="264" text-anchor="middle" font-size="11.5" fill="#8c4a42">改造前没人数过</text>
+  <rect x="832" y="292" width="276" height="42" rx="8" fill="#f6ebe9"/>
+  <text x="970" y="318" text-anchor="middle" font-size="12.5" fill="#8c4a42">未知</text>
+  <text x="970" y="366" text-anchor="middle" font-size="12" fill="#8c4a42">灰度开了，不知道实际覆盖了几成</text>
+
+  <!-- 怎么找 -->
+  <rect x="60" y="430" width="1080" height="56" rx="12" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="600" y="454" text-anchor="middle" font-size="13.5" font-weight="700" fill="#3a6491">找副本的办法不是读改造清单，是反过来搜「谁在做同一个判断」</text>
+  <text x="600" y="474" text-anchor="middle" font-size="12" fill="#6b87a3">按判定依据的那几个字段名全仓搜，而不是按函数名——自己写的那份不会叫同一个名字</text>
+
+  <rect x="60" y="498" width="1080" height="46" rx="12" fill="#24476b"/>
+  <text x="600" y="527" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">灰度的覆盖率等于「读那份判定的入口数」÷「做这个判断的入口总数」，分母得先数清楚</text>
+</svg>

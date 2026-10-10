@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="580" rx="20" fill="#f2f6fa"/>
+  <defs><marker id="cn" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker></defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">同一个请求，三方看到的结局不一样</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">客户端说失败，服务端建成了，没人来收——取消请求和回收资源是两件事</text>
+
+  <!-- 三栏 -->
+  <rect x="50" y="102" width="350" height="230" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="225" y="128" text-anchor="middle" font-size="15" font-weight="700" fill="#6b87a3">客户端</text>
+  <line x1="86" y1="180" x2="364" y2="180" stroke="#6b87a3" stroke-width="2"/>
+  <circle cx="92" cy="180" r="4" fill="#5b88b0"/>
+  <text x="92" y="202" text-anchor="middle" font-size="11" fill="#6b87a3">0ms</text>
+  <text x="92" y="166" text-anchor="middle" font-size="11" fill="#6b87a3">发出</text>
+  <line x1="200" y1="166" x2="214" y2="194" stroke="#b5544a" stroke-width="3"/>
+  <line x1="214" y1="166" x2="200" y2="194" stroke="#b5544a" stroke-width="3"/>
+  <text x="207" y="214" text-anchor="middle" font-size="11" fill="#b5544a">50ms 断开</text>
+  <rect x="86" y="236" width="278" height="64" rx="9" fill="#eef5fa"/>
+  <text x="225" y="258" text-anchor="middle" font-size="12.5" fill="#24476b">它认定的结果：失败</text>
+  <text x="225" y="280" text-anchor="middle" font-size="11.5" fill="#6b87a3">于是重试，或者记一次错</text>
+
+  <rect x="425" y="102" width="350" height="230" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="600" y="128" text-anchor="middle" font-size="15" font-weight="700" fill="#b5544a">服务端</text>
+  <rect x="461" y="146" width="278" height="56" rx="9" fill="#f6ebe9"/>
+  <text x="600" y="168" text-anchor="middle" font-size="12.5" fill="#8c4a42">请求已经发出去了，继续往下走</text>
+  <text x="600" y="190" text-anchor="middle" font-size="11.5" fill="#8c4a42">连接断了它不一定知道，知道了也来不及撤</text>
+  <rect x="461" y="212" width="278" height="88" rx="9" fill="#b5544a"/>
+  <text x="600" y="236" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">沙箱建成了</text>
+  <text x="600" y="262" text-anchor="middle" font-size="12" fill="#f0d9d6">
+    <tspan x="600">经引擎建：16.4% 的放弃请求照样建出</tspan>
+    <tspan x="600" dy="19">直接建 Pod：25.5%</tspan>
+  </text>
+
+  <rect x="800" y="102" width="350" height="230" rx="14" fill="#ffffff" stroke="#8c4a42" stroke-width="2"/>
+  <text x="975" y="128" text-anchor="middle" font-size="15" font-weight="700" fill="#8c4a42">之后</text>
+  <rect x="836" y="146" width="278" height="56" rx="9" fill="#f6ebe9"/>
+  <text x="975" y="168" text-anchor="middle" font-size="12.5" fill="#8c4a42">没有人认为自己该删它</text>
+  <text x="975" y="190" text-anchor="middle" font-size="11.5" fill="#8c4a42">客户端以为没建成，服务端以为对方会管</text>
+  <rect x="836" y="212" width="278" height="88" rx="9" fill="#8c4a42"/>
+  <text x="975" y="242" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff">一晚 49 个</text>
+  <text x="975" y="272" text-anchor="middle" font-size="12" fill="#f0d9d6">现网多出来的无主沙箱，各占 2 核 4G</text>
+
+  <text x="600" y="358" text-anchor="middle" font-size="13" fill="#6b87a3">那 9 个百分点的差值（16.4% vs 25.5%）量化了一件事：多一跳，就多一个可取消的窗口</text>
+
+  <!-- 补偿 -->
+  <rect x="50" y="378" width="1100" height="106" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="600" y="404" text-anchor="middle" font-size="14" font-weight="700" fill="#3a6491">补偿要三条一起上，缺一条就留口子</text>
+  <g font-size="12">
+    <rect x="76" y="418" width="336" height="48" rx="8" fill="#eef5fa"/>
+    <text x="244" y="438" text-anchor="middle" font-weight="700" fill="#24476b">放弃后补删</text>
+    <text x="244" y="456" text-anchor="middle" fill="#6b87a3">发现连接断了就回头删</text>
+
+    <rect x="432" y="418" width="336" height="48" rx="8" fill="#eef5fa"/>
+    <text x="600" y="438" text-anchor="middle" font-weight="700" fill="#24476b">定期对账</text>
+    <text x="600" y="456" text-anchor="middle" fill="#6b87a3">拿应有的清单比一遍，多的删掉</text>
+
+    <rect x="788" y="418" width="336" height="48" rx="8" fill="#eef5fa"/>
+    <text x="956" y="438" text-anchor="middle" font-weight="700" fill="#24476b">报错也按「可能已建成」处理</text>
+    <text x="956" y="456" text-anchor="middle" fill="#6b87a3">引擎回了错，沙箱可能真在那儿</text>
+  </g>
+
+  <rect x="50" y="500" width="1100" height="50" rx="12" fill="#24476b"/>
+  <text x="600" y="531" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">返回码不可信：说失败的那次，东西可能已经建出来了</text>
+</svg>

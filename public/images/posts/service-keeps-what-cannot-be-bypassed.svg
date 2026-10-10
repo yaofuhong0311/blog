@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="626" viewBox="0 0 1200 626" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="626" rx="20" fill="#f2f6fa"/>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">删四类、留五件：判据是绕过服务还成不成</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">判据不是「这个功能有没有用」；约 60% 的代码是内置的 7 种 agent 运行框架，全删之后只剩五件事</text>
+
+  <!-- 左栏：删掉 -->
+  <rect x="48" y="96" width="528" height="382" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.6"/>
+  <text x="70" y="123" font-size="15" font-weight="700" fill="#6b87a3">删掉：绕过服务照样做得成</text>
+  <text x="554" y="123" text-anchor="end" font-size="11.5" fill="#6b87a3">4 类</text>
+  <line x1="68" y1="134" x2="556" y2="134" stroke="#c3d6e6" stroke-width="1"/>
+
+  <rect x="66" y="146" width="492" height="72" rx="8" fill="#f7fbfe" stroke="#c3d6e6" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <rect x="66" y="158" width="4" height="48" fill="#c3d6e6"/>
+  <text x="84" y="174" font-size="12.5" font-weight="700" fill="#6b87a3">内置 7 种 agent 运行框架</text>
+  <rect x="434" y="156" width="112" height="24" rx="12" fill="#6b87a3"/>
+  <text x="490" y="172" text-anchor="middle" font-size="11.5" fill="#ffffff">约 60% 代码</text>
+  <text x="84" y="201" font-size="11.5" fill="#6b87a3">每种框架官方都有安装示例，使用方在自己镜像里装一次就有</text>
+
+  <rect x="66" y="226" width="492" height="72" rx="8" fill="#f7fbfe" stroke="#c3d6e6" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <rect x="66" y="238" width="4" height="48" fill="#c3d6e6"/>
+  <text x="84" y="254" font-size="12.5" font-weight="700" fill="#6b87a3">建 <tspan font-family="monospace">pod</tspan>、维护预建沙箱池</text>
+  <rect x="434" y="236" width="112" height="24" rx="12" fill="#6b87a3"/>
+  <text x="490" y="252" text-anchor="middle" font-size="11.5" fill="#ffffff">603 次全新</text>
+  <text x="84" y="281" font-size="11.5" fill="#6b87a3">引擎自带池领用 603 次，次次是新沙箱；逐个领慢约 85 毫秒，同时领持平</text>
+
+  <rect x="66" y="306" width="492" height="72" rx="8" fill="#f7fbfe" stroke="#c3d6e6" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <rect x="66" y="318" width="4" height="48" fill="#c3d6e6"/>
+  <text x="84" y="334" font-size="12.5" font-weight="700" fill="#6b87a3">小工具接口（有状态代码执行、浏览器、文档转换）</text>
+  <rect x="434" y="316" width="112" height="24" rx="12" fill="#6b87a3"/>
+  <text x="490" y="332" text-anchor="middle" font-size="11.5" fill="#ffffff">15 天 0–7 次</text>
+  <text x="84" y="361" font-size="11.5" fill="#6b87a3">0 可以删，7 不行——先从文档移除，确认无调用后再删</text>
+
+  <rect x="66" y="386" width="492" height="72" rx="8" fill="#f7fbfe" stroke="#c3d6e6" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <rect x="66" y="398" width="4" height="48" fill="#c3d6e6"/>
+  <text x="84" y="414" font-size="12.5" font-weight="700" fill="#6b87a3">个别使用方的专用逻辑（默认挂载、目录布局、版本管理）</text>
+  <rect x="434" y="396" width="112" height="24" rx="12" fill="#6b87a3"/>
+  <text x="490" y="412" text-anchor="middle" font-size="11.5" fill="#ffffff">日志查不出</text>
+  <text x="84" y="441" font-size="11.5" fill="#6b87a3">有明确使用方，只能交还：改用通用挂载参数，不再认识路径含义</text>
+
+  <!-- 中缝 -->
+  <line x1="600" y1="104" x2="600" y2="470" stroke="#c3d6e6" stroke-width="1.6"/>
+  <rect x="586" y="269" width="28" height="28" rx="14" fill="#f2f6fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <text x="600" y="288" text-anchor="middle" font-size="11.5" fill="#6b87a3">vs</text>
+
+  <!-- 右栏：留下 -->
+  <rect x="624" y="96" width="528" height="382" rx="14" fill="#ffffff" stroke="#5b88b0" stroke-width="2.2"/>
+  <text x="646" y="123" font-size="15" font-weight="700" fill="#24476b">留下：绕过服务就失效</text>
+  <text x="1130" y="123" text-anchor="end" font-size="11.5" fill="#6b87a3">5 件</text>
+  <line x1="644" y1="134" x2="1132" y2="134" stroke="#c3d6e6" stroke-width="1"/>
+
+  <rect x="642" y="145" width="492" height="58" rx="8" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <rect x="642" y="155" width="4" height="38" fill="#24476b"/>
+  <text x="660" y="170"><tspan font-size="14" font-weight="700" fill="#24476b">认人</tspan><tspan font-size="11.5" fill="#6b87a3" dx="10"><tspan font-family="monospace">API key</tspan> 只存哈希，比对的也是哈希</tspan></text>
+  <text x="660" y="190" font-size="11.5" fill="#b5544a">绕过去：不经过就没有身份，没人核对 <tspan font-family="monospace">key</tspan></text>
+
+  <rect x="642" y="210" width="492" height="58" rx="8" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <rect x="642" y="220" width="4" height="38" fill="#24476b"/>
+  <text x="660" y="235"><tspan font-size="14" font-weight="700" fill="#24476b">翻译</tspan><tspan font-size="11.5" fill="#6b87a3" dx="10">Kubernetes 的拒绝转成带原因和可重试标记的错误码</tspan></text>
+  <text x="660" y="255" font-size="11.5" fill="#b5544a">绕过去：只拿得到原始拒绝，不知道该改请求还是该等</text>
+
+  <rect x="642" y="275" width="492" height="58" rx="8" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <rect x="642" y="285" width="4" height="38" fill="#24476b"/>
+  <text x="660" y="300"><tspan font-size="14" font-weight="700" fill="#24476b">排队</tspan><tspan font-size="11.5" fill="#6b87a3" dx="10">按真实配额余量算，不写死个数</tspan></text>
+  <text x="660" y="320" font-size="11.5" fill="#b5544a">绕过去：没人算余量，只能写死个数</text>
+
+  <rect x="642" y="340" width="492" height="58" rx="8" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <rect x="642" y="350" width="4" height="38" fill="#24476b"/>
+  <text x="660" y="365"><tspan font-size="14" font-weight="700" fill="#24476b">防重复</tspan><tspan font-size="11.5" fill="#6b87a3" dx="10">幂等键写进沙箱对象的标签，服务重启也找得回</tspan></text>
+  <text x="660" y="385" font-size="11.5" fill="#b5544a">绕过去：幂等键没写进对象，一次重试多建一个沙箱</text>
+
+  <rect x="642" y="405" width="492" height="58" rx="8" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <rect x="642" y="415" width="4" height="38" fill="#24476b"/>
+  <text x="660" y="430"><tspan font-size="14" font-weight="700" fill="#24476b">转发</tspan><tspan font-size="11.5" fill="#6b87a3" dx="10">每次转发前核对目标还是就绪时那个 <tspan font-family="monospace">pod</tspan></tspan></text>
+  <text x="660" y="450" font-size="11.5" fill="#b5544a">绕过去：不核对，<tspan font-family="monospace">IP</tspan> 被复用就转进别人的沙箱</text>
+
+  <!-- 底栏：实测 -->
+  <rect x="48" y="498" width="1104" height="104" rx="12" fill="#24476b"/>
+  <text x="72" y="526" font-size="13.5" font-weight="700" fill="#ffffff">按这五件事重写的原型，三个实测数字</text>
+  <text x="1128" y="526" text-anchor="end" font-size="11.5" fill="#7fa4c4">代价：状态在单进程内存，不能多副本</text>
+
+  <line x1="392" y1="542" x2="392" y2="588" stroke="#3a6491" stroke-width="1.2"/>
+  <line x1="734" y1="542" x2="734" y2="588" stroke="#3a6491" stroke-width="1.2"/>
+
+  <text x="72" y="566" font-size="19" font-weight="700" fill="#ffffff">1818 行</text>
+  <text x="72" y="586" font-size="11.5" fill="#a9c4dc">标准库 Python，跑通两类负载</text>
+
+  <text x="420" y="566" font-size="19" font-weight="700" fill="#ffffff">串号 0、泄漏 0</text>
+  <text x="420" y="586" font-size="11.5" fill="#a9c4dc">12 轮压测</text>
+
+  <text x="762" y="566" font-size="19" font-weight="700" fill="#ffffff">2.6 毫秒</text>
+  <text x="762" y="586" font-size="11.5" fill="#a9c4dc">转发层自身开销：经服务 9.5 毫秒 / 直连 6.9 毫秒</text>
+</svg>
