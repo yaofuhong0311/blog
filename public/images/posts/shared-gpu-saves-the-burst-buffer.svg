@@ -1,42 +1,76 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
-  <rect width="1200" height="580" rx="20" fill="#f2f6fa"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="658" viewBox="0 0 1200 658" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="658" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <pattern id="sgpuIdle" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="9" height="9" fill="#eef5fa"/>
+      <line x1="4.5" y1="0" x2="4.5" y2="9" stroke="#6b87a3" stroke-width="3"/>
+    </pattern>
+  </defs>
 
-  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">省下来的那一半卡，原本就是留给突发的</text>
-  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">同一条任务时间线，共用借卡确实省一半——省掉的恰好是没人用时的空转</text>
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">省下的一半卡，原本是留给突发的余量</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">同一条任务时间线，三种给卡方式：「不慢」和「省一半」能同时成立，因为省下的全是空转</text>
 
-  <!-- 两根柱子 -->
-  <text x="300" y="112" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b87a3">专给 40 张卡</text>
-  <rect x="200" y="128" width="200" height="104" rx="6" fill="#c3d6e6"/>
-  <text x="300" y="166" text-anchor="middle" font-size="12.5" fill="#6b87a3">空转余量</text>
-  <text x="300" y="188" text-anchor="middle" font-size="16" font-weight="700" fill="#6b87a3">9723 卡·秒</text>
-  <text x="300" y="210" text-anchor="middle" font-size="12" fill="#6b87a3">占 53%</text>
-  <rect x="200" y="232" width="200" height="92" rx="6" fill="#24476b"/>
-  <text x="300" y="268" text-anchor="middle" font-size="12.5" fill="#ffffff">实际跑任务</text>
-  <text x="300" y="292" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">8629 卡·秒</text>
-  <text x="300" y="348" text-anchor="middle" font-size="13" fill="#24476b">总计 18352 卡·秒 · 用时 458.8 秒</text>
+  <rect x="50" y="94" width="1100" height="446" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <line x1="783" y1="116" x2="783" y2="518" stroke="#c3d6e6" stroke-width="1.3" stroke-dasharray="6 6"/>
 
-  <text x="760" y="112" text-anchor="middle" font-size="14.5" font-weight="700" fill="#3a6491">共用借卡（名义同样 40 张额度）</text>
-  <rect x="660" y="232" width="200" height="92" rx="6" fill="#24476b"/>
-  <text x="760" y="268" text-anchor="middle" font-size="12.5" fill="#ffffff">实际跑任务</text>
-  <text x="760" y="292" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">8629 卡·秒</text>
-  <rect x="660" y="128" width="200" height="104" rx="6" fill="none" stroke="#b5544a" stroke-width="2" stroke-dasharray="7 5"/>
-  <text x="760" y="172" text-anchor="middle" font-size="12.5" fill="#b5544a">这块没了</text>
-  <text x="760" y="196" text-anchor="middle" font-size="11.5" fill="#8c4a42">用完就还，不占着</text>
-  <text x="760" y="348" text-anchor="middle" font-size="13" fill="#3a6491">总计 8629 卡·秒 · 同样的时间线</text>
+  <!-- 两条卡·秒参考线：画在柱体之下，只在柱间露出 -->
+  <line x1="120" y1="240" x2="712" y2="240" stroke="#3a6491" stroke-width="2" stroke-dasharray="9 6"/>
+  <line x1="120" y1="367" x2="712" y2="367" stroke="#5b88b0" stroke-width="1.6" stroke-dasharray="5 5"/>
+  <line x1="120" y1="480" x2="1058" y2="480" stroke="#c3d6e6" stroke-width="1.6"/>
 
-  <text x="1030" y="236" text-anchor="middle" font-size="26" font-weight="700" fill="#24476b">省 53%</text>
-  <text x="1030" y="262" text-anchor="middle" font-size="12" fill="#6b87a3">任务没变慢</text>
+  <!-- 左栏：专给 40 张卡 -->
+  <text x="252" y="126" text-anchor="middle" font-size="15.5" font-weight="700" fill="#24476b">专给 40 张卡</text>
+  <text x="252" y="162" text-anchor="middle" font-size="14.5" font-weight="700" fill="#24476b">用时 458.8 秒</text>
+  <rect x="112" y="172" width="280" height="18" rx="5" fill="#eef5fa"/>
+  <rect x="112" y="172" width="115" height="18" rx="5" fill="#5b88b0"/>
+  <text x="252" y="212" text-anchor="middle" font-size="12" fill="#6b87a3">按峰值 40 张预留，低谷期卡空着也算你占着</text>
 
-  <!-- 判断 -->
-  <rect x="50" y="376" width="1100" height="96" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
-  <text x="600" y="402" text-anchor="middle" font-size="14.5" font-weight="700" fill="#b5544a">但省下的这一半，正是任务突然涌进来时能顶上的那部分</text>
-  <text x="600" y="426" text-anchor="middle" font-size="12.5" fill="#8c4a42">
-    <tspan x="600">专给的时候，空转的卡随时能接新任务；共用之后，那些卡在别人手里</tspan>
-    <tspan x="600" dy="19">平峰省下来的余量，恰好是峰值时要用的余量——同一块</tspan>
+  <rect x="177" y="240" width="150" height="127" fill="url(#sgpuIdle)" stroke="#6b87a3" stroke-width="1.2"/>
+  <rect x="185" y="272" width="134" height="60" rx="7" fill="#ffffff" stroke="#c3d6e6" stroke-width="1"/>
+  <text x="252" y="294" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3a6491">空转余量 53%</text>
+  <text x="252" y="315" text-anchor="middle" font-size="12" fill="#6b87a3">9723 卡·秒</text>
+
+  <rect x="177" y="367" width="150" height="113" fill="#24476b"/>
+  <text x="252" y="412" text-anchor="middle" font-size="12.5" fill="#c3d6e6">实际跑任务</text>
+  <text x="252" y="437" text-anchor="middle" font-size="14.5" font-weight="700" fill="#ffffff">8629 卡·秒</text>
+
+  <text x="252" y="506" text-anchor="middle" font-size="13" font-weight="700" fill="#24476b">预留 18352 卡·秒</text>
+  <text x="252" y="525" text-anchor="middle" font-size="11.5" fill="#6b87a3">8629 实跑 ＋ 9723 空转</text>
+
+  <!-- 中栏：共用借卡 -->
+  <text x="604" y="126" text-anchor="middle" font-size="15.5" font-weight="700" fill="#24476b">共用借卡（名义 40 张额度）</text>
+  <text x="604" y="162" text-anchor="middle" font-size="14.5" font-weight="700" fill="#24476b">用时 461.3 秒</text>
+  <rect x="464" y="172" width="280" height="18" rx="5" fill="#eef5fa"/>
+  <rect x="464" y="172" width="116" height="18" rx="5" fill="#5b88b0"/>
+  <text x="604" y="212" text-anchor="middle" font-size="12" fill="#3a6491">比专给慢 0.5%，只在真跑的时候占卡</text>
+
+  <text x="604" y="296" text-anchor="middle" font-size="12.5" fill="#3a6491">
+    <tspan x="604" font-weight="700">这段空转就是突发缓冲</tspan>
+    <tspan x="604" dy="21">共用之后被别队填上了</tspan>
   </text>
-  <text x="600" y="464" text-anchor="middle" font-size="12" fill="#8c4a42">而且要先调好三处配置才跑得起来，这个前提不写清楚，数字会被当成开箱即得</text>
 
-  <rect x="50" y="488" width="1100" height="68" rx="12" fill="#24476b"/>
-  <text x="600" y="514" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">所以做成选配，有团队明确要才开，不设成默认</text>
-  <text x="600" y="538" text-anchor="middle" font-size="12.5" fill="#a9c4dc">收集需求的群里只有一个专项提过要单独提交 GPU 作业——没人要的能力，省下的卡不值那个风险</text>
+  <rect x="529" y="367" width="150" height="113" fill="#24476b"/>
+  <text x="604" y="412" text-anchor="middle" font-size="12.5" fill="#c3d6e6">实占 47%</text>
+  <text x="604" y="437" text-anchor="middle" font-size="14.5" font-weight="700" fill="#ffffff">8629 卡·秒</text>
+
+  <text x="604" y="506" text-anchor="middle" font-size="13" font-weight="700" fill="#24476b">实占 8629 卡·秒</text>
+  <text x="604" y="525" text-anchor="middle" font-size="11.5" fill="#6b87a3">柱高与左栏下段完全相同</text>
+
+  <!-- 右栏：一台 8 卡工作站 -->
+  <text x="954" y="126" text-anchor="middle" font-size="15.5" font-weight="700" fill="#8c4a42">只给一台 8 卡工作站</text>
+  <text x="954" y="162" text-anchor="middle" font-size="14.5" font-weight="700" fill="#b5544a">用时 1116.8 秒</text>
+  <rect x="814" y="172" width="280" height="18" rx="5" fill="#eef5fa"/>
+  <rect x="814" y="172" width="280" height="18" rx="5" fill="#b5544a"/>
+  <text x="954" y="212" text-anchor="middle" font-size="12" fill="#8c4a42">2.4 倍，五个阶段只能串行</text>
+
+  <rect x="879" y="288" width="150" height="192" rx="4" fill="none" stroke="#c3d6e6" stroke-width="1.8" stroke-dasharray="7 6"/>
+  <text x="954" y="376" text-anchor="middle" font-size="12.5" fill="#8c4a42">卡·秒：报告未给该数</text>
+  <text x="954" y="398" text-anchor="middle" font-size="11.5" fill="#6b87a3">虚线框不参与高度对照</text>
+
+  <text x="954" y="506" text-anchor="middle" font-size="12" fill="#8c4a42">8 张卡同时跑不下那批单卡实验</text>
+
+  <!-- 底部结论横栏 -->
+  <rect x="50" y="558" width="1100" height="80" rx="12" fill="#24476b"/>
+  <text x="600" y="588" text-anchor="middle" font-size="14.5" font-weight="700" fill="#ffffff">70% 占用下共用仍是 453 秒，代价是停掉其他团队 21 个单卡任务</text>
+  <text x="600" y="614" text-anchor="middle" font-size="12.5" fill="#a9c4dc">这笔成本不出现在任何一条时延曲线里</text>
 </svg>

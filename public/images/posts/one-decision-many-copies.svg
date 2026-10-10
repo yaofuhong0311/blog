@@ -1,53 +1,101 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
-  <rect width="1200" height="560" rx="20" fill="#f2f6fa"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="660" rx="20" fill="#f2f6fa"/>
   <defs>
-    <marker id="od" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
-    <marker id="odr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
+    <marker id="ocd-blue" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="ocd-red" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
   </defs>
 
   <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">灰度能覆盖多少，取决于同一个判定有几份副本</text>
-  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">只改了读判定的那一份，另一份自己查自己的——灰度就是假的</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">同一次请求里，三个对外接口各自去拿路由决定——漏掉一份，那条路径上的灰度就是假的</text>
 
-  <rect x="470" y="98" width="260" height="46" rx="9" fill="#5b88b0"/>
-  <text x="600" y="127" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">同一次用户请求</text>
+  <!-- 左栏：聊天接口 -->
+  <rect x="50" y="96" width="353" height="360" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="74" y="124" font-size="15" font-weight="700" fill="#24476b">聊天接口</text>
 
-  <path d="M600,144 L230,168" stroke="#3a6491" stroke-width="2" marker-end="url(#od)"/>
-  <path d="M600,144 L600,168" stroke="#b5544a" stroke-width="2" marker-end="url(#odr)"/>
-  <path d="M600,144 L970,168" stroke="#b5544a" stroke-width="2" marker-end="url(#odr)"/>
+  <rect x="116" y="140" width="220" height="40" rx="10" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.4"/>
+  <text x="226" y="165" text-anchor="middle" font-size="13" fill="#24476b">一次请求进入</text>
 
-  <!-- 三个入口 -->
-  <rect x="60" y="176" width="340" height="238" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
-  <text x="230" y="202" text-anchor="middle" font-size="14.5" font-weight="700" fill="#24476b">聊天接口</text>
-  <rect x="92" y="218" width="276" height="62" rx="9" fill="#24476b"/>
-  <text x="230" y="242" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">读那份灰度判定</text>
-  <text x="230" y="264" text-anchor="middle" font-size="11.5" fill="#a9c4dc">一次请求只解析一次</text>
-  <rect x="92" y="292" width="276" height="42" rx="8" fill="#eef5fa"/>
-  <text x="230" y="318" text-anchor="middle" font-size="12.5" fill="#24476b">灰度生效</text>
-  <text x="230" y="366" text-anchor="middle" font-size="12" fill="#3a6491">改造时改的就是这一份</text>
+  <path d="M226,180 L226,206" stroke="#3a6491" stroke-width="2" marker-end="url(#ocd-blue)"/>
 
-  <rect x="430" y="176" width="340" height="238" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
-  <text x="600" y="202" text-anchor="middle" font-size="14.5" font-weight="700" fill="#b5544a">取消接口</text>
-  <rect x="462" y="218" width="276" height="62" rx="9" fill="none" stroke="#b5544a" stroke-width="2" stroke-dasharray="6 4"/>
-  <text x="600" y="242" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b5544a">自己写了一份</text>
-  <text x="600" y="264" text-anchor="middle" font-size="11.5" fill="#8c4a42">直接去查容器，不读那份判定</text>
-  <rect x="462" y="292" width="276" height="42" rx="8" fill="#f6ebe9"/>
-  <text x="600" y="318" text-anchor="middle" font-size="12.5" fill="#8c4a42">灰度绕过去了</text>
-  <text x="600" y="366" text-anchor="middle" font-size="12" fill="#8c4a42">改造时没人想到它也在做同一个判断</text>
+  <rect x="74" y="212" width="305" height="86" rx="12" fill="#24476b" stroke="#24476b" stroke-width="3"/>
+  <text x="226" y="242" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">解析路由决定</text>
+  <text x="226" y="264" text-anchor="middle" font-size="11.5" fill="#a9c4dc">
+    <tspan x="226">读数据库里的一个组合键</tspan>
+    <tspan x="226" dy="19">一次请求只解析一次，往下传</tspan>
+  </text>
 
-  <rect x="800" y="176" width="340" height="238" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
-  <text x="970" y="202" text-anchor="middle" font-size="14.5" font-weight="700" fill="#b5544a">其他入口</text>
-  <rect x="832" y="218" width="276" height="62" rx="9" fill="none" stroke="#b5544a" stroke-width="2" stroke-dasharray="6 4"/>
-  <text x="970" y="242" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b5544a">还有几份？</text>
-  <text x="970" y="264" text-anchor="middle" font-size="11.5" fill="#8c4a42">改造前没人数过</text>
-  <rect x="832" y="292" width="276" height="42" rx="8" fill="#f6ebe9"/>
-  <text x="970" y="318" text-anchor="middle" font-size="12.5" fill="#8c4a42">未知</text>
-  <text x="970" y="366" text-anchor="middle" font-size="12" fill="#8c4a42">灰度开了，不知道实际覆盖了几成</text>
+  <path d="M176,320 l8,9 l15,-19" fill="none" stroke="#24476b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="208" y="328" font-size="13" font-weight="700" fill="#24476b">已接灰度判定</text>
 
-  <!-- 怎么找 -->
-  <rect x="60" y="430" width="1080" height="56" rx="12" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.5"/>
-  <text x="600" y="454" text-anchor="middle" font-size="13.5" font-weight="700" fill="#3a6491">找副本的办法不是读改造清单，是反过来搜「谁在做同一个判断」</text>
-  <text x="600" y="474" text-anchor="middle" font-size="12" fill="#6b87a3">按判定依据的那几个字段名全仓搜，而不是按函数名——自己写的那份不会叫同一个名字</text>
+  <text x="262" y="382" text-anchor="middle" font-size="11.5" fill="#6b87a3">
+    <tspan x="262">每轮新对话开始时解析一次</tspan>
+    <tspan x="262" dy="19">一轮之内不许重新读名单</tspan>
+  </text>
 
-  <rect x="60" y="498" width="1080" height="46" rx="12" fill="#24476b"/>
-  <text x="600" y="527" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">灰度的覆盖率等于「读那份判定的入口数」÷「做这个判断的入口总数」，分母得先数清楚</text>
+  <!-- 中栏：取消接口 -->
+  <rect x="423" y="96" width="353" height="360" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="447" y="124" font-size="15" font-weight="700" fill="#b5544a">取消接口</text>
+
+  <rect x="489" y="140" width="220" height="40" rx="10" fill="#f6ebe9" stroke="#d8c2bf" stroke-width="1.4"/>
+  <text x="599" y="165" text-anchor="middle" font-size="13" fill="#8c4a42">同一次请求进入</text>
+
+  <path d="M600,180 L600,292" stroke="#b5544a" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ocd-red)"/>
+  <text x="616" y="216" font-size="11.5" fill="#b5544a">
+    <tspan x="616">不经过左栏那个方块</tspan>
+    <tspan x="616" dy="19">没读这次请求算出的走哪边</tspan>
+  </text>
+
+  <rect x="447" y="298" width="305" height="64" rx="12" fill="#f6ebe9" stroke="#b5544a" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="599" y="322" text-anchor="middle" font-size="13.5" font-weight="700" fill="#8c4a42">自己写的一份取消实现</text>
+  <text x="599" y="344" text-anchor="middle" font-size="12" fill="#b5544a">直接去查容器</text>
+
+  <path d="M600,362 L600,382" stroke="#b5544a" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ocd-red)"/>
+
+  <rect x="467" y="386" width="266" height="42" rx="10" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.6"/>
+  <text x="600" y="412" text-anchor="middle" font-size="13" fill="#6b87a3">灰度会话无容器可查</text>
+
+  <text x="600" y="445" text-anchor="middle" font-size="12" font-weight="700" fill="#b5544a">返回成功 · 任务照常跑完 · 零错误日志</text>
+
+  <!-- 右栏：文件接口 -->
+  <rect x="796" y="96" width="353" height="360" rx="14" fill="#ffffff" stroke="#5b88b0" stroke-width="2"/>
+  <text x="820" y="124" font-size="15" font-weight="700" fill="#24476b">文件接口</text>
+
+  <rect x="862" y="140" width="220" height="40" rx="10" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.4"/>
+  <text x="972" y="165" text-anchor="middle" font-size="13" fill="#24476b">同一次请求进入</text>
+
+  <path d="M972,180 L972,192 L820,192 L820,248 L838,248" fill="none" stroke="#3a6491" stroke-width="2" marker-end="url(#ocd-blue)"/>
+  <path d="M820,248 L820,344 L838,344" fill="none" stroke="#b5544a" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ocd-red)"/>
+
+  <rect x="846" y="212" width="283" height="72" rx="12" fill="#ffffff" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="866" y="240" font-size="13" font-weight="700" fill="#24476b">列表：走事件透传</text>
+  <text x="866" y="262" font-size="11.5" fill="#3a6491">不经本服务解析</text>
+  <path d="M1052,241 l6,7 l13,-16" fill="none" stroke="#24476b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="1080" y="248" font-size="12" font-weight="700" fill="#24476b">可见</text>
+
+  <rect x="846" y="308" width="283" height="72" rx="12" fill="#f6ebe9" stroke="#b5544a" stroke-width="1.6"/>
+  <text x="866" y="336" font-size="13" font-weight="700" fill="#8c4a42">预览：路径解析函数</text>
+  <text x="866" y="358" font-size="11.5" fill="#b5544a">仍按旧链路目录算</text>
+  <text x="1109" y="354" text-anchor="end" font-size="19" font-weight="700" font-family="monospace" fill="#b5544a">404</text>
+
+  <text x="972" y="416" text-anchor="middle" font-size="11.5" fill="#6b87a3">原计划：等需求出现再排期</text>
+
+  <!-- 中栏弯回左栏：改法 -->
+  <path d="M600,460 L600,470 Q600,486 584,486 L136,486 Q120,486 120,470 L120,302" fill="none" stroke="#b5544a" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#ocd-red)"/>
+  <text x="368" y="505" text-anchor="middle" font-size="12" font-weight="700" fill="#b5544a">改法：改为消费已解析的路由决定</text>
+
+  <!-- 底部横带 -->
+  <rect x="50" y="516" width="1100" height="124" rx="14" fill="#24476b"/>
+  <text x="600" y="546" text-anchor="middle" font-size="14.5" font-weight="700" fill="#ffffff">同一手法用过的另外三处，括号内是数清楚的分叉数</text>
+
+  <rect x="74" y="562" width="338" height="62" rx="10" fill="#eef5fa"/>
+  <text x="243" y="587" text-anchor="middle" font-size="12.5" font-weight="700" fill="#24476b">安全校验 → 起子进程的那个函数</text>
+  <text x="243" y="607" text-anchor="middle" font-size="11.5" fill="#3a6491">（只在写入口拦，实测绕过 2 条）</text>
+
+  <rect x="430" y="562" width="338" height="62" rx="10" fill="#eef5fa"/>
+  <text x="599" y="587" text-anchor="middle" font-size="12.5" font-weight="700" fill="#24476b">SSE 收尾 → 所有分支都经过的落盘函数</text>
+  <text x="599" y="607" text-anchor="middle" font-size="11.5" fill="#3a6491">（至少 4 个成功出口分支）</text>
+
+  <rect x="786" y="562" width="338" height="62" rx="10" fill="#eef5fa"/>
+  <text x="955" y="587" text-anchor="middle" font-size="12.5" font-weight="700" fill="#24476b">未声明查询参数 → <tspan font-family="monospace">router</tspan> 级依赖</text>
+  <text x="955" y="607" text-anchor="middle" font-size="11.5" fill="#3a6491">（<tspan font-family="monospace">422</tspan>，新增端点自动纳管）</text>
 </svg>
