@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="640" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="a2" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/>
+    </marker>
+  </defs>
+
+  <text x="600" y="46" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">两条轨并行，差集才是产出</text>
+  <text x="600" y="74" text-anchor="middle" font-size="14" fill="#6b87a3">读过实现的人只会复述已有分支；「这里本该有一个分支」不会出现在任何一条用例里</text>
+
+  <!-- 白盒轨 -->
+  <rect x="70" y="110" width="440" height="200" rx="14" fill="#ffffff" stroke="#5b88b0" stroke-width="2"/>
+  <text x="290" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#3a6491">白盒轨</text>
+  <text x="290" y="166" text-anchor="middle" font-size="13" fill="#6b87a3">读代码</text>
+  <rect x="100" y="182" width="380" height="104" rx="10" fill="#eef5fa"/>
+  <text x="290" y="208" text-anchor="middle" font-size="13" fill="#24476b">
+    <tspan x="290">真实调用路径 · 异常分支 · 并发点</tspan>
+    <tspan x="290" dy="22">能发现：条件写反、类型不匹配</tspan>
+    <tspan x="290" dy="22">发现不了：代码里根本没写的分支</tspan>
+  </text>
+
+  <!-- 黑盒轨 -->
+  <rect x="690" y="110" width="440" height="200" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="910" y="140" text-anchor="middle" font-size="16" font-weight="700" fill="#24476b">黑盒轨</text>
+  <text x="910" y="166" text-anchor="middle" font-size="13" fill="#6b87a3">禁读实现，只给手写契约</text>
+  <rect x="720" y="182" width="380" height="104" rx="10" fill="#24476b"/>
+  <text x="910" y="208" text-anchor="middle" font-size="13" fill="#ffffff">
+    <tspan x="910">三态穷举：开启 / 关闭 / 依赖缺失</tspan>
+    <tspan x="910" dy="22" fill="#a9c4dc">不变量用「宁可…不可…」钉死</tspan>
+    <tspan x="910" dy="22" fill="#a9c4dc">价值来自确实不知道实现怎么写</tspan>
+  </text>
+
+  <text x="600" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#6b87a3">互相</text>
+  <text x="600" y="236" text-anchor="middle" font-size="13" font-weight="700" fill="#6b87a3">看不见</text>
+
+  <path d="M290,310 L290,352" stroke="#3a6491" stroke-width="2" marker-end="url(#a2)"/>
+  <path d="M910,310 L910,352" stroke="#3a6491" stroke-width="2" marker-end="url(#a2)"/>
+
+  <!-- 比对 -->
+  <rect x="330" y="358" width="540" height="56" rx="12" fill="#5b88b0"/>
+  <text x="600" y="392" text-anchor="middle" font-size="15.5" font-weight="700" fill="#ffffff">人工比对语义（不按字面，两份各几十条）</text>
+  <path d="M290,352 L330,380" stroke="#3a6491" stroke-width="2"/>
+  <path d="M910,352 L870,380" stroke="#3a6491" stroke-width="2"/>
+
+  <path d="M600,414 L600,448" stroke="#3a6491" stroke-width="2" marker-end="url(#a2)"/>
+
+  <!-- 三类结果 -->
+  <rect x="70" y="454" width="340" height="120" rx="12" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="240" y="482" text-anchor="middle" font-size="14" font-weight="700" fill="#3a6491">两边都有</text>
+  <text x="240" y="512" text-anchor="middle" font-size="12.5" fill="#6b87a3">
+    <tspan x="240">正常覆盖</tspan>
+    <tspan x="240" dy="19">按优先级排期</tspan>
+  </text>
+
+  <rect x="430" y="454" width="340" height="120" rx="12" fill="#24476b"/>
+  <text x="600" y="482" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">黑盒有、白盒没有</text>
+  <text x="600" y="512" text-anchor="middle" font-size="12.5" fill="#a9c4dc">
+    <tspan x="600">契约要求了而代码没做</tspan>
+    <tspan x="600" dy="19" fill="#ffffff" font-weight="700">差集里最有价值的一类</tspan>
+  </text>
+
+  <rect x="790" y="454" width="340" height="120" rx="12" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="960" y="482" text-anchor="middle" font-size="14" font-weight="700" fill="#3a6491">白盒有、黑盒没有</text>
+  <text x="960" y="512" text-anchor="middle" font-size="12.5" fill="#6b87a3">
+    <tspan x="960">要么契约漏写</tspan>
+    <tspan x="960" dy="19">要么是多余的防御分支</tspan>
+  </text>
+
+  <text x="600" y="614" text-anchor="middle" font-size="13" fill="#6b87a3">写代码之前先跑黑盒轨，同一份清单就是实现待办——成本相同，用途不同</text>
+</svg>

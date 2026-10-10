@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="620" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="ar" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/>
+    </marker>
+    <marker id="arRed" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/>
+    </marker>
+  </defs>
+
+  <text x="600" y="46" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">评审看见的是行为，还是作者的意图</text>
+  <text x="600" y="74" text-anchor="middle" font-size="14" fill="#6b87a3">缺陷藏在意图与行为的落差里——知道了意图，这个落差就看不见了</text>
+
+  <!-- 左：给了背景 -->
+  <rect x="60" y="110" width="510" height="460" rx="16" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="315" y="142" text-anchor="middle" font-size="16" font-weight="700" fill="#b5544a">给了作者的解释</text>
+
+  <rect x="100" y="166" width="430" height="62" rx="10" fill="#f6ebe9"/>
+  <text x="315" y="192" text-anchor="middle" font-size="13.5" fill="#8c4a42">
+    <tspan x="315">「这次改动是为了让异常更精确」</tspan>
+    <tspan x="315" dy="19">——作者叙述进入上下文</tspan>
+  </text>
+
+  <path d="M315,232 L315,266" stroke="#b5544a" stroke-width="2" marker-end="url(#arRed)"/>
+
+  <rect x="100" y="272" width="430" height="58" rx="10" fill="#ffffff" stroke="#d8c2bf" stroke-width="1.5"/>
+  <text x="315" y="307" text-anchor="middle" font-size="14.5" fill="#8c4a42">评审问题变成「它是不是在做作者说的事」</text>
+
+  <path d="M315,334 L315,368" stroke="#b5544a" stroke-width="2" marker-end="url(#arRed)"/>
+
+  <rect x="100" y="374" width="430" height="58" rx="10" fill="#ffffff" stroke="#d8c2bf" stroke-width="1.5"/>
+  <text x="315" y="409" text-anchor="middle" font-size="14.5" fill="#8c4a42">代码照着意图写的，内部完全自洽 → 判定通过</text>
+
+  <rect x="100" y="452" width="430" height="92" rx="10" fill="#b5544a"/>
+  <text x="315" y="484" text-anchor="middle" font-size="14.5" font-weight="700" fill="#ffffff">异常类型被收窄</text>
+  <text x="315" y="510" text-anchor="middle" font-size="13" fill="#f0d9d6">
+    <tspan x="315">调用方原有的 except 分支不再命中</tspan>
+    <tspan x="315" dy="19">知道意图时，这会被读成「改进」</tspan>
+  </text>
+
+  <!-- 右：切断过程 -->
+  <rect x="630" y="110" width="510" height="460" rx="16" fill="#ffffff" stroke="#3a6491" stroke-width="2"/>
+  <text x="885" y="142" text-anchor="middle" font-size="16" font-weight="700" fill="#3a6491">切断过程，补足事实</text>
+
+  <rect x="670" y="166" width="430" height="62" rx="10" fill="#eef5fa"/>
+  <text x="885" y="192" text-anchor="middle" font-size="13.5" fill="#24476b">
+    <tspan x="885">「你对开发过程一无所知，这是有意安排的」</tspan>
+    <tspan x="885" dy="19">——显式声明，不是省略不给</tspan>
+  </text>
+
+  <path d="M885,232 L885,266" stroke="#3a6491" stroke-width="2" marker-end="url(#ar)"/>
+
+  <rect x="670" y="272" width="430" height="58" rx="10" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="885" y="307" text-anchor="middle" font-size="14.5" fill="#24476b">评审问题是「这段代码的行为是什么」</text>
+
+  <path d="M885,334 L885,368" stroke="#3a6491" stroke-width="2" marker-end="url(#ar)"/>
+
+  <rect x="670" y="374" width="430" height="58" rx="10" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="885" y="409" text-anchor="middle" font-size="14.5" fill="#24476b">把行为和外部约定对照 → 落差暴露</text>
+
+  <rect x="670" y="452" width="430" height="92" rx="10" fill="#24476b"/>
+  <text x="885" y="479" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">必须一并补上的客观事实</text>
+  <text x="885" y="504" text-anchor="middle" font-size="12.5" fill="#a9c4dc">
+    <tspan x="885">变更文件清单 · 上下游文件 · 仓库内已有约定</tspan>
+    <tspan x="885" dy="19">不补的话，它会自己构造一个意图再照着评</tspan>
+  </text>
+
+  <text x="600" y="597" text-anchor="middle" font-size="13" fill="#6b87a3">分界线：不含「我想怎么做」的事实都可以给，实现思路和取舍理由一律不给</text>
+</svg>
