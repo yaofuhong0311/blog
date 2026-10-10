@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="600" rx="20" fill="#f2f6fa"/>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">12 批负载，10 批全绿</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">能证明限流配置真的在执行的，只有被拒的那 30/58</text>
+
+  <!-- 12 批 -->
+  <text x="80" y="112" font-size="13.5" font-weight="700" fill="#6b87a3">这一轮的 12 批</text>
+  <g>
+    <rect x="80" y="124" width="700" height="44" rx="8" fill="#eef5fa"/>
+    <text x="430" y="151" text-anchor="middle" font-size="13" fill="#24476b">10 批全部成功 —— 没告诉我系统扛住了什么</text>
+    <rect x="792" y="124" width="150" height="44" rx="8" fill="#b5544a"/>
+    <text x="867" y="151" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">1 批打到拒绝</text>
+    <rect x="954" y="124" width="166" height="44" rx="8" fill="#b5544a"/>
+    <text x="1037" y="151" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">1 批限速到不够用</text>
+  </g>
+  <text x="600" y="190" text-anchor="middle" font-size="12" fill="#6b87a3">375 个请求，没有一个沙箱看到别人的数据——这条全绿站得住，因为同一轮里有 2 批真被推过了边界</text>
+
+  <!-- 三道设计 -->
+  <rect x="50" y="212" width="356" height="196" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="228" y="238" text-anchor="middle" font-size="14.5" font-weight="700" fill="#24476b">注定被拒的那一批</text>
+  <rect x="78" y="254" width="300" height="60" rx="9" fill="#24476b"/>
+  <text x="228" y="278" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">58 个任务里 30 个被拒</text>
+  <text x="228" y="300" text-anchor="middle" font-size="11.5" fill="#a9c4dc">排队超过 20 秒上限</text>
+  <text x="228" y="334" text-anchor="middle" font-size="12" fill="#6b87a3">
+    <tspan x="228">假如这批也全绿，20 秒这个配置</tspan>
+    <tspan x="228" dy="18">从头到尾一次都没被执行过</tspan>
+    <tspan x="228" dy="18">写成 20 分钟、根本没读进去，</tspan>
+    <tspan x="228" dy="18">测试结果长得一模一样</tspan>
+  </text>
+
+  <rect x="422" y="212" width="356" height="196" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="600" y="238" text-anchor="middle" font-size="14.5" font-weight="700" fill="#b5544a">阴性结果要配阳性对照</text>
+  <rect x="450" y="254" width="300" height="60" rx="9" fill="#f6ebe9"/>
+  <text x="600" y="276" text-anchor="middle" font-size="12.5" fill="#8c4a42">三种作弊手法 6 次全是 0 分</text>
+  <text x="600" y="298" text-anchor="middle" font-size="11.5" fill="#8c4a42">看着像防住了</text>
+  <text x="600" y="334" text-anchor="middle" font-size="12" fill="#8c4a42">
+    <tspan x="600">同一轮里 5 种改动一个都没传过去——</tspan>
+    <tspan x="600" dy="18">diff 混进 1 个二进制文件，整份 patch 失败</tspan>
+    <tspan x="600" dy="18">0 分可以来自「挡住了」，</tspan>
+    <tspan x="600" dy="18">也可以来自「代码根本没传过去」</tspan>
+  </text>
+
+  <rect x="794" y="212" width="356" height="196" rx="14" fill="#ffffff" stroke="#5b88b0" stroke-width="2"/>
+  <text x="972" y="238" text-anchor="middle" font-size="14.5" font-weight="700" fill="#3a6491">判据写在测之前</text>
+  <rect x="822" y="254" width="300" height="60" rx="9" fill="#eef5fa"/>
+  <text x="972" y="276" text-anchor="middle" font-size="12.5" fill="#24476b">快 30% 以上才考虑换掉</text>
+  <text x="972" y="298" text-anchor="middle" font-size="11.5" fill="#3a6491">实测快约 50%，达标</text>
+  <text x="972" y="334" text-anchor="middle" font-size="12" fill="#6b87a3">
+    <tspan x="972">结论仍然是不换：差距全落在三处配置，</tspan>
+    <tspan x="972" dy="18">改完降到 5% 以内</tspan>
+    <tspan x="972" dy="18">达标只是开始查的理由，</tspan>
+    <tspan x="972" dy="18">不是换掉一个组件的结论</tspan>
+  </text>
+
+  <!-- 三种没测到 -->
+  <rect x="50" y="424" width="1100" height="74" rx="12" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="600" y="448" text-anchor="middle" font-size="13.5" font-weight="700" fill="#3a6491">「没测到」有三种强度，后续动作各不相同</text>
+  <text x="600" y="472" text-anchor="middle" font-size="12" fill="#6b87a3">
+    <tspan x="600">未复现 → 留根因和边界　｜　没测成 → 留复测条件　｜　测出不行 → 才能关掉一个方向</tspan>
+    <tspan x="600" dy="19">全写成「不行」，省下几行字，赔进去的是以后重测的成本和一个被误杀的方案</tspan>
+  </text>
+
+  <rect x="50" y="514" width="1100" height="66" rx="12" fill="#24476b"/>
+  <text x="600" y="540" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">开跑前先写三行：哪一批注定被拒、哪条阴性结论配了阳性对照、每条判据的数值和写下它的日期</text>
+  <text x="600" y="564" text-anchor="middle" font-size="12.5" fill="#a9c4dc">三行写不全就先别跑——跑完手里也只有「全绿」这一个事实</text>
+</svg>
