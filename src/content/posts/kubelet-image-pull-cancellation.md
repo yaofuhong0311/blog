@@ -1,6 +1,6 @@
 ---
 title: 日志里的「已取消」是一句局部真话
-published: 2026-09-18T09:00:00+08:00
+published: 2026-09-08T09:00:00+08:00
 description: kubelet 打印 Cancelling current pod sync 时，它说的是自己那个调谐循环，不是下游的镜像拉取。一行日志的作用域只有写它的那个函数知道，要确认信号传到了哪里，得去读调用链。
 tags: [Kubernetes, 源码分析, 工程实践, AI Infra]
 category: 源码调研

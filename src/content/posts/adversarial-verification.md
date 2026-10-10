@@ -1,6 +1,6 @@
 ---
 title: AI 复核应当要求推翻，而不是要求确认
-published: 2026-09-12T09:00:00+08:00
+published: 2026-09-01T09:00:00+08:00
 description: 让模型确认一条结论的成本远低于推翻它，因此复核指令必须把默认立场设为不成立，并用三票里两票反驳的多数表决筛掉站不住的结论。
 tags: [AI Coding, AI Agent, 工程实践, Claude Code]
 category: AI Coding

@@ -1,6 +1,6 @@
 ---
 title: Kubernetes 里没有「暂停」，能还回内存的暂停都是退出
-published: 2026-10-10T17:00:00+08:00
+published: 2026-10-10T15:00:00+08:00
 description: 约 307 MiB 的沙箱只冻结 CPU，机器可用内存反而少 1 MiB；能还回内存的那种暂停，最后一步是进程真的结束，而 Kubernetes 的生命周期里没有「挂起」这一档。要内存回收，就得放弃一个沙箱一个 Pod。
 tags: [沙箱, Kubernetes, gVisor, AI Infra]
 category: 工程实践

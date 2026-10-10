@@ -1,6 +1,6 @@
 ---
 title: 你删了 Pod，镜像还在下
-published: 2026-10-10T13:00:00+08:00
+published: 2026-09-19T09:00:00+08:00
 description: 删除 Pod 撤回的是期望状态声明，不是停止指令：kubelet 下发给容器运行时的 context 被 context.WithoutCancel 剥掉了取消能力，正在进行的镜像拉取收不到信号。要让调用方放弃时下载立刻停，拉取必须由平台自己发起。
 tags: [Kubernetes, AI Infra, 工程实践, 沙箱]
 category: 工程实践

@@ -1,6 +1,6 @@
 ---
 title: 编号提问是检查表，不是排版习惯
-published: 2026-09-04T09:00:00+08:00
+published: 2026-08-04T09:00:00+08:00
 description: 把问题写成编号列表，等于在回答交付前就加上一张可逐条核对的检查表；它解决的是「哪一条没被回应」这个靠重读答案很难发现的问题。
 tags: [AI Coding, AI Agent, 工程实践, 学习笔记]
 category: AI Coding

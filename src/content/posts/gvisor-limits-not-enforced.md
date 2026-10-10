@@ -1,6 +1,6 @@
 ---
 title: 你给 gVisor Pod 设的 limits 可能根本没生效
-published: 2026-09-24T09:00:00+08:00
+published: 2026-09-15T09:00:00+08:00
 description: 限额写在 Pod spec 里不等于内核会执行它：gVisor 的 sentry 与 stub 进程落在 Pod 的 cgroup 之外，上限完全失去约束力且不报任何错。隔离运行时的资源上限必须实测，并由节点组件在接受业务之前自检。
 tags: [沙箱, Kubernetes, AI Infra, 安全]
 category: 工程实践

@@ -1,6 +1,6 @@
 ---
 title: 评审的价值来自不知情，不是知情
-published: 2026-09-09T09:00:00+08:00
+published: 2026-08-07T09:00:00+08:00
 description: 给评审 agent 补充背景会让它从判断行为转向确认意图。切断过程信息是质量手段，但必须同时补足客观事实，否则它会自行构造一个意图再照着评。
 tags: [AI Coding, Code Review, 工程实践, AI Agent]
 category: AI Coding
