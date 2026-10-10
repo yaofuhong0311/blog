@@ -1,67 +1,110 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
-  <rect width="1200" height="640" rx="20" fill="#f2f6fa"/>
-  <defs><marker id="gp" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker></defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="660" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="gpUp" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="gpStop" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
+  </defs>
 
-  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">否定性证据有强弱，最弱的那档信息量是零</text>
-  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">每一档都压在一个前提上，前提不成立，结论就是空的</text>
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">grep 不到，只能证明你搜过的那些文件里没有</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">否定性证据有多强，全看它背后那个前提会不会失效 —— 最弱的两档信息量接近零</text>
 
-  <!-- 四级台阶 -->
-  <rect x="60" y="104" width="640" height="82" rx="10" fill="#f6ebe9" stroke="#b5544a" stroke-width="2"/>
-  <text x="86" y="130" font-size="14" font-weight="700" fill="#b5544a">最弱　日志里没有 X</text>
-  <text x="86" y="152" font-size="12" fill="#8c4a42">前提：X 发生时一定会写日志</text>
-  <text x="86" y="172" font-size="12" fill="#8c4a42">反例：内存超限由内核直接杀进程，来不及写日志</text>
+  <!-- 左：强度阶梯 -->
+  <rect x="50" y="96" width="660" height="440" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="76" y="124" font-size="15" font-weight="700" fill="#24476b">强度阶梯：从下往上，前提越来越难被推翻</text>
 
-  <rect x="60" y="196" width="640" height="82" rx="10" fill="#f6ebe9" stroke="#b5544a" stroke-width="1.6"/>
-  <text x="86" y="222" font-size="14" font-weight="700" fill="#b5544a">弱　　grep 不到 X</text>
-  <text x="86" y="244" font-size="12" fill="#8c4a42">前提：X 以字面形式存在于我搜过的文件里</text>
-  <text x="86" y="264" font-size="12" fill="#8c4a42">反例：权限数据在身份服务的库里——实测 114 条，我搜的那两个全在</text>
+  <path d="M84,505 L84,142" stroke="#3a6491" stroke-width="2" marker-end="url(#gpUp)"/>
+  <text x="66" y="325" text-anchor="middle" font-size="11.5" fill="#3a6491" transform="rotate(-90 66 325)">强度递增</text>
 
-  <rect x="60" y="288" width="640" height="76" rx="10" fill="#eef5fa" stroke="#5b88b0" stroke-width="1.6"/>
-  <text x="86" y="314" font-size="14" font-weight="700" fill="#3a6491">中　　对照组也没有 X，而对照组是好的</text>
-  <text x="86" y="338" font-size="12" fill="#6b87a3">前提：两组确实只差这一个变量</text>
+  <!-- 第四级：最强 -->
+  <rect x="130" y="136" width="120" height="88" rx="10" fill="#24476b"/>
+  <text x="190" y="187" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">最强</text>
+  <rect x="258" y="136" width="436" height="88" rx="10" fill="#eef5fa"/>
+  <text x="276" y="163" font-size="14" font-weight="700" fill="#24476b">行为特征只符合其中一种解释</text>
+  <text x="276" y="186" font-size="12" fill="#3a6491">前提：两种解释的可观测行为确实不同</text>
+  <text x="276" y="207" font-size="11.5" fill="#5b88b0">这一档已经是正面指认机制，不再算否定性证据</text>
 
-  <rect x="60" y="374" width="640" height="88" rx="10" fill="#24476b"/>
-  <text x="86" y="400" font-size="14" font-weight="700" fill="#ffffff">最强　行为特征只符合其中一种解释</text>
-  <text x="86" y="422" font-size="12" fill="#a9c4dc">前提：两种解释的可观测行为确实不同</text>
-  <text x="86" y="444" font-size="12" fill="#ffffff">这一档已经不是否定性证据，是正面指认一种机制</text>
+  <!-- 第三级：中 -->
+  <rect x="150" y="232" width="100" height="88" rx="10" fill="#5b88b0"/>
+  <text x="200" y="283" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">中</text>
+  <rect x="258" y="232" width="436" height="88" rx="10" fill="#eef5fa"/>
+  <text x="276" y="259" font-size="14" font-weight="700" fill="#24476b">对照组也没有 X，而对照组是好的</text>
+  <text x="276" y="282" font-size="12" fill="#3a6491">前提：两组确实只差这一个变量</text>
+  <text x="276" y="303" font-size="11.5" fill="#6b87a3">同配置的另外两个副本当天零重启，只有跑评测那台出事</text>
 
-  <!-- 右侧：grep 够不到的 -->
-  <rect x="730" y="104" width="410" height="358" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
-  <text x="935" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#3a6491">grep 的作用域边界</text>
+  <!-- 第二级：弱 -->
+  <rect x="170" y="328" width="80" height="88" rx="10" fill="#c3d6e6"/>
+  <text x="210" y="379" text-anchor="middle" font-size="15" font-weight="700" fill="#24476b">弱</text>
+  <rect x="258" y="328" width="436" height="88" rx="10" fill="#eef5fa"/>
+  <text x="276" y="355" font-size="14" font-weight="700" fill="#24476b" font-family="monospace">grep</text>
+  <text x="326" y="355" font-size="14" font-weight="700" fill="#24476b">不到 X</text>
+  <text x="276" y="378" font-size="12" fill="#3a6491">前提：X 一定以字面形式出现在我搜过的文件里</text>
+  <text x="276" y="399" font-size="11.5" fill="#b5544a">反例：权限在身份服务的库里 —— 实测 114 条，我搜的那两个全在</text>
 
-  <rect x="762" y="150" width="346" height="52" rx="8" fill="#eef5fa"/>
-  <text x="935" y="172" text-anchor="middle" font-size="12.5" font-weight="700" fill="#24476b">代码仓库里的文件</text>
-  <text x="935" y="192" text-anchor="middle" font-size="11.5" fill="#6b87a3">grep 能覆盖的，只有这一块</text>
+  <!-- 第一级：最弱 -->
+  <rect x="190" y="424" width="60" height="88" rx="10" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="220" y="475" text-anchor="middle" font-size="15" font-weight="700" fill="#24476b">最弱</text>
+  <rect x="258" y="424" width="436" height="88" rx="10" fill="#eef5fa"/>
+  <text x="276" y="451" font-size="14" font-weight="700" fill="#24476b">日志里没有 X</text>
+  <text x="276" y="474" font-size="12" fill="#3a6491">前提：X 发生时一定会写进日志</text>
+  <text x="276" y="495" font-size="11.5" fill="#b5544a">反例：内存超限是内核直接杀进程，进程来不及写日志</text>
 
-  <text x="935" y="226" text-anchor="middle" font-size="12" fill="#b5544a">以下四类在框外，搜不到</text>
+  <!-- 右：grep 的作用域边界 -->
+  <rect x="730" y="96" width="420" height="440" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="752" y="124" font-size="15" font-weight="700" fill="#24476b">它的作用域边界：仓库那一圈</text>
 
-  <g font-size="11.5">
-    <rect x="762" y="238" width="346" height="44" rx="7" fill="#f6ebe9"/>
-    <text x="780" y="256" fill="#8c4a42" font-weight="700">运行时数据</text>
-    <text x="780" y="274" fill="#8c4a42">权限 · 配额 · 特性开关——代码只写判断逻辑</text>
+  <rect x="752" y="140" width="376" height="104" rx="12" fill="#ffffff" stroke="#3a6491" stroke-width="2"/>
+  <text x="940" y="162" text-anchor="middle" font-size="12.5" fill="#24476b">代码仓库 = grep 能覆盖的全部范围</text>
 
-    <rect x="762" y="290" width="346" height="44" rx="7" fill="#f6ebe9"/>
-    <text x="780" y="308" fill="#8c4a42" font-weight="700">配置没注入</text>
-    <text x="780" y="326" fill="#8c4a42">env 缺了，用的是镜像里那行默认值</text>
+  <rect x="898" y="174" width="84" height="36" rx="8" fill="#5b88b0"/>
+  <text x="940" y="197" text-anchor="middle" font-size="13" font-family="monospace" fill="#ffffff">grep</text>
 
-    <rect x="762" y="342" width="346" height="44" rx="7" fill="#f6ebe9"/>
-    <text x="780" y="360" fill="#8c4a42" font-weight="700">版本错位</text>
-    <text x="780" y="378" fill="#8c4a42">工作区落后 60+ 提交，关键代码根本不在上面</text>
+  <path d="M892,192 L772,192" stroke="#b5544a" stroke-width="2" marker-end="url(#gpStop)"/>
+  <path d="M988,192 L1108,192" stroke="#b5544a" stroke-width="2" marker-end="url(#gpStop)"/>
+  <line x1="745" y1="180" x2="759" y2="204" stroke="#b5544a" stroke-width="3"/>
+  <line x1="759" y1="180" x2="745" y2="204" stroke="#b5544a" stroke-width="3"/>
+  <line x1="1121" y1="180" x2="1135" y2="204" stroke="#b5544a" stroke-width="3"/>
+  <line x1="1135" y1="180" x2="1121" y2="204" stroke="#b5544a" stroke-width="3"/>
+  <text x="940" y="232" text-anchor="middle" font-size="11.5" fill="#8c4a42">到边界就停了，再往外一步都够不到</text>
 
-    <rect x="762" y="394" width="346" height="44" rx="7" fill="#f6ebe9"/>
-    <text x="780" y="412" fill="#8c4a42" font-weight="700">跑不跑得到</text>
-    <text x="780" y="430" fill="#8c4a42">搜到一个分支，不代表它会被执行</text>
-  </g>
+  <text x="752" y="263" font-size="12" font-weight="700" fill="#8c4a42">框外这四类，一条都搜不到</text>
 
-  <!-- 结论 -->
-  <rect x="60" y="476" width="1080" height="56" rx="12" fill="#24476b"/>
-  <text x="600" y="500" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">要证明「不是 X」，最后多半得靠正面证明「是 Y」</text>
-  <text x="600" y="521" text-anchor="middle" font-size="12.5" fill="#a9c4dc">同一个 401，我给过三个结论，前两个都撤回了</text>
+  <rect x="752" y="272" width="376" height="60" rx="10" fill="#f6ebe9"/>
+  <circle cx="768" cy="289" r="5" fill="#b5544a"/>
+  <text x="782" y="292" font-size="12.5" font-weight="700" fill="#8c4a42">运行时数据：权限 / 配额 / 特性开关</text>
+  <text x="782" y="309" font-size="11.5" fill="#6b87a3">
+    <tspan x="782">代码里只写判断逻辑，数据另存一份；实测那个身份</tspan>
+    <tspan x="782" dy="15">有 114 条权限，全在身份服务的库和角色配置里</tspan>
+  </text>
 
-  <rect x="60" y="544" width="1080" height="72" rx="12" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
-  <text x="600" y="568" text-anchor="middle" font-size="13" font-weight="700" fill="#3a6491">「没找到」必须附搜索过程</text>
-  <text x="600" y="592" text-anchor="middle" font-size="12" fill="#6b87a3">
-    <tspan x="600">审计任务只允许三种结论：已实现（附 file:line）、未实现（说明在哪找过、用过哪些关键词）、部分实现</tspan>
-    <tspan x="600" dy="18">代价：大半结论会降级成「未确认」，对要做决定的人不如一句明确判断好用</tspan>
+  <rect x="752" y="336" width="376" height="60" rx="10" fill="#f6ebe9"/>
+  <circle cx="768" cy="353" r="5" fill="#b5544a"/>
+  <text x="782" y="356" font-size="12.5" font-weight="700" fill="#8c4a42">配置回退：没注入环境变量 → 用镜像里的默认值</text>
+  <text x="782" y="373" font-size="11.5" fill="#6b87a3">
+    <tspan x="782">部署的 configmap 没注入，服务用了镜像里硬写的</tspan>
+    <tspan x="782" dy="15">默认地址，它指向另一个命名空间里 41 天前的旧服务</tspan>
+  </text>
+
+  <rect x="752" y="400" width="376" height="60" rx="10" fill="#f6ebe9"/>
+  <circle cx="768" cy="417" r="5" fill="#b5544a"/>
+  <text x="782" y="420" font-size="12.5" font-weight="700" fill="#8c4a42">版本错位：部署的镜像 ≠ 当前分支</text>
+  <text x="782" y="437" font-size="11.5" fill="#6b87a3">
+    <tspan x="782">子代理在落后六十多个提交的工作区里搜，关键代码</tspan>
+    <tspan x="782" dy="15">根本不在上面，整条结论作废</tspan>
+  </text>
+
+  <rect x="752" y="464" width="376" height="60" rx="10" fill="#f6ebe9"/>
+  <circle cx="768" cy="481" r="5" fill="#b5544a"/>
+  <text x="782" y="484" font-size="12.5" font-weight="700" fill="#8c4a42">可达性：分支存在 ≠ 跑得到</text>
+  <text x="782" y="501" font-size="11.5" fill="#6b87a3">
+    <tspan x="782">反过来也成立：没搜到清理逻辑，也可能有个定时任务</tspan>
+    <tspan x="782" dy="15">在把卡住的资源扫出来兜底</tspan>
+  </text>
+
+  <!-- 底部结论 -->
+  <rect x="50" y="556" width="1100" height="80" rx="12" fill="#24476b"/>
+  <text x="600" y="584" text-anchor="middle" font-size="14.5" font-weight="700" fill="#ffffff">「没找到」是一次搜索的结果，不是结论</text>
+  <text x="600" y="607" text-anchor="middle" font-size="12.5" fill="#c3d6e6">
+    <tspan x="600">审计类任务只允许三种结论：已实现（附 file:line 和关键代码）/ 未实现（写清在哪找过、用过哪些关键词）/ 部分实现</tspan>
+    <tspan x="600" dy="19">代价是调研变慢、大半结论降级成「未确认」—— 12 条里 7 条未确认的报告，不如一句明确判断好用</tspan>
   </text>
 </svg>

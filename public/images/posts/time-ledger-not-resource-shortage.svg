@@ -1,39 +1,105 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
-  <rect width="1200" height="560" rx="20" fill="#f2f6fa"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="658" viewBox="0 0 1200 658" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="658" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="tlzoom" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="tlback" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
+  </defs>
 
-  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">只记开始和结束，会把工具问题读成资源问题</text>
-  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">同一段 77 小时，拆开之前和拆开之后指向的结论完全相反</text>
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">77 小时拆开记，排在第一的不是等节点</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">合着记，工具链在中断会被读成资源不够——而加机器只动得了最窄的那一段</text>
 
-  <!-- 上：不拆 -->
-  <text x="80" y="124" font-size="14" font-weight="700" fill="#6b87a3">只记两个时间点</text>
-  <rect x="80" y="136" width="1040" height="52" rx="8" fill="#5b88b0"/>
-  <text x="600" y="168" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">总计 77 小时</text>
-  <text x="80" y="210" font-size="12.5" fill="#6b87a3">看到这个数，能得出的结论只有两种：要更多资源，或者方案太复杂。两个都是错的。</text>
+  <rect x="50" y="96" width="1100" height="436" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
 
-  <!-- 下：拆开 -->
-  <text x="80" y="256" font-size="14" font-weight="700" fill="#24476b">按中断类型分类记</text>
+  <!-- ① 总账一根条 -->
+  <text x="74" y="124" font-size="13.5" font-weight="700" fill="#24476b">① 一本只记开始和结束的账</text>
+  <text x="920" y="124" text-anchor="end" font-size="11.5" fill="#6b87a3">只记开始和结束时，看到的就是这个</text>
 
-  <rect x="80" y="268" width="759" height="56" rx="8" fill="#b5544a"/>
-  <text x="459" y="292" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">断网等重连　56 小时</text>
-  <text x="459" y="314" text-anchor="middle" font-size="12.5" fill="#f0d9d6">占 73%——这段时间里什么都做不了</text>
+  <rect x="74" y="136" width="846" height="40" rx="8" fill="#5b88b0"/>
+  <text x="497" y="154" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">总计 77 小时</text>
+  <text x="497" y="170" text-anchor="middle" font-size="11.5" fill="#dce9ff">09-25 21:47 → 09-29 02:30</text>
 
-  <rect x="845" y="268" width="275" height="56" rx="8" fill="#24476b"/>
-  <text x="982" y="292" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">连得上集群　20 小时</text>
-  <text x="982" y="314" text-anchor="middle" font-size="12.5" fill="#a9c4dc">占 27%</text>
+  <text x="916" y="194" text-anchor="end" font-size="12" font-weight="700" fill="#b5544a">加机器只动得了这一段</text>
 
-  <!-- 20h 再拆 -->
-  <path d="M982,324 L982,348" stroke="#3a6491" stroke-width="2"/>
-  <path d="M982,348 L560,348 L560,366" stroke="#3a6491" stroke-width="2"/>
-  <path d="M982,348 L1120,348 L1120,366" stroke="#3a6491" stroke-width="2"/>
+  <!-- ② 按实际占比拆 -->
+  <text x="74" y="222" font-size="13.5" font-weight="700" fill="#24476b">② 按实际占比拆开：73% 根本不在做实验</text>
 
-  <rect x="80" y="368" width="1040" height="54" rx="8" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.5"/>
-  <text x="600" y="390" text-anchor="middle" font-size="13" font-weight="700" fill="#3a6491">这 20 小时里，实验本身只跑了 9.3 分钟</text>
-  <text x="600" y="410" text-anchor="middle" font-size="12" fill="#6b87a3">其余是代理中断后重读上下文、流水线排队、工具不可用</text>
+  <rect x="74" y="232" width="615" height="46" rx="8" fill="#b5544a"/>
+  <text x="381" y="256" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">断网等人工重连 56 小时（约 73%）</text>
+  <text x="381" y="272" text-anchor="middle" font-size="11.5" fill="#f0d9d6">本机锁屏 → VPN 掉线，界面上重连不上，集群侧只有探针在跑</text>
+
+  <rect x="691" y="232" width="229" height="46" rx="8" fill="#5b88b0"/>
+  <text x="806" y="256" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">连得上集群 20 小时（约 27%）</text>
+  <text x="806" y="272" text-anchor="middle" font-size="11" fill="#dce9ff">真能动手的只有这一段</text>
+
+  <!-- 放大漏斗 -->
+  <polygon points="691,280 920,280 920,330 74,330" fill="#eef5fa" stroke="#a9c4dc" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <text x="806" y="300" text-anchor="middle" font-size="11.5" fill="#3a6491">把这 20 小时按类拆开</text>
+  <path d="M806,308 L806,326" stroke="#3a6491" stroke-width="2" marker-end="url(#tlzoom)"/>
+
+  <!-- ③ 20 小时分类条 -->
+  <text x="74" y="350" font-size="13.5" font-weight="700" fill="#24476b">③ 这 20 小时再按类拆：排在第一的不是等节点</text>
+  <text x="920" y="350" text-anchor="end" font-size="11.5" fill="#6b87a3">最极端一条线：3 小时 16 分钟里，13 个数据文件首尾时间戳合计 9.3 分钟</text>
+
+  <rect x="74" y="360" width="255" height="44" rx="6" fill="#24476b"/>
+  <text x="202" y="387" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">代理中断重读</text>
+  <text x="202" y="424" text-anchor="middle" font-size="11.5" fill="#6b87a3">
+    <tspan x="202">一条线 1 小时 47 分钟</tspan>
+    <tspan x="202" dy="17">没留记录，前 6 个实例白做</tspan>
+  </text>
+
+  <rect x="331" y="360" width="140" height="44" rx="6" fill="#5b88b0"/>
+  <text x="401" y="387" text-anchor="middle" font-size="12.5" fill="#ffffff">实验按时长跑</text>
+  <text x="401" y="424" text-anchor="middle" font-size="11.5" fill="#6b87a3">
+    <tspan x="401">切 6 次 = 79 分钟</tspan>
+    <tspan x="401" dy="17">加机器也短不了</tspan>
+  </text>
+
+  <rect x="473" y="360" width="228" height="44" rx="6" fill="#5b88b0"/>
+  <text x="587" y="387" text-anchor="middle" font-size="12.5" fill="#ffffff">流水线等最慢的线</text>
+  <text x="587" y="424" text-anchor="middle" font-size="11.5" fill="#6b87a3">
+    <tspan x="587">四条线收完差 2.5 小时</tspan>
+    <tspan x="587" dy="17">三条线干等一条</tspan>
+  </text>
+
+  <rect x="703" y="360" width="173" height="44" rx="6" fill="#5b88b0"/>
+  <text x="790" y="387" text-anchor="middle" font-size="12.5" fill="#ffffff">脚本 bug 返工</text>
+  <text x="790" y="424" text-anchor="middle" font-size="11.5" fill="#6b87a3">
+    <tspan x="790">两条线返工</tspan>
+    <tspan x="790" dy="17">约 50 和 45 分钟</tspan>
+  </text>
+
+  <rect x="878" y="360" width="42" height="44" rx="4" fill="#ffffff" stroke="#b5544a" stroke-width="2.5"/>
+  <path d="M899,406 L899,450" stroke="#b5544a" stroke-width="1.6"/>
+
+  <rect x="660" y="452" width="260" height="68" rx="10" fill="#f6ebe9" stroke="#b5544a" stroke-width="1.6"/>
+  <text x="678" y="474" font-size="12.5" font-weight="700" fill="#b5544a">排队等资源：0–14 分钟</text>
+  <text x="678" y="493" font-size="11.5" fill="#8c4a42">12 次占用日志里等了 0 次</text>
+  <text x="678" y="510" font-size="11.5" fill="#8c4a42">占各线总时长 5%–20%，排在最后</text>
+
+  <!-- 引线：这一小段回指整条 77 小时 -->
+  <path d="M920,486 L936,486 L936,157 L924,157" fill="none" stroke="#b5544a" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#tlback)"/>
+
+  <!-- 另一个维度 -->
+  <rect x="952" y="232" width="174" height="188" rx="12" fill="#eef5fa" stroke="#6b87a3" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="1039" y="256" text-anchor="middle" font-size="12.5" font-weight="700" fill="#24476b">另起一个维度</text>
+  <text x="1039" y="276" text-anchor="middle" font-size="11.5" fill="#6b87a3">节点少卡住的是范围</text>
+  <line x1="968" y1="288" x2="1110" y2="288" stroke="#c3d6e6" stroke-width="1"/>
+  <text x="968" y="310" font-size="11.5" fill="#24476b">
+    <tspan x="968">· 多节点一致性</tspan>
+    <tspan x="968" dy="19">· 压不出控制面瓶颈</tspan>
+    <tspan x="968" dy="19">· GPU / 真 NAS 路径</tspan>
+  </text>
+  <text x="968" y="374" font-size="10.5" fill="#6b87a3">
+    <tspan x="968">KWOK 能伪造 50 台 worker</tspan>
+    <tspan x="968" dy="16">伪造不出第二个 etcd</tspan>
+  </text>
+  <text x="1039" y="410" text-anchor="middle" font-size="12" font-weight="700" fill="#b5544a">测不了，不是测得慢</text>
 
   <!-- 结论 -->
-  <rect x="80" y="442" width="1040" height="56" rx="12" fill="#24476b"/>
-  <text x="600" y="466" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">瓶颈不在算力，也不在方案复杂度，在工具链稳定性</text>
-  <text x="600" y="487" text-anchor="middle" font-size="12.5" fill="#a9c4dc">不分类记录，就看不出该修哪一条</text>
-
-  <text x="600" y="528" text-anchor="middle" font-size="12.5" fill="#6b87a3">分类要在中断发生时就记，事后回忆分不清「在等工具」和「在想问题」</text>
+  <rect x="50" y="554" width="1100" height="80" rx="12" fill="#24476b"/>
+  <text x="600" y="582" text-anchor="middle" font-size="14.5" font-weight="700" fill="#ffffff">工时要把「在干活」和「在等工具」分开记</text>
+  <text x="600" y="606" text-anchor="middle" font-size="12.5" fill="#a9c4dc">
+    <tspan x="600">合着记，73% 的断网会被读成「实验做得慢」，答案只会是「再加几个节点」</tspan>
+    <tspan x="600" dy="19">这次该修的四条里加机器排最后；代价为零的代理中断那条，当天 19:08 就改完了</tspan>
+  </text>
 </svg>

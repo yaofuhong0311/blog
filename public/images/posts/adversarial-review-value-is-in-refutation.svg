@@ -1,0 +1,267 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="650" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="advb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="advr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
+    <pattern id="advwaste" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="#f6ebe9"/>
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#b5544a" stroke-width="1.6" stroke-opacity="0.28"/>
+    </pattern>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">编排规模乘的是发现条数，不是不确定性</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">28 × 3 = 84 这个乘法里，没有任何一项代表「这条结论有多不确定」</text>
+
+  <!-- 第一层：五个视角找问题 -->
+  <rect x="46" y="94" width="330" height="400" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.6"/>
+  <text x="68" y="118" font-size="14.5" font-weight="700" fill="#24476b">第一层 · 五个视角各找一遍</text>
+  <rect x="96" y="130" width="230" height="40" rx="10" fill="#5b88b0"/>
+  <text x="211" y="155" text-anchor="middle" font-size="12.5" fill="#ffffff">跨多个仓库的改造方案</text>
+  <path d="M211,170 L211,184 L74,184 L74,323" fill="none" stroke="#3a6491" stroke-width="1.6"/>
+  <path d="M74,207 L88,207" stroke="#3a6491" stroke-width="1.6" marker-end="url(#advb)"/>
+  <rect x="90" y="194" width="236" height="26" rx="7" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1"/>
+  <text x="104" y="211" font-size="12" fill="#24476b">数据安全</text>
+  <path d="M74,236 L88,236" stroke="#3a6491" stroke-width="1.6" marker-end="url(#advb)"/>
+  <rect x="90" y="223" width="236" height="26" rx="7" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1"/>
+  <text x="104" y="240" font-size="12" fill="#24476b">并发</text>
+  <path d="M74,265 L88,265" stroke="#3a6491" stroke-width="1.6" marker-end="url(#advb)"/>
+  <rect x="90" y="252" width="236" height="26" rx="7" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1"/>
+  <text x="104" y="269" font-size="12" fill="#24476b">契约</text>
+  <path d="M74,294 L88,294" stroke="#3a6491" stroke-width="1.6" marker-end="url(#advb)"/>
+  <rect x="90" y="281" width="236" height="26" rx="7" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1"/>
+  <text x="104" y="298" font-size="12" fill="#24476b">上线流程</text>
+  <path d="M74,323 L88,323" stroke="#3a6491" stroke-width="1.6" marker-end="url(#advb)"/>
+  <rect x="90" y="310" width="236" height="26" rx="7" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1"/>
+  <text x="104" y="327" font-size="12" fill="#24476b">文档与代码一致性</text>
+  <path d="M211,340 L211,356" stroke="#3a6491" stroke-width="1.6" marker-end="url(#advb)"/>
+  <rect x="58" y="358" width="306" height="128" rx="12" fill="#eef5fa" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="211" y="382" text-anchor="middle" font-size="13.5" font-weight="700" fill="#24476b">汇出约 28 条发现</text>
+  <circle cx="81" cy="402" r="6" fill="#24476b"/>
+  <circle cx="101" cy="402" r="6" fill="#24476b"/>
+  <circle cx="121" cy="402" r="6" fill="#24476b"/>
+  <circle cx="141" cy="402" r="6" fill="#24476b"/>
+  <circle cx="161" cy="402" r="6" fill="#24476b"/>
+  <circle cx="181" cy="402" r="6" fill="#24476b"/>
+  <circle cx="201" cy="402" r="6" fill="#24476b"/>
+  <circle cx="221" cy="402" r="6" fill="#24476b"/>
+  <circle cx="241" cy="402" r="6" fill="#24476b"/>
+  <circle cx="261" cy="402" r="6" fill="#c3d6e6"/>
+  <circle cx="281" cy="402" r="6" fill="#c3d6e6"/>
+  <circle cx="301" cy="402" r="6" fill="#c3d6e6"/>
+  <circle cx="321" cy="402" r="6" fill="#c3d6e6"/>
+  <circle cx="341" cy="402" r="6" fill="#c3d6e6"/>
+  <circle cx="81" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="101" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="121" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="141" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="161" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="181" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="201" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="221" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="241" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="261" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="281" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="301" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="321" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="341" cy="422" r="6" fill="#c3d6e6"/>
+  <circle cx="84" cy="448" r="5.5" fill="#24476b"/>
+  <text x="96" y="452" font-size="11.5" fill="#24476b">只有模型推理，没有独立证据</text>
+  <circle cx="84" cy="468" r="5.5" fill="#c3d6e6"/>
+  <text x="96" y="472" font-size="11.5" fill="#6b87a3">已有实测证据，或只改一行文档措辞</text>
+
+  <!-- 第二层：每条发现配 3 个反驳者 -->
+  <rect x="392" y="94" width="420" height="400" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="414" y="118" font-size="14.5" font-weight="700" fill="#b5544a">第二层 · 每条发现都配 3 个反驳者</text>
+  <rect x="404" y="132" width="126" height="28" rx="8" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.2"/>
+  <text x="467" y="151" text-anchor="middle" font-size="11.5" fill="#24476b">核代码事实</text>
+  <rect x="539" y="132" width="126" height="28" rx="8" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.2"/>
+  <text x="602" y="151" text-anchor="middle" font-size="11.5" fill="#24476b">核后果是否成立</text>
+  <rect x="674" y="132" width="126" height="28" rx="8" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.2"/>
+  <text x="737" y="151" text-anchor="middle" font-size="11.5" fill="#24476b">核差异归类</text>
+  <text x="602" y="194" text-anchor="middle" font-size="19" font-weight="700" fill="#b5544a">28 × 3 = 84 个子代理</text>
+  <rect x="412" y="214" width="124" height="64" rx="8" fill="#eef5fa"/>
+  <rect x="539" y="214" width="254" height="64" rx="8" fill="url(#advwaste)" stroke="#b5544a" stroke-width="1.2" stroke-opacity="0.45"/>
+  <circle cx="422" cy="228" r="4.5" fill="#5b88b0"/>
+  <circle cx="435" cy="228" r="4.5" fill="#5b88b0"/>
+  <circle cx="448" cy="228" r="4.5" fill="#5b88b0"/>
+  <circle cx="461" cy="228" r="4.5" fill="#5b88b0"/>
+  <circle cx="474" cy="228" r="4.5" fill="#5b88b0"/>
+  <circle cx="487" cy="228" r="4.5" fill="#5b88b0"/>
+  <circle cx="500" cy="228" r="4.5" fill="#5b88b0"/>
+  <circle cx="513" cy="228" r="4.5" fill="#5b88b0"/>
+  <circle cx="526" cy="228" r="4.5" fill="#5b88b0"/>
+  <circle cx="549" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="562" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="575" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="588" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="601" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="614" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="627" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="640" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="653" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="666" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="679" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="692" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="705" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="718" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="731" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="744" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="757" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="770" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="783" cy="228" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="422" cy="246" r="4.5" fill="#5b88b0"/>
+  <circle cx="435" cy="246" r="4.5" fill="#5b88b0"/>
+  <circle cx="448" cy="246" r="4.5" fill="#5b88b0"/>
+  <circle cx="461" cy="246" r="4.5" fill="#5b88b0"/>
+  <circle cx="474" cy="246" r="4.5" fill="#5b88b0"/>
+  <circle cx="487" cy="246" r="4.5" fill="#5b88b0"/>
+  <circle cx="500" cy="246" r="4.5" fill="#5b88b0"/>
+  <circle cx="513" cy="246" r="4.5" fill="#5b88b0"/>
+  <circle cx="526" cy="246" r="4.5" fill="#5b88b0"/>
+  <circle cx="549" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="562" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="575" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="588" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="601" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="614" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="627" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="640" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="653" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="666" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="679" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="692" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="705" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="718" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="731" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="744" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="757" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="770" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="783" cy="246" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="422" cy="264" r="4.5" fill="#5b88b0"/>
+  <circle cx="435" cy="264" r="4.5" fill="#5b88b0"/>
+  <circle cx="448" cy="264" r="4.5" fill="#5b88b0"/>
+  <circle cx="461" cy="264" r="4.5" fill="#5b88b0"/>
+  <circle cx="474" cy="264" r="4.5" fill="#5b88b0"/>
+  <circle cx="487" cy="264" r="4.5" fill="#5b88b0"/>
+  <circle cx="500" cy="264" r="4.5" fill="#5b88b0"/>
+  <circle cx="513" cy="264" r="4.5" fill="#5b88b0"/>
+  <circle cx="526" cy="264" r="4.5" fill="#5b88b0"/>
+  <circle cx="549" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="562" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="575" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="588" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="601" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="614" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="627" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="640" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="653" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="666" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="679" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="692" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="705" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="718" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="731" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="744" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="757" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="770" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <circle cx="783" cy="264" r="4.5" fill="#b5544a" fill-opacity="0.38"/>
+  <text x="474" y="296" text-anchor="middle" font-size="11.5" font-weight="700" fill="#24476b">值得派</text>
+  <text x="474" y="312" text-anchor="middle" font-size="11" fill="#6b87a3">只有推理的那几条</text>
+  <text x="666" y="296" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b5544a">浪费掉的那一片</text>
+  <text x="666" y="312" text-anchor="middle" font-size="11" fill="#8c4a42">给已经查实的结论投三票，怎么投都不改下一步</text>
+  <rect x="408" y="328" width="388" height="86" rx="10" fill="#f6ebe9" stroke="#b5544a" stroke-width="1.6"/>
+  <text x="428" y="352" font-size="12.5" font-weight="700" fill="#b5544a">跑到一半撞上用量上限，任务中途断掉</text>
+  <text x="428" y="375" font-size="11.5" fill="#8c4a42">
+    <tspan x="428">汇总那一步从脚本变成手工活</tspan>
+    <tspan x="428" dy="19">84 份反驳输出最后还得人一条条读</tspan>
+  </text>
+  <text x="602" y="444" text-anchor="middle" font-size="13" font-weight="700" fill="#24476b">这笔调用量买回来的，是把一件已经查实的事</text>
+  <text x="602" y="466" text-anchor="middle" font-size="13" font-weight="700" fill="#24476b">重新变回待定</text>
+
+  <!-- 改成按不确定性派 -->
+  <rect x="828" y="94" width="326" height="400" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2"/>
+  <text x="850" y="118" font-size="14.5" font-weight="700" fill="#24476b">改成按不确定性派</text>
+  <text x="991" y="142" text-anchor="middle" font-size="11.5" fill="#6b87a3">同样是 28 条发现进来</text>
+  <circle cx="861" cy="162" r="6" fill="#24476b"/>
+  <circle cx="881" cy="162" r="6" fill="#24476b"/>
+  <circle cx="901" cy="162" r="6" fill="#24476b"/>
+  <circle cx="921" cy="162" r="6" fill="#24476b"/>
+  <circle cx="941" cy="162" r="6" fill="#24476b"/>
+  <circle cx="961" cy="162" r="6" fill="#24476b"/>
+  <circle cx="981" cy="162" r="6" fill="#24476b"/>
+  <circle cx="1001" cy="162" r="6" fill="#24476b"/>
+  <circle cx="1021" cy="162" r="6" fill="#24476b"/>
+  <circle cx="1041" cy="162" r="6" fill="#c3d6e6"/>
+  <circle cx="1061" cy="162" r="6" fill="#c3d6e6"/>
+  <circle cx="1081" cy="162" r="6" fill="#c3d6e6"/>
+  <circle cx="1101" cy="162" r="6" fill="#c3d6e6"/>
+  <circle cx="1121" cy="162" r="6" fill="#c3d6e6"/>
+  <circle cx="861" cy="184" r="6" fill="#c3d6e6"/>
+  <circle cx="881" cy="184" r="6" fill="#c3d6e6"/>
+  <circle cx="901" cy="184" r="6" fill="#c3d6e6"/>
+  <circle cx="921" cy="184" r="6" fill="#c3d6e6"/>
+  <circle cx="941" cy="184" r="6" fill="#c3d6e6"/>
+  <circle cx="961" cy="184" r="6" fill="#c3d6e6"/>
+  <circle cx="981" cy="184" r="6" fill="#c3d6e6"/>
+  <circle cx="1001" cy="184" r="6" fill="#c3d6e6"/>
+  <circle cx="1021" cy="184" r="6" fill="#c3d6e6"/>
+  <circle cx="1041" cy="184" r="6" fill="#c3d6e6"/>
+  <circle cx="1061" cy="184" r="6" fill="#c3d6e6"/>
+  <circle cx="1081" cy="184" r="6" fill="#c3d6e6"/>
+  <circle cx="1101" cy="184" r="6" fill="#c3d6e6"/>
+  <circle cx="1121" cy="184" r="6" fill="#c3d6e6"/>
+  <path d="M930,196 L917,220" stroke="#3a6491" stroke-width="1.6" marker-end="url(#advb)"/>
+  <path d="M1058,196 L1071,220" stroke="#3a6491" stroke-width="1.6" marker-end="url(#advb)"/>
+  <rect x="846" y="224" width="142" height="64" rx="10" fill="#24476b"/>
+  <text x="917" y="250" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">进第二层</text>
+  <text x="917" y="272" text-anchor="middle" font-size="11.5" fill="#ffffff" fill-opacity="0.78">不到 10 条</text>
+  <rect x="1000" y="224" width="142" height="64" rx="10" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.6"/>
+  <text x="1071" y="250" text-anchor="middle" font-size="12.5" font-weight="700" fill="#24476b">跳过第二层</text>
+  <text x="1071" y="272" text-anchor="middle" font-size="11" fill="#6b87a3">带实测证据的</text>
+  <path d="M917,288 L917,304" stroke="#3a6491" stroke-width="1.6" marker-end="url(#advb)"/>
+  <circle cx="873" cy="314" r="3" fill="#5b88b0"/>
+  <circle cx="884" cy="314" r="3" fill="#5b88b0"/>
+  <circle cx="895" cy="314" r="3" fill="#5b88b0"/>
+  <circle cx="906" cy="314" r="3" fill="#5b88b0"/>
+  <circle cx="917" cy="314" r="3" fill="#5b88b0"/>
+  <circle cx="928" cy="314" r="3" fill="#5b88b0"/>
+  <circle cx="939" cy="314" r="3" fill="#5b88b0"/>
+  <circle cx="950" cy="314" r="3" fill="#5b88b0"/>
+  <circle cx="961" cy="314" r="3" fill="#5b88b0"/>
+  <circle cx="873" cy="326" r="3" fill="#5b88b0"/>
+  <circle cx="884" cy="326" r="3" fill="#5b88b0"/>
+  <circle cx="895" cy="326" r="3" fill="#5b88b0"/>
+  <circle cx="906" cy="326" r="3" fill="#5b88b0"/>
+  <circle cx="917" cy="326" r="3" fill="#5b88b0"/>
+  <circle cx="928" cy="326" r="3" fill="#5b88b0"/>
+  <circle cx="939" cy="326" r="3" fill="#5b88b0"/>
+  <circle cx="950" cy="326" r="3" fill="#5b88b0"/>
+  <circle cx="961" cy="326" r="3" fill="#5b88b0"/>
+  <circle cx="873" cy="338" r="3" fill="#5b88b0"/>
+  <circle cx="884" cy="338" r="3" fill="#5b88b0"/>
+  <circle cx="895" cy="338" r="3" fill="#5b88b0"/>
+  <circle cx="906" cy="338" r="3" fill="#5b88b0"/>
+  <circle cx="917" cy="338" r="3" fill="#5b88b0"/>
+  <circle cx="928" cy="338" r="3" fill="#5b88b0"/>
+  <circle cx="939" cy="338" r="3" fill="#5b88b0"/>
+  <circle cx="950" cy="338" r="3" fill="#5b88b0"/>
+  <circle cx="961" cy="338" r="3" fill="#5b88b0"/>
+  <text x="917" y="360" text-anchor="middle" font-size="11.5" fill="#24476b">× 3 反驳者</text>
+  <path d="M917,366 L917,377" stroke="#3a6491" stroke-width="1.6" marker-end="url(#advb)"/>
+  <path d="M1071,288 L1071,377" stroke="#3a6491" stroke-width="1.6" marker-end="url(#advb)"/>
+  <text x="1082" y="334" font-size="11" fill="#6b87a3">直接进结论</text>
+  <rect x="866" y="380" width="250" height="44" rx="10" fill="#5b88b0"/>
+  <text x="991" y="407" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">结论</text>
+  <text x="991" y="454" text-anchor="middle" font-size="20" font-weight="700" fill="#24476b">84 → 不到 30</text>
+  <text x="991" y="478" text-anchor="middle" font-size="11.5" fill="#6b87a3">派几个，看这条有多不确定</text>
+
+  <rect x="46" y="506" width="1108" height="34" rx="10" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <text x="600" y="528" text-anchor="middle" font-size="12" fill="#24476b">投票规则：反驳者只拿到结论原文，看不到调查过程 · 默认立场写死「这条站不住脚」 · 不确定算一张反驳票 · 三票里两票推翻就丢掉</text>
+
+  <rect x="46" y="552" width="1108" height="80" rx="12" fill="#24476b"/>
+  <text x="600" y="580" text-anchor="middle" font-size="14.5" font-weight="700" fill="#ffffff">信息量全在推翻那一侧：另一次 15 个子代理的复核，4 个判定 refuted，主结论当场作废</text>
+  <text x="600" y="602" text-anchor="middle" font-size="12.5" fill="#ffffff" fill-opacity="0.72">
+    <tspan x="600">有信息量的反驳指出因果链断在哪一环，再给一个能把两种假设分开的最小实验</tspan>
+    <tspan x="600" dy="19">笼统说「我觉得不太对」和点头一样便宜</tspan>
+  </text>
+</svg>

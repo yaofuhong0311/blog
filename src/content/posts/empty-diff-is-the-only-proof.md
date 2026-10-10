@@ -8,6 +8,8 @@ category: 工程实践
 
 > 同一个需求被开出 3 条分支，合并前要确认没漏代码。我先后用了 git log、git branch --contains、git diff --stat，三个都给了错的答案。我的判断是：合并前的检查只能用来筛选，证据只有一个——合完之后重新比一次。
 
+![同一份改动经 merge 和 cherry-pick 两条路进主干后，git log、branch --contains、diff --stat 为什么会答错，以及合并后只数 insertion 才是证据](/images/posts/empty-diff-is-the-only-proof.svg)
+
 ## 三个看着像答案的判据
 
 起因是把二期当成了新任务。一个运维后台的配置需求，二期加功能开一条分支，补 CRUD 又开一条，最后三条分支名字是 page、ui、crud，谁包含谁完全说不清。
