@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="624" viewBox="0 0 1200 624" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="624" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="rj" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">8.7 倍的加速，我决定不要</text>
+  <text x="600" y="70" text-anchor="middle" font-size="14" fill="#6b87a3">技术上可行不等于值得做——8.7 倍只活在「没人提前建沙箱」的那种时序里</text>
+
+  <!-- 上块：顺序建单个沙箱 -->
+  <rect x="50" y="88" width="1100" height="212" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="76" y="114" font-size="15" font-weight="700" fill="#24476b">顺序建单个沙箱时</text>
+  <text x="1124" y="114" text-anchor="end" font-size="11.5" fill="#6b87a3">共用起点与时间刻度</text>
+
+  <!-- 时间刻度 -->
+  <text x="76" y="140" text-anchor="middle" font-size="10.5" fill="#93adc4">0</text>
+  <text x="238" y="140" text-anchor="middle" font-size="10.5" fill="#93adc4">500</text>
+  <text x="401" y="140" text-anchor="middle" font-size="10.5" fill="#93adc4">1000</text>
+  <text x="563" y="140" text-anchor="middle" font-size="10.5" fill="#93adc4">1500</text>
+  <text x="725" y="140" text-anchor="middle" font-size="10.5" fill="#93adc4">2000</text>
+  <text x="888" y="140" text-anchor="middle" font-size="10.5" fill="#93adc4">2500 毫秒</text>
+  <line x1="76" y1="146" x2="76" y2="248" stroke="#c3d6e6" stroke-width="1.2"/>
+  <line x1="238" y1="146" x2="238" y2="248" stroke="#c3d6e6" stroke-width="1" opacity="0.7"/>
+  <line x1="401" y1="146" x2="401" y2="248" stroke="#c3d6e6" stroke-width="1" opacity="0.7"/>
+  <line x1="563" y1="146" x2="563" y2="248" stroke="#c3d6e6" stroke-width="1" opacity="0.7"/>
+  <line x1="725" y1="146" x2="725" y2="248" stroke="#c3d6e6" stroke-width="1" opacity="0.7"/>
+  <line x1="888" y1="146" x2="888" y2="248" stroke="#c3d6e6" stroke-width="1" opacity="0.7"/>
+
+  <!-- 条 1：一沙箱一 Pod -->
+  <text x="76" y="162" font-size="12.5" font-weight="700" fill="#b5544a">一沙箱一 Pod（runc）</text>
+  <rect x="76" y="168" width="104" height="28" fill="#b5544a"/>
+  <rect x="180" y="168" width="70" height="28" fill="#8c4a42"/>
+  <rect x="250" y="168" width="66" height="28" fill="#b5544a"/>
+  <rect x="316" y="168" width="90" height="28" fill="#8c4a42"/>
+  <rect x="406" y="168" width="142" height="28" fill="#b5544a"/>
+  <rect x="548" y="168" width="90" height="28" fill="#8c4a42"/>
+  <text x="128" y="186" text-anchor="middle" font-size="10.5" fill="#ffffff">Kubernetes 对象</text>
+  <text x="215" y="186" text-anchor="middle" font-size="10.5" fill="#ffffff">控制器</text>
+  <text x="283" y="186" text-anchor="middle" font-size="10.5" fill="#ffffff">调度器</text>
+  <text x="361" y="186" text-anchor="middle" font-size="10.5" fill="#ffffff">kubelet</text>
+  <text x="477" y="186" text-anchor="middle" font-size="10.5" fill="#ffffff">containerd+shim</text>
+  <text x="593" y="186" text-anchor="middle" font-size="10.5" fill="#ffffff">运行时</text>
+  <text x="648" y="188" font-size="13" font-weight="700" fill="#b5544a">1733 毫秒</text>
+
+  <!-- 条 2：原型 -->
+  <text x="76" y="212" font-size="12.5" font-weight="700" fill="#24476b">原型，特权 Pod 直调运行时（runc）</text>
+  <rect x="76" y="218" width="65" height="28" rx="4" fill="#24476b"/>
+  <text x="149" y="238" font-size="13" font-weight="700" fill="#24476b">200 毫秒</text>
+  <text x="252" y="225" text-anchor="middle" font-size="10.5" fill="#6b87a3">拆开看</text>
+  <path d="M212,232 L292,232" stroke="#3a6491" stroke-width="1.6" marker-end="url(#rj)"/>
+  <rect x="300" y="218" width="100" height="28" rx="6" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <text x="350" y="237" text-anchor="middle" font-size="11.5" fill="#24476b">建网 50ms</text>
+  <rect x="412" y="218" width="124" height="28" rx="6" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <text x="474" y="237" text-anchor="middle" font-size="11.5" fill="#24476b">准备根目录 4ms</text>
+  <rect x="548" y="218" width="112" height="28" rx="6" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <text x="604" y="237" text-anchor="middle" font-size="11.5" fill="#24476b" font-family="monospace">create 65ms</text>
+  <rect x="672" y="218" width="104" height="28" rx="6" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <text x="724" y="237" text-anchor="middle" font-size="11.5" fill="#24476b" font-family="monospace">start 10ms</text>
+
+  <!-- 倍数 -->
+  <text x="1032" y="170" text-anchor="middle" font-size="11.5" fill="#6b87a3">runc 冷启动</text>
+  <text x="1032" y="204" text-anchor="middle" font-size="40" font-weight="700" fill="#24476b">8.7 倍</text>
+  <text x="1032" y="228" text-anchor="middle" font-size="12" fill="#3a6491">1733 → 200 毫秒</text>
+
+  <rect x="72" y="256" width="1056" height="32" rx="8" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <text x="600" y="276" text-anchor="middle" font-size="12.5" fill="#3a6491">换成 gVisor 也一样：2565 毫秒 vs 602 毫秒 = 4.3 倍</text>
+
+  <!-- 下块：真实训练时序 -->
+  <text x="76" y="338" font-size="15" font-weight="700" fill="#24476b">真实训练时序下</text>
+  <text x="1124" y="338" text-anchor="end" font-size="11.5" fill="#6b87a3">每格横轴各自独立，区间已写在标签上</text>
+
+  <!-- 面板 1 -->
+  <rect x="50" y="352" width="356" height="152" rx="12" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="228" y="378" text-anchor="middle" font-size="13.5" font-weight="700" fill="#24476b">步间空档约 10 秒</text>
+  <text x="388" y="378" text-anchor="end" font-size="10.5" fill="#93adc4">横轴 0–1.4 秒</text>
+  <text x="68" y="402" font-size="11.5" fill="#8c4a42">Pod 路径　0.3–1.3 秒</text>
+  <rect x="68" y="408" width="320" height="18" rx="4" fill="#eef5fa"/>
+  <rect x="137" y="408" width="229" height="18" rx="4" fill="#b5544a"/>
+  <text x="68" y="446" font-size="11.5" fill="#24476b">原型　0.1–0.7 秒</text>
+  <rect x="68" y="452" width="320" height="18" rx="4" fill="#eef5fa"/>
+  <rect x="91" y="452" width="137" height="18" rx="4" fill="#24476b"/>
+  <text x="228" y="490" text-anchor="middle" font-size="13" font-weight="700" fill="#6b87a3">差不到 1 秒</text>
+
+  <!-- 面板 2 -->
+  <rect x="422" y="352" width="356" height="152" rx="12" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="600" y="378" text-anchor="middle" font-size="13.5" font-weight="700" fill="#24476b">同题起 8 个沙箱</text>
+  <text x="760" y="378" text-anchor="end" font-size="10.5" fill="#93adc4">横轴 0–0.8 秒</text>
+  <text x="440" y="402" font-size="11.5" fill="#8c4a42">提前建好 8 个普通 Pod　0.52–0.76 秒</text>
+  <rect x="440" y="408" width="320" height="18" rx="4" fill="#eef5fa"/>
+  <rect x="648" y="408" width="96" height="18" rx="4" fill="#b5544a"/>
+  <text x="440" y="446" font-size="11.5" fill="#24476b">原型　0.63–0.76 秒</text>
+  <rect x="440" y="452" width="320" height="18" rx="4" fill="#eef5fa"/>
+  <rect x="692" y="452" width="52" height="18" rx="4" fill="#24476b"/>
+  <text x="600" y="490" text-anchor="middle" font-size="13" font-weight="700" fill="#6b87a3">原型没有更快</text>
+
+  <!-- 面板 3 -->
+  <rect x="794" y="352" width="356" height="152" rx="12" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="972" y="378" text-anchor="middle" font-size="13.5" font-weight="700" fill="#24476b">步间空档压到 2.5–3 秒</text>
+  <text x="1132" y="378" text-anchor="end" font-size="10.5" fill="#93adc4">横轴 0–8 秒</text>
+  <text x="812" y="402" font-size="11.5" fill="#8c4a42">Pod 路径　2.3–7.7 秒</text>
+  <rect x="812" y="408" width="320" height="18" rx="4" fill="#eef5fa"/>
+  <rect x="904" y="408" width="216" height="18" rx="4" fill="#b5544a"/>
+  <text x="812" y="446" font-size="11.5" fill="#24476b">原型　0.2–1.6 秒</text>
+  <rect x="812" y="452" width="320" height="18" rx="4" fill="#eef5fa"/>
+  <rect x="820" y="452" width="56" height="18" rx="4" fill="#24476b"/>
+  <text x="972" y="490" text-anchor="middle" font-size="13" font-weight="700" fill="#24476b">只有这时差距才回来</text>
+
+  <!-- 结论 -->
+  <rect x="50" y="524" width="1100" height="76" rx="12" fill="#24476b"/>
+  <text x="600" y="552" text-anchor="middle" font-size="14.5" font-weight="700" fill="#ffffff">8.7 倍成立的条件，是建沙箱堵在关键路径上；能提前建，加速它就没有收益</text>
+  <text x="600" y="578" text-anchor="middle" font-size="12.5" fill="#a9c4dc">7 个外部做法全部在 gVisor 上复现成功（7/7 技术可行），最后只采纳 2 条</text>
+</svg>

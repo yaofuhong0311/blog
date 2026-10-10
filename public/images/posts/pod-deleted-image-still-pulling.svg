@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="580" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="pa" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="pr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">取消信号传到哪一层就断了</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">同一个「调用方放弃」，走 kubelet 和直连 containerd，结果差 300 倍</text>
+
+  <!-- 上：kubelet 路径 -->
+  <rect x="50" y="102" width="1100" height="190" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="76" y="128" font-size="15" font-weight="700" fill="#b5544a">默认路径：删 Pod，让 kubelet 自己收手</text>
+
+  <rect x="72" y="146" width="150" height="62" rx="10" fill="#5b88b0"/>
+  <text x="147" y="172" text-anchor="middle" font-size="13" fill="#ffffff">删除 Pod</text>
+  <text x="147" y="192" text-anchor="middle" font-size="11.5" fill="#dce9ff">调用方放弃</text>
+
+  <path d="M222,177 L258,177" stroke="#3a6491" stroke-width="2" marker-end="url(#pa)"/>
+
+  <rect x="264" y="146" width="186" height="62" rx="10" fill="#ffffff" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="357" y="170" text-anchor="middle" font-size="12.5" fill="#24476b">pod worker 的 context</text>
+  <text x="357" y="190" text-anchor="middle" font-size="11.5" fill="#3a6491">确实被取消了</text>
+  <text x="357" y="226" text-anchor="middle" font-size="11" font-family="monospace" fill="#6b87a3">Cancelling current pod sync</text>
+
+  <!-- 断口 -->
+  <path d="M452,177 L486,177" stroke="#b5544a" stroke-width="2.5" stroke-dasharray="5 5"/>
+  <line x1="462" y1="162" x2="478" y2="192" stroke="#b5544a" stroke-width="3"/>
+  <line x1="478" y1="162" x2="462" y2="192" stroke="#b5544a" stroke-width="3"/>
+  <text x="470" y="146" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b5544a">信号断在这</text>
+
+  <rect x="492" y="146" width="206" height="62" rx="10" fill="#b5544a"/>
+  <text x="595" y="170" text-anchor="middle" font-size="12.5" fill="#ffffff">SyncPod 调运行时这层</text>
+  <text x="595" y="190" text-anchor="middle" font-size="11.5" font-family="monospace" fill="#f0d9d6">context.WithoutCancel</text>
+  <text x="595" y="226" text-anchor="middle" font-size="11" fill="#8c4a42">取消能力被剥掉，往下传的 context 不可取消</text>
+
+  <path d="M700,177 L736,177" stroke="#b5544a" stroke-width="2" marker-end="url(#pr)"/>
+
+  <rect x="742" y="146" width="150" height="62" rx="10" fill="#ffffff" stroke="#d8c2bf" stroke-width="1.6"/>
+  <text x="817" y="182" text-anchor="middle" font-size="13" fill="#8c4a42">CRI PullImage</text>
+
+  <path d="M894,177 L930,177" stroke="#b5544a" stroke-width="2" marker-end="url(#pr)"/>
+
+  <rect x="936" y="146" width="194" height="62" rx="10" fill="#8c4a42"/>
+  <text x="1033" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">containerd 继续下</text>
+  <text x="1033" y="190" text-anchor="middle" font-size="11.5" fill="#f0d9d6">拉完还会把容器起起来</text>
+
+  <text x="600" y="268" text-anchor="middle" font-size="14" font-weight="700" fill="#b5544a">又跑了 322.7 秒，多下 7288 MB</text>
+
+  <!-- 下：直连 containerd -->
+  <rect x="50" y="312" width="1100" height="128" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="76" y="338" font-size="15" font-weight="700" fill="#24476b">直连 containerd：取消权握在自己手里</text>
+
+  <rect x="72" y="356" width="150" height="56" rx="10" fill="#5b88b0"/>
+  <text x="147" y="389" text-anchor="middle" font-size="13" fill="#ffffff">调用方放弃</text>
+
+  <path d="M222,384 L478,384" stroke="#3a6491" stroke-width="2" marker-end="url(#pa)"/>
+  <text x="350" y="375" text-anchor="middle" font-size="11.5" fill="#3a6491">自己 cancel 自己发出的那个 context</text>
+
+  <rect x="484" y="356" width="214" height="56" rx="10" fill="#24476b"/>
+  <text x="591" y="389" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">PullImage 立刻返回</text>
+
+  <text x="880" y="382" text-anchor="middle" font-size="20" font-weight="700" fill="#24476b">1–2 秒停下</text>
+  <text x="880" y="404" text-anchor="middle" font-size="12" fill="#3a6491">另一组：0.09 秒，只多下 3.1 MB</text>
+
+  <!-- 后果 -->
+  <rect x="50" y="460" width="1100" height="80" rx="12" fill="#24476b"/>
+  <text x="600" y="488" text-anchor="middle" font-size="14.5" font-weight="700" fill="#ffffff">后果不在当次请求，在下一个人身上</text>
+  <text x="600" y="513" text-anchor="middle" font-size="12.5" fill="#a9c4dc">
+    <tspan x="600">带宽被占着，后续新建的小镜像 Pod 要等 404 秒才能跑第一条命令</tspan>
+    <tspan x="600" dy="19">同样的 Pod 在空闲节点上只要 19.8 秒</tspan>
+  </text>
+</svg>

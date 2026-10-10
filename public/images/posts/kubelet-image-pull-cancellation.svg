@@ -1,72 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
-  <rect width="1200" height="600" rx="20" fill="#f2f6fa"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="560" rx="20" fill="#f2f6fa"/>
   <defs>
-    <marker id="a3" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
-      <path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/>
-    </marker>
+    <marker id="lg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
   </defs>
 
-  <text x="600" y="46" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">取消信号停在 kubelet 内部</text>
-  <text x="600" y="74" text-anchor="middle" font-size="14" fill="#6b87a3">日志打了「已取消」，但下发给容器运行时的 context 被剥离了取消能力</text>
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">一行日志的作用域，只到写它的那个函数</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">它说自己的 context 没了，没说也不知道此前下发出去的调用现在怎样</text>
 
-  <!-- 调用方 -->
-  <rect x="60" y="120" width="190" height="80" rx="12" fill="#5b88b0"/>
-  <text x="155" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">调用方</text>
-  <text x="155" y="176" text-anchor="middle" font-size="12.5" fill="#eef5fa">超时，删除 Pod</text>
+  <!-- 日志覆盖范围 -->
+  <rect x="60" y="106" width="420" height="300" rx="14" fill="#ffffff" stroke="#3a6491" stroke-width="2.5"/>
+  <text x="270" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="#3a6491">这行日志说的是这一层</text>
 
-  <path d="M250,160 L306,160" stroke="#3a6491" stroke-width="2" marker-end="url(#a3)"/>
-
-  <!-- kubelet -->
-  <rect x="312" y="105" width="560" height="200" rx="14" fill="#ffffff" stroke="#3a6491" stroke-width="2.5"/>
-  <text x="592" y="134" text-anchor="middle" font-size="16" font-weight="700" fill="#3a6491">kubelet</text>
-
-  <rect x="344" y="150" width="230" height="68" rx="10" fill="#eef5fa"/>
-  <text x="459" y="178" text-anchor="middle" font-size="13.5" fill="#24476b">
-    <tspan x="459">调谐循环收到取消</tspan>
-    <tspan x="459" dy="19" font-family="monospace" font-size="11.5">Cancelling current pod sync</tspan>
+  <rect x="96" y="152" width="348" height="74" rx="10" fill="#24476b"/>
+  <text x="270" y="178" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">pod worker 的调谐循环</text>
+  <text x="270" y="200" text-anchor="middle" font-size="12" fill="#a9c4dc">
+    <tspan x="270">kubelet 给每个 Pod 维护一个</tspan>
+    <tspan x="270" dy="18">Pod 删除时它的 context 确实被取消</tspan>
   </text>
 
-  <path d="M574,184 L612,184" stroke="#3a6491" stroke-width="2" marker-end="url(#a3)"/>
+  <rect x="96" y="244" width="348" height="40" rx="8" fill="#eef5fa"/>
+  <text x="270" y="269" text-anchor="middle" font-size="12" font-family="monospace" fill="#24476b">Cancelling current pod sync</text>
 
-  <rect x="618" y="150" width="228" height="68" rx="10" fill="#b5544a"/>
-  <text x="732" y="178" text-anchor="middle" font-size="13.5" fill="#ffffff">
-    <tspan x="732">SyncPod 调运行时这一层</tspan>
-    <tspan x="732" dy="19" font-family="monospace" font-size="11.5">context.WithoutCancel</tspan>
+  <text x="270" y="312" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3a6491">这句话本身是对的</text>
+  <text x="270" y="340" text-anchor="middle" font-size="12" fill="#6b87a3">
+    <tspan x="270">它是一个函数对自己状态的陈述，</tspan>
+    <tspan x="270" dy="19">不是对整条链路的陈述</tspan>
   </text>
+  <text x="270" y="388" text-anchor="middle" font-size="12" fill="#6b87a3">作用域到此为止 ↓</text>
 
-  <text x="592" y="250" text-anchor="middle" font-size="13" font-weight="700" fill="#b5544a">取消能力到这里被剥离，再往下传的 context 已经不可取消</text>
-  <text x="592" y="276" text-anchor="middle" font-size="12.5" fill="#6b87a3">日志是真的，它只描述调谐循环自己，不代表下游真的停了</text>
+  <!-- 分界 -->
+  <line x1="510" y1="120" x2="510" y2="400" stroke="#b5544a" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="510" y="112" text-anchor="middle" font-size="12" font-weight="700" fill="#b5544a">作用域边界</text>
 
-  <path d="M872,205 L928,205" stroke="#b5544a" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#a3)"/>
+  <!-- 日志管不到的部分 -->
+  <rect x="540" y="106" width="600" height="300" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="840" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="#b5544a">日志没说、也不知道的这一层</text>
 
-  <!-- containerd -->
-  <rect x="934" y="150" width="206" height="110" rx="12" fill="#24476b"/>
-  <text x="1037" y="182" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">containerd</text>
-  <text x="1037" y="208" text-anchor="middle" font-size="12.5" fill="#a9c4dc">
-    <tspan x="1037">PullImage 继续跑</tspan>
-    <tspan x="1037" dy="19">带宽一直被占着</tspan>
-  </text>
+  <rect x="572" y="152" width="536" height="60" rx="10" fill="#f6ebe9"/>
+  <text x="840" y="176" text-anchor="middle" font-size="12.5" fill="#8c4a42">kubelet 向容器运行时下发时，context 换过一道</text>
+  <text x="840" y="198" text-anchor="middle" font-size="12.5" font-family="monospace" font-weight="700" fill="#b5544a">ctx = context.WithoutCancel(ctx)</text>
 
-  <!-- 对照实验 -->
-  <rect x="60" y="340" width="520" height="190" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
-  <text x="320" y="370" text-anchor="middle" font-size="15.5" font-weight="700" fill="#b5544a">删 Pod 之后（经 kubelet）</text>
-  <text x="320" y="406" text-anchor="middle" font-size="30" font-weight="700" fill="#b5544a">323 秒</text>
-  <text x="320" y="432" text-anchor="middle" font-size="13" fill="#8c4a42">拉取继续跑，多下 7.3 GB</text>
-  <rect x="100" y="448" width="440" height="58" rx="10" fill="#f6ebe9"/>
-  <text x="320" y="473" text-anchor="middle" font-size="12.5" fill="#8c4a42">
-    <tspan x="320">后果：新建的小镜像 Pod 要等 404 秒才能跑第一条命令</tspan>
-    <tspan x="320" dy="19">同样的 Pod 在空闲节点上只要 19.8 秒</tspan>
-  </text>
+  <path d="M840,214 L840,240" stroke="#b5544a" stroke-width="2" marker-end="url(#lg)"/>
 
-  <rect x="620" y="340" width="520" height="190" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2"/>
-  <text x="880" y="370" text-anchor="middle" font-size="15.5" font-weight="700" fill="#24476b">绕过 kubelet，直接调 containerd</text>
-  <text x="880" y="406" text-anchor="middle" font-size="30" font-weight="700" fill="#24476b">1–2 秒</text>
-  <text x="880" y="432" text-anchor="middle" font-size="13" fill="#3a6491">取消后立刻停</text>
-  <rect x="660" y="448" width="440" height="58" rx="10" fill="#eef5fa"/>
-  <text x="880" y="473" text-anchor="middle" font-size="12.5" fill="#24476b">
-    <tspan x="880">所以「先拉镜像再建 Pod」是必须的</tspan>
-    <tspan x="880" dy="19">不是可选优化——取消权必须握在自己手里</tspan>
-  </text>
+  <rect x="572" y="246" width="256" height="56" rx="10" fill="#ffffff" stroke="#d8c2bf" stroke-width="1.5"/>
+  <text x="700" y="268" text-anchor="middle" font-size="12.5" fill="#8c4a42">值都还在</text>
+  <text x="700" y="288" text-anchor="middle" font-size="11.5" fill="#8c4a42">trace ID 这些照常传</text>
 
-  <text x="600" y="570" text-anchor="middle" font-size="13" fill="#6b87a3">排查方法：日志说取消了不等于真的取消了，要么读源码确认信号路径，要么把取消点换一层做对照</text>
+  <rect x="852" y="246" width="256" height="56" rx="10" fill="#b5544a"/>
+  <text x="980" y="268" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">取消不再往下传</text>
+  <text x="980" y="288" text-anchor="middle" font-size="11.5" fill="#f0d9d6">父取消时它不取消</text>
+
+  <path d="M840,304 L840,330" stroke="#b5544a" stroke-width="2" marker-end="url(#lg)"/>
+
+  <rect x="572" y="336" width="536" height="52" rx="10" fill="#8c4a42"/>
+  <text x="840" y="358" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">CRI PullImage 拿到的 context 永远不会进入取消状态</text>
+  <text x="840" y="378" text-anchor="middle" font-size="11.5" fill="#f0d9d6">containerd 侧的下载没收到任何信号</text>
+
+  <!-- 这个设计是对的 -->
+  <rect x="60" y="428" width="1080" height="54" rx="12" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="600" y="452" text-anchor="middle" font-size="13.5" font-weight="700" fill="#3a6491">这不是疏忽，是权衡：镜像在节点上是共享的</text>
+  <text x="600" y="472" text-anchor="middle" font-size="12" fill="#6b87a3">同一个镜像可能被好几个 Pod 等着，删掉其中一个不该断掉别人还在等的那份下载</text>
+
+  <rect x="60" y="494" width="1080" height="46" rx="12" fill="#24476b"/>
+  <text x="600" y="523" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">权衡的另一面没有出口：它不在日志里，也不在文档里，只在源码的一行函数调用里</text>
 </svg>

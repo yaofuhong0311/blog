@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="640" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="nka" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="nkg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#a9b9c9"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">Kubernetes 里没有「暂停」</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">想把内存还给机器，就得让进程结束——这两件事没法同时成立</text>
+
+  <!-- 左：冻结 -->
+  <rect x="50" y="104" width="530" height="244" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="315" y="131" text-anchor="middle" font-size="15.5" font-weight="700" fill="#b5544a">冻结（cgroup freezer）</text>
+  <text x="315" y="152" text-anchor="middle" font-size="12" fill="#8c4a42">按下暂停键，进程原地冻住</text>
+
+  <rect x="86" y="168" width="458" height="68" rx="10" fill="#f6ebe9" stroke="#d8c2bf" stroke-width="1.4"/>
+  <text x="102" y="200" font-size="12" fill="#8c4a42">沙箱</text>
+  <rect x="162" y="182" width="110" height="26" rx="6" fill="#ffffff" stroke="#b5544a" stroke-width="1.4"/>
+  <text x="217" y="199" text-anchor="middle" font-size="12" fill="#b5544a">进程仍在</text>
+  <rect x="288" y="182" width="180" height="26" rx="6" fill="#ffffff" stroke="#b5544a" stroke-width="1.4"/>
+  <text x="378" y="199" text-anchor="middle" font-size="12" fill="#b5544a">匿名页仍挂在 <tspan font-family="monospace">cgroup</tspan> 上</text>
+  <text x="315" y="226" text-anchor="middle" font-size="11.5" fill="#8c4a42">冻住的是执行，占着的东西一样不少</text>
+
+  <text x="86" y="270" font-size="12.5" fill="#24476b">机器可用内存</text>
+  <line x1="172" y1="250" x2="172" y2="290" stroke="#6b87a3" stroke-width="1.5"/>
+  <rect x="172" y="256" width="170" height="20" rx="4" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.4"/>
+  <rect x="164" y="256" width="8" height="20" rx="2" fill="#b5544a"/>
+  <text x="360" y="275" font-size="24" font-weight="700" fill="#b5544a">−1 MiB</text>
+  <text x="360" y="294" font-size="11.5" fill="#8c4a42">沙箱约 307 MiB</text>
+
+  <text x="315" y="317" text-anchor="middle" font-size="12.5" fill="#8c4a42">一个字节都还不回来，还倒亏 1 MiB</text>
+  <text x="315" y="336" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b5544a">进程还在，内存就还在</text>
+
+  <!-- 中缝 -->
+  <line x1="600" y1="112" x2="600" y2="340" stroke="#a9b9c9" stroke-width="1.6" stroke-dasharray="6 6"/>
+  <rect x="588" y="183" width="24" height="120" rx="9" fill="#f2f6fa"/>
+  <text x="600" y="247.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6b87a3" transform="rotate(-90 600 243)">这两件事互斥</text>
+
+  <!-- 右：写盘暂停 -->
+  <rect x="620" y="104" width="530" height="244" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="885" y="131" text-anchor="middle" font-size="15.5" font-weight="700" fill="#24476b">写盘暂停</text>
+  <text x="885" y="152" text-anchor="middle" font-size="12" fill="#3a6491">把状态写到磁盘，再结束掉</text>
+
+  <rect x="656" y="168" width="458" height="68" rx="10" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.4"/>
+  <text x="672" y="200" font-size="12" fill="#3a6491">沙箱</text>
+  <rect x="752" y="182" width="120" height="26" rx="6" fill="#ffffff" stroke="#5b88b0" stroke-width="1.4"/>
+  <text x="812" y="199" text-anchor="middle" font-size="12" fill="#24476b">进程已退出</text>
+  <rect x="888" y="182" width="130" height="26" rx="6" fill="#ffffff" stroke="#5b88b0" stroke-width="1.4"/>
+  <text x="953" y="199" text-anchor="middle" font-size="12" fill="#24476b"><tspan font-family="monospace">Pod</tspan> 被删除</text>
+  <text x="885" y="226" text-anchor="middle" font-size="11.5" fill="#3a6491">该还的都还了，因为它真的结束了</text>
+
+  <text x="656" y="270" font-size="12.5" fill="#24476b">机器可用内存</text>
+  <line x1="742" y1="250" x2="742" y2="290" stroke="#6b87a3" stroke-width="1.5"/>
+  <rect x="742" y="256" width="170" height="20" rx="4" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.4"/>
+  <rect x="742" y="256" width="127" height="20" rx="4" fill="#5b88b0"/>
+  <rect x="869" y="256" width="43" height="20" rx="4" fill="#24476b"/>
+  <text x="930" y="275" font-size="24" font-weight="700" fill="#24476b">+86～115 MiB</text>
+  <text x="930" y="294" font-size="11.5" fill="#3a6491">沙箱实际占用 101 MiB</text>
+
+  <text x="885" y="317" text-anchor="middle" font-size="12.5" fill="#3a6491">内存是还回来了，但那是因为进程真结束了</text>
+  <text x="885" y="336" text-anchor="middle" font-size="12.5" font-weight="700" fill="#24476b">这不是暂停，是退出</text>
+
+  <!-- 状态轴 -->
+  <rect x="50" y="366" width="1100" height="130" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="76" y="394" font-size="15" font-weight="700" fill="#24476b">Pod 的生命周期里，没有「暂停」这个状态</text>
+
+  <text x="602" y="416" text-anchor="middle" font-size="12" font-weight="700" fill="#b5544a">这个状态不存在</text>
+
+  <rect x="200" y="424" width="118" height="40" rx="9" fill="#eef5fa" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="259" y="449" text-anchor="middle" font-size="13" font-family="monospace" fill="#24476b">Pending</text>
+
+  <path d="M318,444 L348,444" stroke="#3a6491" stroke-width="2" marker-end="url(#nka)"/>
+
+  <rect x="360" y="424" width="118" height="40" rx="9" fill="#5b88b0"/>
+  <text x="419" y="449" text-anchor="middle" font-size="13" font-family="monospace" fill="#ffffff">Running</text>
+
+  <path d="M478,444 L512,444" stroke="#a9b9c9" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#nkg)"/>
+
+  <rect x="524" y="424" width="156" height="40" rx="9" fill="#f2f6fa" stroke="#a9b9c9" stroke-width="1.8" stroke-dasharray="6 5"/>
+  <line x1="540" y1="434" x2="560" y2="454" stroke="#b5544a" stroke-width="2.6"/>
+  <line x1="560" y1="434" x2="540" y2="454" stroke="#b5544a" stroke-width="2.6"/>
+  <text x="572" y="449" font-size="13" font-family="monospace" fill="#8c4a42">Suspended？</text>
+
+  <path d="M680,444 L714,444" stroke="#a9b9c9" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#nkg)"/>
+
+  <rect x="726" y="424" width="134" height="40" rx="9" fill="#24476b"/>
+  <text x="793" y="449" text-anchor="middle" font-size="13" font-family="monospace" fill="#ffffff">Succeeded</text>
+  <text x="870" y="449" text-anchor="middle" font-size="14" fill="#6b87a3">/</text>
+  <rect x="882" y="424" width="118" height="40" rx="9" fill="#ffffff" stroke="#24476b" stroke-width="1.8"/>
+  <text x="941" y="449" text-anchor="middle" font-size="13" font-family="monospace" fill="#24476b">Failed</text>
+
+  <text x="600" y="482" text-anchor="middle" font-size="13" font-weight="700" fill="#3a6491">原地暂停会被 Kubernetes 判定为容器退出</text>
+
+  <!-- 结论 -->
+  <rect x="50" y="516" width="1100" height="100" rx="12" fill="#24476b"/>
+  <text x="600" y="546" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">引擎自带的暂停/快照只存文件系统（删 Pod、恢复时重建），不保留内存和进程</text>
+  <text x="600" y="573" text-anchor="middle" font-size="12.5" fill="#a9c4dc">
+    <tspan x="600">恢复也比论文慢：约 100 MiB 的沙箱恢复要 275–378 毫秒，原文 49 毫秒，差 5.6–7.7 倍</tspan>
+    <tspan x="600" dy="19">差的不是运行时性能，是恢复策略：全量读回 vs 按页惰性读入</tspan>
+  </text>
+</svg>

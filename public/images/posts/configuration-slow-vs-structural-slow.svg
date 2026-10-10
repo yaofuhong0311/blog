@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="640" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="csr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
+    <marker id="csb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">只有结构性的慢才是换掉组件的理由</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">同样是 2 倍差距，一种改配置就消失，另一种改配置消不掉</text>
+
+  <!-- 左列：经引擎建沙箱 -->
+  <rect x="50" y="92" width="466" height="364" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="283" y="118" text-anchor="middle" font-size="15.5" font-weight="700" fill="#b5544a">经引擎建沙箱</text>
+
+  <rect x="76" y="136" width="414" height="42" rx="9" fill="#f6ebe9"/>
+  <text x="283" y="161" text-anchor="middle" font-size="12.5" fill="#8c4a42">init 容器 <tspan font-family="monospace">resources</tspan> 字段为空</text>
+
+  <path d="M283,179 L283,190" stroke="#b5544a" stroke-width="2" marker-end="url(#csr)"/>
+
+  <rect x="76" y="192" width="414" height="46" rx="9" fill="#f6ebe9"/>
+  <text x="283" y="209" text-anchor="middle" font-size="12.5" fill="#8c4a42">
+    <tspan x="283">命名空间 <tspan font-family="monospace">LimitRange</tspan> 填上默认值</tspan>
+    <tspan x="283" dy="19">→ 2 核（<tspan font-family="monospace">requests</tspan> 随 <tspan font-family="monospace">limits</tspan> 一起填）</tspan>
+  </text>
+
+  <path d="M283,239 L283,250" stroke="#b5544a" stroke-width="2" marker-end="url(#csr)"/>
+
+  <rect x="76" y="252" width="414" height="46" rx="9" fill="#f6ebe9"/>
+  <text x="283" y="269" text-anchor="middle" font-size="12.5" fill="#8c4a42">
+    <tspan x="283">Pod 占位 = max(init 2 核, 主容器 0.5 核)</tspan>
+    <tspan x="283" dy="19" font-size="13" font-weight="700" fill="#b5544a">= 2 核</tspan>
+  </text>
+
+  <path d="M283,299 L283,310" stroke="#b5544a" stroke-width="2" marker-end="url(#csr)"/>
+
+  <rect x="76" y="312" width="414" height="40" rx="9" fill="#ffffff" stroke="#b5544a" stroke-width="1.8"/>
+  <text x="283" y="337" text-anchor="middle" font-size="13" font-weight="700" fill="#b5544a">同配额下并发峰值 <tspan font-size="16">27</tspan> 个</text>
+
+  <rect x="76" y="368" width="414" height="66" rx="10" fill="#b5544a"/>
+  <text x="283" y="398" text-anchor="middle" font-size="28" font-weight="700" fill="#ffffff">45.0 秒</text>
+  <text x="283" y="422" text-anchor="middle" font-size="12" fill="#f6ebe9">60 个沙箱就绪中位数</text>
+
+  <!-- 中间：倍数与门槛 -->
+  <text x="600" y="394" text-anchor="middle" font-size="25" font-weight="700" fill="#b5544a">差 2 倍</text>
+  <text x="600" y="418" text-anchor="middle" font-size="11.5" fill="#8c4a42">
+    <tspan x="600">预设的「快 30% 就绕开」</tspan>
+    <tspan x="600" dy="19">门槛达标了</tspan>
+  </text>
+
+  <!-- 右列：直接建 Pod -->
+  <rect x="684" y="92" width="466" height="364" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="917" y="118" text-anchor="middle" font-size="15.5" font-weight="700" fill="#24476b">直接建 Pod</text>
+
+  <rect x="710" y="136" width="414" height="42" rx="9" fill="#eef5fa"/>
+  <text x="917" y="161" text-anchor="middle" font-size="12.5" fill="#24476b">没有 init 容器</text>
+
+  <path d="M917,179 L917,190" stroke="#3a6491" stroke-width="2" marker-end="url(#csb)"/>
+
+  <rect x="710" y="192" width="414" height="46" rx="9" fill="#eef5fa"/>
+  <text x="917" y="219" text-anchor="middle" font-size="12.5" fill="#24476b">不触发默认值填充</text>
+
+  <path d="M917,239 L917,250" stroke="#3a6491" stroke-width="2" marker-end="url(#csb)"/>
+
+  <rect x="710" y="252" width="414" height="46" rx="9" fill="#eef5fa"/>
+  <text x="917" y="279" text-anchor="middle" font-size="12.5" fill="#24476b">Pod 占位 = 主容器 <tspan font-size="13" font-weight="700" fill="#3a6491">0.5 核</tspan></text>
+
+  <path d="M917,299 L917,310" stroke="#3a6491" stroke-width="2" marker-end="url(#csb)"/>
+
+  <rect x="710" y="312" width="414" height="40" rx="9" fill="#ffffff" stroke="#24476b" stroke-width="1.8"/>
+  <text x="917" y="337" text-anchor="middle" font-size="13" font-weight="700" fill="#24476b">同配额下并发峰值 <tspan font-size="16">53</tspan> 个</text>
+
+  <rect x="710" y="368" width="414" height="66" rx="10" fill="#24476b"/>
+  <text x="917" y="398" text-anchor="middle" font-size="28" font-weight="700" fill="#ffffff">22.6 秒</text>
+  <text x="917" y="422" text-anchor="middle" font-size="12" fill="#c3d6e6">60 个沙箱就绪中位数</text>
+
+  <!-- 过渡问句 -->
+  <text x="600" y="474" text-anchor="middle" font-size="13.5" font-weight="700" fill="#3a6491">门槛达标之后才是开始：这 2 倍属于哪一类慢？</text>
+
+  <!-- 底部结论横栏 -->
+  <rect x="50" y="490" width="1100" height="100" rx="12" fill="#24476b"/>
+  <line x1="600" y1="508" x2="600" y2="572" stroke="#5b88b0" stroke-width="1.5"/>
+
+  <text x="80" y="520" font-size="14.5" font-weight="700" fill="#ffffff">配置性的慢：改配置就没了</text>
+  <text x="80" y="546" font-size="12.5" fill="#c3d6e6">
+    <tspan x="80">→ 给 init 容器补上 <tspan font-family="monospace">resources</tspan> 后，两条路径差距 &lt; 5%</tspan>
+    <tspan x="80" dy="20">门槛达标了，但它不是换掉组件的理由</tspan>
+  </text>
+
+  <text x="630" y="520" font-size="14.5" font-weight="700" fill="#ffffff">结构性的慢：改配置消不掉</text>
+  <text x="630" y="546" font-size="12.5" fill="#c3d6e6">
+    <tspan x="630">→ 每个沙箱多 8.5 次 K8s 写请求</tspan>
+    <tspan x="630" dy="20">这才是换掉组件该拿出的理由</tspan>
+  </text>
+
+  <text x="600" y="618" text-anchor="middle" font-size="13" font-weight="700" fill="#3a6491">判据达标只是开始调查的理由，不是换掉组件的结论</text>
+</svg>
