@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="620" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="ik" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="ikr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">同一个键，两个调用方</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">幂等匹配的作用域得服务端自己划，不能全托给调用方给的那个字符串</text>
+
+  <!-- 左：改前 -->
+  <rect x="50" y="104" width="540" height="330" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="320" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#b5544a">摘要 = sha256(key)</text>
+
+  <rect x="82" y="150" width="212" height="46" rx="8" fill="#5b88b0"/>
+  <text x="188" y="169" text-anchor="middle" font-size="12" fill="#ffffff">alice 先到</text>
+  <text x="188" y="187" text-anchor="middle" font-size="11.5" font-family="monospace" fill="#dce9ff">key = nightly-eval</text>
+
+  <rect x="346" y="150" width="212" height="46" rx="8" fill="#5b88b0"/>
+  <text x="452" y="169" text-anchor="middle" font-size="12" fill="#ffffff">bob 后到</text>
+  <text x="452" y="187" text-anchor="middle" font-size="11.5" font-family="monospace" fill="#dce9ff">key = nightly-eval</text>
+
+  <path d="M188,198 L188,222" stroke="#3a6491" stroke-width="2" marker-end="url(#ik)"/>
+  <path d="M452,198 L452,222" stroke="#b5544a" stroke-width="2" marker-end="url(#ikr)"/>
+
+  <rect x="82" y="228" width="476" height="38" rx="8" fill="#f6ebe9"/>
+  <text x="320" y="252" text-anchor="middle" font-size="12.5" font-family="monospace" fill="#8c4a42">两边都算出 d1 —— 命中</text>
+
+  <path d="M320,268 L320,292" stroke="#b5544a" stroke-width="2" marker-end="url(#ikr)"/>
+
+  <rect x="82" y="298" width="476" height="52" rx="8" fill="#b5544a"/>
+  <text x="320" y="320" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">bob 拿到 201 和 alice 那个沙箱的 id</text>
+  <text x="320" y="340" text-anchor="middle" font-size="11.5" fill="#f0d9d6">exec 正常返回，文件读得到——只是读到的不是自己的</text>
+
+  <rect x="82" y="360" width="476" height="56" rx="8" fill="#f6ebe9"/>
+  <text x="320" y="382" text-anchor="middle" font-size="12" fill="#8c4a42">之后每条命令读写的是 alice 的四个目录</text>
+  <text x="320" y="402" text-anchor="middle" font-size="11.5" fill="#8c4a42">窗口：那个沙箱活着的全程、任意副本</text>
+
+  <!-- 右：改后 -->
+  <rect x="620" y="104" width="530" height="330" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="885" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#24476b">摘要 = sha256(作用域 | key)</text>
+
+  <rect x="652" y="150" width="212" height="46" rx="8" fill="#eef5fa"/>
+  <text x="758" y="172" text-anchor="middle" font-size="11.5" font-family="monospace" fill="#24476b">o5:alice|nightly-eval</text>
+  <text x="758" y="189" text-anchor="middle" font-size="11.5" fill="#3a6491">→ d1</text>
+
+  <rect x="906" y="150" width="212" height="46" rx="8" fill="#eef5fa"/>
+  <text x="1012" y="172" text-anchor="middle" font-size="11.5" font-family="monospace" fill="#24476b">o3:bob|nightly-eval</text>
+  <text x="1012" y="189" text-anchor="middle" font-size="11.5" fill="#3a6491">→ d2</text>
+
+  <text x="885" y="216" text-anchor="middle" font-size="12.5" font-weight="700" fill="#24476b">d1 ≠ d2，未命中，bob 新建自己的</text>
+
+  <text x="885" y="244" text-anchor="middle" font-size="12" fill="#6b87a3">长度前缀不能省：ab|cd 和 a|bcd 会拼成同一个串</text>
+
+  <rect x="652" y="256" width="466" height="76" rx="8" fill="#24476b"/>
+  <text x="885" y="278" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">认领前服务端自己再核一遍</text>
+  <text x="885" y="298" text-anchor="middle" font-size="11.5" fill="#a9c4dc">逐条比对沙箱上记的摘要和归属，对不上就当没查到</text>
+  <text x="885" y="318" text-anchor="middle" font-size="11.5" fill="#ffffff">保留键从调用方输入里剔掉，只能由服务端写</text>
+
+  <rect x="652" y="342" width="466" height="74" rx="8" fill="#f6ebe9"/>
+  <text x="885" y="364" text-anchor="middle" font-size="12" font-weight="700" fill="#8c4a42">为什么不能只信下游过滤</text>
+  <text x="885" y="384" text-anchor="middle" font-size="11.5" fill="#8c4a42">服务密钥全集群共用，不带过滤会返回所有人的沙箱</text>
+  <text x="885" y="404" text-anchor="middle" font-size="11.5" font-family="monospace" fill="#8c4a42">limit 不是上游认的参数名（应为 pageSize）</text>
+
+  <!-- 底部 -->
+  <rect x="50" y="450" width="1100" height="56" rx="12" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="600" y="474" text-anchor="middle" font-size="13" font-weight="700" fill="#3a6491">三处作用域必须用同一个摘要：进程内占位表 · 沙箱 metadata · 认领核对</text>
+  <text x="600" y="494" text-anchor="middle" font-size="12" fill="#6b87a3">第一稿只改了跨副本那条，同副本的占位表还在用原始 key——半截修复补在了次要的那条路上</text>
+
+  <rect x="50" y="520" width="1100" height="80" rx="12" fill="#24476b"/>
+  <text x="600" y="546" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">查不动的时候一律按没查到处理，继续新建</text>
+  <text x="600" y="570" text-anchor="middle" font-size="12" fill="#a9c4dc">
+    <tspan x="600">多建一个沙箱浪费 2 核 4G，认错一个是把别人的工作区交出去</tspan>
+    <tspan x="600" dy="19">两种错不对称，这一边故意往「多建」偏</tspan>
+  </text>
+</svg>

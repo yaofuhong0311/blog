@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="640" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="sf" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="sfr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">出错的地方和发现的地方，隔了多远</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">报错给一个位置，静默给一个症状——从症状倒推回去，中间隔着整条链路</text>
+
+  <!-- 静默路径 -->
+  <rect x="50" y="100" width="1100" height="190" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="76" y="126" font-size="15" font-weight="700" fill="#b5544a">静默：每一层都说可以</text>
+
+  <rect x="72" y="142" width="164" height="54" rx="9" fill="#5b88b0"/>
+  <text x="154" y="164" text-anchor="middle" font-size="12.5" fill="#ffffff">调用方填</text>
+  <text x="154" y="184" text-anchor="middle" font-size="13" font-family="monospace" font-weight="700" fill="#ffffff">cpu: 500M</text>
+
+  <path d="M236,169 L266,169" stroke="#3a6491" stroke-width="2" marker-end="url(#sf)"/>
+  <rect x="272" y="142" width="130" height="54" rx="9" fill="#eef5fa"/>
+  <text x="337" y="166" text-anchor="middle" font-size="12.5" fill="#24476b">入口校验</text>
+  <text x="337" y="186" text-anchor="middle" font-size="12" fill="#3a6491">放行</text>
+
+  <path d="M402,169 L432,169" stroke="#3a6491" stroke-width="2" marker-end="url(#sf)"/>
+  <rect x="438" y="142" width="150" height="54" rx="9" fill="#eef5fa"/>
+  <text x="513" y="166" text-anchor="middle" font-size="12.5" fill="#24476b">API server 格式校验</text>
+  <text x="513" y="186" text-anchor="middle" font-size="12" fill="#3a6491">放行</text>
+
+  <path d="M588,169 L618,169" stroke="#3a6491" stroke-width="2" marker-end="url(#sf)"/>
+  <rect x="624" y="142" width="150" height="54" rx="9" fill="#eef5fa"/>
+  <text x="699" y="166" text-anchor="middle" font-size="12.5" fill="#24476b">调度器</text>
+  <text x="699" y="186" text-anchor="middle" font-size="12" fill="#3a6491">不报错，找不到节点</text>
+
+  <path d="M774,169 L804,169" stroke="#b5544a" stroke-width="2" marker-end="url(#sfr)"/>
+  <rect x="810" y="142" width="316" height="54" rx="9" fill="#b5544a"/>
+  <text x="968" y="164" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">pod Pending，挂住 120 秒零响应</text>
+  <text x="968" y="184" text-anchor="middle" font-size="12" font-family="monospace" fill="#f0d9d6">req: 62500m / Insufficient cpu</text>
+
+  <!-- 回溯线 -->
+  <path d="M968,200 L968,238 L154,238 L154,202" stroke="#b5544a" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#sfr)"/>
+  <text x="560" y="232" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b5544a">症状只是「卡住了」——要依次排除网络、镜像、调度器水位、配额，才轮到那个字符串</text>
+  <text x="560" y="272" text-anchor="middle" font-size="12" fill="#8c4a42">小写 m 是毫，大写 M 是 SI 的兆。一个字母差 10⁹ 倍，值本身完全合法</text>
+
+  <!-- 显式拒绝 -->
+  <rect x="50" y="306" width="1100" height="90" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="76" y="332" font-size="15" font-weight="700" fill="#24476b">显式拒绝：出错点和发现点重合</text>
+  <rect x="72" y="344" width="164" height="40" rx="9" fill="#5b88b0"/>
+  <text x="154" y="369" text-anchor="middle" font-size="13" font-family="monospace" fill="#ffffff">cpu: 500M</text>
+  <path d="M236,364 L276,364" stroke="#3a6491" stroke-width="2" marker-end="url(#sf)"/>
+  <rect x="282" y="344" width="460" height="40" rx="9" fill="#24476b"/>
+  <text x="512" y="369" text-anchor="middle" font-size="12.5" fill="#ffffff">入口 422 拒绝：大写 M 是 SI 兆，上限 64 核 / 512Gi</text>
+  <text x="900" y="360" text-anchor="middle" font-size="12.5" fill="#3a6491">线上实测用大写 SI 量纲的 pod 是 0 个</text>
+  <text x="900" y="380" text-anchor="middle" font-size="12.5" fill="#6b87a3">这次改动对线上影响为零</text>
+
+  <!-- 另外四个场景 -->
+  <rect x="50" y="412" width="1100" height="148" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="600" y="438" text-anchor="middle" font-size="14" font-weight="700" fill="#3a6491">同一条判断在另外四个地方重复出现</text>
+  <g font-size="12">
+    <rect x="76" y="452" width="520" height="44" rx="8" fill="#f6ebe9"/>
+    <text x="94" y="470" fill="#8c4a42" font-weight="700">能力矩阵丢字段</text>
+    <text x="94" y="488" fill="#8c4a42">调用方传了参数，行为和没传一样</text>
+
+    <rect x="604" y="452" width="520" height="44" rx="8" fill="#f6ebe9"/>
+    <text x="622" y="470" fill="#8c4a42" font-weight="700">query 参数拼错</text>
+    <text x="622" y="488" fill="#8c4a42">筛选条件被丢掉，拿到全量数据还以为在筛</text>
+
+    <rect x="76" y="504" width="520" height="44" rx="8" fill="#f6ebe9"/>
+    <text x="94" y="522" fill="#8c4a42" font-weight="700">Map 列放错</text>
+    <text x="94" y="540" fill="#8c4a42">取到空值，过滤永不命中，查询返回空结果</text>
+
+    <rect x="604" y="504" width="520" height="44" rx="8" fill="#f6ebe9"/>
+    <text x="622" y="522" fill="#8c4a42" font-weight="700">枚举认不出就透传</text>
+    <text x="622" y="540" fill="#8c4a42">跑错模型，用户不知道实际跑的是哪个</text>
+  </g>
+
+  <rect x="50" y="576" width="1100" height="48" rx="12" fill="#24476b"/>
+  <text x="600" y="606" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">错了不报错、只是数字不对的约束，必须由代码固定——靠「调用方记得」一定会漏，漏了还没人知道</text>
+</svg>
