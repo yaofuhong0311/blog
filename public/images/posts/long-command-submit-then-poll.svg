@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="600" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="lcpBlue" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="lcpRed" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">同步等长命令，等的是连接不是结果</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">连接断了不代表命令断了：要改的不是重连策略，是把结果存下来让人凭编号来取</text>
+
+  <!-- 左：同步等待（现状） -->
+  <rect x="50" y="100" width="530" height="360" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="78" y="128" font-size="15" font-weight="700" fill="#b5544a">同步等待（现状）</text>
+
+  <text x="316" y="150" text-anchor="middle" font-size="12" fill="#6b87a3">SSE 长连接</text>
+
+  <rect x="78" y="158" width="112" height="56" rx="10" fill="#5b88b0"/>
+  <text x="134" y="192" text-anchor="middle" font-size="13" fill="#ffffff">调用方</text>
+
+  <path d="M190,186 L290,186" stroke="#3a6491" stroke-width="2"/>
+  <path d="M290,186 L342,186" stroke="#b5544a" stroke-width="2.5" stroke-dasharray="5 5"/>
+  <line x1="300" y1="171" x2="332" y2="201" stroke="#b5544a" stroke-width="3"/>
+  <line x1="332" y1="171" x2="300" y2="201" stroke="#b5544a" stroke-width="3"/>
+  <path d="M342,186 L434,186" stroke="#b5544a" stroke-width="2" marker-end="url(#lcpRed)"/>
+  <text x="316" y="220" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b5544a">连接断了</text>
+
+  <rect x="440" y="158" width="112" height="56" rx="10" fill="#b5544a"/>
+  <text x="496" y="192" text-anchor="middle" font-size="13" fill="#ffffff">沙箱执行命令</text>
+
+  <text x="134" y="236" text-anchor="middle" font-size="11.5" fill="#8c4a42">一直挂着，等不到</text>
+  <text x="496" y="236" text-anchor="middle" font-size="11.5" fill="#8c4a42">命令其实已经跑完</text>
+
+  <rect x="78" y="256" width="474" height="96" rx="12" fill="#f6ebe9" stroke="#b5544a" stroke-width="1.2"/>
+  <text x="315" y="282" text-anchor="middle" font-size="12" fill="#8c4a42">长连接中途断开</text>
+  <text x="315" y="318" text-anchor="middle" font-size="30" font-weight="700" fill="#b5544a">72 次里 17 次</text>
+  <text x="315" y="340" text-anchor="middle" font-size="13" fill="#8c4a42">占 23.6%</text>
+
+  <rect x="78" y="368" width="474" height="60" rx="10" fill="#f6ebe9"/>
+  <text x="315" y="394" text-anchor="middle" font-size="13" font-weight="700" fill="#8c4a42">连接断了 ≠ 命令断了</text>
+  <text x="315" y="414" text-anchor="middle" font-size="11.5" fill="#8c4a42">沙箱那边跑完了，调用方这头什么都收不到</text>
+
+  <!-- 右：提交后轮询（改后） -->
+  <rect x="620" y="100" width="530" height="360" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="648" y="128" font-size="15" font-weight="700" fill="#24476b">提交后轮询（改后）</text>
+
+  <rect x="648" y="152" width="140" height="66" rx="10" fill="#24476b"/>
+  <text x="718" y="180" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">1 提交命令</text>
+  <text x="718" y="200" text-anchor="middle" font-size="11.5" fill="#eef5fa">拿到命令编号</text>
+
+  <path d="M790,185 L808,185" stroke="#3a6491" stroke-width="2" marker-end="url(#lcpBlue)"/>
+
+  <rect x="816" y="152" width="140" height="66" rx="10" fill="#5b88b0"/>
+  <text x="886" y="180" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">2 后台执行</text>
+  <text x="886" y="200" text-anchor="middle" font-size="11.5" fill="#eef5fa">不依赖这条连接</text>
+
+  <path d="M958,185 L976,185" stroke="#3a6491" stroke-width="2" marker-end="url(#lcpBlue)"/>
+
+  <rect x="984" y="152" width="140" height="66" rx="10" fill="#24476b"/>
+  <text x="1054" y="180" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">3 查状态、读输出</text>
+  <text x="1054" y="200" text-anchor="middle" font-size="11.5" fill="#eef5fa">凭编号、按游标</text>
+
+  <text x="648" y="244" font-size="11.5" fill="#6b87a3">输出流</text>
+  <text x="880" y="226" text-anchor="middle" font-size="11.5" font-weight="700" fill="#24476b">游标</text>
+  <path d="M872,232 L888,232 L880,244 z" fill="#24476b"/>
+
+  <rect x="648" y="254" width="476" height="40" rx="8" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.4"/>
+  <line x1="880" y1="246" x2="880" y2="302" stroke="#24476b" stroke-width="3"/>
+  <text x="762" y="278" text-anchor="middle" font-size="11.5" fill="#6b87a3">已经读过的输出</text>
+  <text x="1004" y="278" text-anchor="middle" font-size="11.5" fill="#6b87a3">还没读的输出</text>
+
+  <text x="886" y="322" text-anchor="middle" font-size="12" fill="#24476b">断线后从这里接着读，不用重跑</text>
+
+  <rect x="648" y="368" width="476" height="60" rx="10" fill="#ffffff" stroke="#24476b" stroke-width="1.8"/>
+  <text x="886" y="394" text-anchor="middle" font-size="13" font-weight="700" fill="#24476b">同一次提交只执行一次（幂等）</text>
+  <text x="886" y="414" text-anchor="middle" font-size="11.5" fill="#6b87a3">重连、重试都认同一个命令编号，不会跑出第二条命令</text>
+
+  <!-- 底部结论 -->
+  <rect x="50" y="482" width="1100" height="78" rx="12" fill="#24476b"/>
+  <text x="600" y="512" text-anchor="middle" font-size="14.5" font-weight="700" fill="#ffffff">超时由沙箱侧强制执行，不靠调用方等</text>
+  <text x="600" y="536" text-anchor="middle" font-size="12.5" fill="#eef5fa">调用方可能早就不在了</text>
+</svg>

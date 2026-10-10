@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="640" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="nz-b" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="nz-r" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">以为有网络隔离的集群，实查 0 条规则</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">没有报错不等于有防护 —— 0 条策略，和「策略写对了」在外部看完全一样</text>
+
+  <!-- 上段：三条进入沙箱的路径 -->
+  <rect x="50" y="92" width="1100" height="188" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.6"/>
+  <text x="76" y="117" font-size="15" font-weight="700" fill="#24476b">三条进入沙箱的路径，策略只管得住其中一条</text>
+  <text x="1124" y="117" text-anchor="end" font-size="11.5" fill="#6b87a3">本段先假设策略确实存在，实查结果见下一段</text>
+
+  <!-- 三个来源 -->
+  <rect x="72" y="133" width="176" height="38" rx="9" fill="#5b88b0"/>
+  <text x="160" y="157" text-anchor="middle" font-size="12.5" fill="#ffffff">① 普通 Pod</text>
+
+  <rect x="72" y="181" width="176" height="38" rx="9" fill="#b5544a"/>
+  <text x="160" y="205" text-anchor="middle" font-size="12.5" fill="#ffffff">② 同机宿主程序</text>
+
+  <rect x="72" y="229" width="176" height="38" rx="9" fill="#b5544a"/>
+  <text x="160" y="253" text-anchor="middle" font-size="12.5" fill="#ffffff">③ <tspan font-family="monospace">hostNetwork</tspan> 的 Pod</text>
+
+  <!-- NetworkPolicy 执行点 -->
+  <rect x="302" y="127" width="32" height="146" rx="8" fill="#eef5fa" stroke="#3a6491" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text transform="translate(318,200) rotate(-90)" text-anchor="middle" font-size="11.5" fill="#3a6491">NetworkPolicy 执行点</text>
+
+  <!-- 沙箱 -->
+  <rect x="430" y="148" width="176" height="104" rx="12" fill="#24476b"/>
+  <text x="518" y="194" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">沙箱 Pod</text>
+  <text x="518" y="215" text-anchor="middle" font-size="11.5" fill="#a9c4dc"><tspan font-family="monospace">execd</tspan> 端口在监听</text>
+
+  <!-- ① 被拦 -->
+  <path d="M248,152 L300,152" stroke="#3a6491" stroke-width="2.2" marker-end="url(#nz-b)"/>
+  <line x1="310" y1="144" x2="326" y2="160" stroke="#24476b" stroke-width="3"/>
+  <line x1="326" y1="144" x2="310" y2="160" stroke="#24476b" stroke-width="3"/>
+  <text x="344" y="156" font-size="11.5" font-weight="700" fill="#24476b">拦下</text>
+
+  <!-- ②③ 穿过 -->
+  <path d="M248,200 L426,200" stroke="#b5544a" stroke-width="2.2" marker-end="url(#nz-r)"/>
+  <text x="382" y="193" text-anchor="middle" font-size="11" font-weight="700" fill="#b5544a">穿过</text>
+
+  <path d="M248,248 L426,248" stroke="#b5544a" stroke-width="2.2" marker-end="url(#nz-r)"/>
+  <text x="382" y="241" text-anchor="middle" font-size="11" font-weight="700" fill="#b5544a">穿过</text>
+
+  <!-- 旁注 -->
+  <text x="626" y="156" font-size="12" fill="#6b87a3">走 Pod 网络接口，策略在这里生效</text>
+  <text x="626" y="195" font-size="12" fill="#8c4a42">
+    <tspan x="626">NetworkPolicy 由 CNI 在 Pod 网络数据面执行；</tspan>
+    <tspan x="626" dy="19">宿主访问本机 Pod 走本地路由，不经过那个执行点</tspan>
+  </text>
+  <text x="626" y="252" font-size="12" fill="#8c4a42">共用宿主网络命名空间，按 Pod 选择器写的策略选不中它</text>
+
+  <!-- 中段：实查结果 -->
+  <rect x="50" y="290" width="1100" height="106" rx="14" fill="#f6ebe9" stroke="#b5544a" stroke-width="2"/>
+  <text x="76" y="322" font-size="13" font-weight="700" fill="#8c4a42">全集群实查</text>
+  <text x="76" y="366" font-size="26" font-weight="700" fill="#b5544a">0 条 NetworkPolicy</text>
+
+  <line x1="372" y1="308" x2="372" y2="378" stroke="#d8c2bf" stroke-width="1.5"/>
+
+  <text x="398" y="322" font-size="12.5" font-weight="700" fill="#8c4a42">默认语义是放行 —— 没被任何策略选中的 Pod，进出都不受限</text>
+  <text x="398" y="341" font-size="12" fill="#8c4a42">这和「策略写对了、流量恰好被放行」在外部观察上完全一样，缺口不会自己报出来</text>
+
+  <rect x="398" y="354" width="430" height="30" rx="8" fill="#ffffff" stroke="#d8c2bf" stroke-width="1.4"/>
+  <text x="414" y="374" font-size="12.5" fill="#8c4a42">同一次核查：单机 Pod 上限，会议纪要写 <tspan font-weight="700" fill="#b5544a">150</tspan>，实查 <tspan font-weight="700" fill="#b5544a">110</tspan></text>
+
+  <!-- 下段：补救的连带代价 -->
+  <rect x="50" y="406" width="1100" height="150" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="76" y="432" font-size="15" font-weight="700" fill="#24476b">补上这道防护，连带代价立刻出现</text>
+
+  <rect x="72" y="450" width="200" height="48" rx="10" fill="#5b88b0"/>
+  <text x="172" y="472" text-anchor="middle" font-size="12.5" fill="#ffffff">加机器防火墙</text>
+  <text x="172" y="490" text-anchor="middle" font-size="11" fill="#dce9ff">挡住宿主连 <tspan font-family="monospace">execd</tspan> 端口</text>
+
+  <path d="M272,474 L298,474" stroke="#3a6491" stroke-width="2" marker-end="url(#nz-b)"/>
+
+  <rect x="302" y="450" width="240" height="48" rx="10" fill="#ffffff" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="422" y="472" text-anchor="middle" font-size="12.5" fill="#24476b">kubelet 的 TCP 就绪探针</text>
+  <text x="422" y="490" text-anchor="middle" font-size="11" fill="#6b87a3">也在被挡住的那一侧</text>
+
+  <path d="M542,474 L568,474" stroke="#3a6491" stroke-width="2" marker-end="url(#nz-b)"/>
+
+  <rect x="572" y="450" width="172" height="48" rx="10" fill="#f6ebe9" stroke="#b5544a" stroke-width="1.8"/>
+  <text x="658" y="480" text-anchor="middle" font-size="13" font-weight="700" fill="#b5544a">就绪判定过不了</text>
+
+  <path d="M744,474 L770,474" stroke="#3a6491" stroke-width="2" marker-end="url(#nz-b)"/>
+
+  <rect x="774" y="450" width="354" height="48" rx="10" fill="#24476b"/>
+  <text x="951" y="480" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">只能换成 <tspan font-family="monospace">exec probe</tspan></text>
+
+  <text x="76" y="520" font-size="12" fill="#6b87a3">exec probe 走 API Server 到 kubelet，在容器里 fork 一个进程，不经 Pod 网络接口，所以不吃这条防火墙规则</text>
+  <text x="76" y="539" font-size="12" fill="#8c4a42">但这不是等价替换：TCP 探针验的是「端口在监听」，exec 验的是你写的那条命令 —— 判据要重新定</text>
+
+  <!-- 底部结论 -->
+  <rect x="50" y="566" width="1100" height="62" rx="12" fill="#24476b"/>
+  <text x="600" y="593" text-anchor="middle" font-size="14.5" font-weight="700" fill="#ffffff">安全配置没有「默认生效」这回事</text>
+  <text x="600" y="615" text-anchor="middle" font-size="12.5" fill="#a9c4dc">堵一条路，走这条路的所有流量都会停 —— 包括控制面自己派出去的那一份</text>
+</svg>

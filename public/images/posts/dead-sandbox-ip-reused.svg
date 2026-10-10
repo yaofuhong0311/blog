@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="620" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="dsipA" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="dsipR" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">沙箱死了，它的 IP 还在为别人服务</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">IP 不是沙箱的身份，只是机器临时借出去的号码牌——上一个还回去，下一个就拿到了</text>
+
+  <!-- 上：事故发生 -->
+  <rect x="50" y="92" width="1100" height="192" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="76" y="118" font-size="15" font-weight="700" fill="#b5544a">事故发生</text>
+  <text x="166" y="118" font-size="12.5" fill="#8c4a42">同一台机器上，IP 是会被回收、再发给下一个沙箱的</text>
+
+  <!-- 1 -->
+  <rect x="72" y="140" width="222" height="78" rx="10" fill="#ffffff" stroke="#5b88b0" stroke-width="1.6"/>
+  <circle cx="96" cy="140" r="12" fill="#5b88b0"/>
+  <text x="96" y="144.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">1</text>
+  <text x="183" y="170" text-anchor="middle" font-size="13" fill="#24476b">沙箱 A 运行中</text>
+  <text x="183" y="189" text-anchor="middle" font-size="12" font-family="monospace" fill="#3a6491">持有 IP-1</text>
+
+  <path d="M296,179 L344,179" stroke="#3a6491" stroke-width="2" marker-end="url(#dsipA)"/>
+
+  <!-- 2 -->
+  <rect x="350" y="140" width="222" height="78" rx="10" fill="#f6ebe9" stroke="#d8c2bf" stroke-width="1.6"/>
+  <circle cx="374" cy="140" r="12" fill="#b5544a"/>
+  <text x="374" y="144.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">2</text>
+  <text x="461" y="170" text-anchor="middle" font-size="13" fill="#8c4a42">沙箱 A 死亡</text>
+  <text x="461" y="189" text-anchor="middle" font-size="12" font-family="monospace" fill="#8c4a42">IP-1 被释放</text>
+
+  <path d="M574,179 L622,179" stroke="#3a6491" stroke-width="2" marker-end="url(#dsipA)"/>
+
+  <!-- 3 -->
+  <rect x="628" y="140" width="222" height="78" rx="10" fill="#f6ebe9" stroke="#d8c2bf" stroke-width="1.6"/>
+  <circle cx="652" cy="140" r="12" fill="#b5544a"/>
+  <text x="652" y="144.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">3</text>
+  <text x="739" y="170" text-anchor="middle" font-size="13" fill="#8c4a42">同机新建沙箱 B</text>
+  <text x="739" y="189" text-anchor="middle" font-size="12" font-family="monospace" fill="#8c4a42">拿到同一个 IP-1</text>
+
+  <path d="M852,179 L900,179" stroke="#b5544a" stroke-width="2.5" marker-end="url(#dsipR)"/>
+
+  <!-- 4 -->
+  <rect x="906" y="140" width="222" height="78" rx="10" fill="#b5544a"/>
+  <circle cx="930" cy="140" r="12" fill="#8c4a42"/>
+  <text x="930" y="144.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">4</text>
+  <text x="1017" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">发给 A 的请求转进了 B</text>
+  <text x="1017" y="189" text-anchor="middle" font-size="11.5" fill="#f0d9d6">请求进了别人的沙箱</text>
+
+  <rect x="72" y="230" width="1056" height="34" rx="8" fill="#f6ebe9"/>
+  <text x="600" y="252" text-anchor="middle" font-size="12.5" fill="#8c4a42">转发前只查了「沙箱还活着」——而 B 确实活着</text>
+
+  <!-- 下：修法 -->
+  <rect x="50" y="300" width="1100" height="214" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="76" y="326" font-size="15" font-weight="700" fill="#24476b">修法：转发前核对三样</text>
+  <text x="246" y="326" font-size="12.5" fill="#6b87a3">三者都对，才认为对面还是当初那个沙箱</text>
+
+  <rect x="72" y="344" width="228" height="70" rx="10" fill="#eef5fa" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="186" y="374" text-anchor="middle" font-size="13.5" font-weight="700" font-family="monospace" fill="#24476b">Pod 名</text>
+  <text x="186" y="394" text-anchor="middle" font-size="11.5" fill="#6b87a3">还是不是当初那个名字</text>
+
+  <rect x="320" y="344" width="228" height="70" rx="10" fill="#eef5fa" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="434" y="374" text-anchor="middle" font-size="13.5" font-weight="700" font-family="monospace" fill="#24476b">uid</text>
+  <text x="434" y="394" text-anchor="middle" font-size="11.5" fill="#6b87a3">同名也可能是重建出来的新 Pod</text>
+
+  <rect x="568" y="344" width="228" height="70" rx="10" fill="#eef5fa" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="682" y="374" text-anchor="middle" font-size="13.5" font-weight="700" font-family="monospace" fill="#24476b">IP</text>
+  <text x="682" y="394" text-anchor="middle" font-size="11.5" fill="#6b87a3">记下的 IP 现在还属于它吗</text>
+
+  <path d="M186,414 L186,434" stroke="#3a6491" stroke-width="2"/>
+  <path d="M434,414 L434,434" stroke="#3a6491" stroke-width="2"/>
+  <path d="M682,414 L682,434" stroke="#3a6491" stroke-width="2"/>
+  <path d="M186,434 L838,434" stroke="#3a6491" stroke-width="2" marker-end="url(#dsipA)"/>
+  <text x="762" y="426" text-anchor="middle" font-size="11.5" fill="#3a6491">三者全对才放行</text>
+
+  <rect x="846" y="406" width="282" height="56" rx="10" fill="#24476b"/>
+  <text x="987" y="429" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">转发</text>
+  <text x="987" y="449" text-anchor="middle" font-size="11.5" fill="#a9c4dc">任一项对不上就不转</text>
+
+  <rect x="72" y="466" width="1056" height="34" rx="8" fill="#eef5fa"/>
+  <text x="600" y="488" text-anchor="middle" font-size="12.5" fill="#6b87a3">引擎（含上游新版）仍按记下的 IP 转发，这道校验是再确认一次目标还是原来那个 Pod</text>
+
+  <!-- 底部结论 -->
+  <rect x="50" y="530" width="1100" height="70" rx="12" fill="#24476b"/>
+  <line x1="600" y1="548" x2="600" y2="582" stroke="#4c6f93" stroke-width="1.5"/>
+  <text x="325" y="572" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">「活着」和「是同一个」是两个判断</text>
+  <text x="875" y="559" text-anchor="middle" font-size="12.5" fill="#ffffff">这条按机制推断，没实测</text>
+  <text x="875" y="580" text-anchor="middle" font-size="11.5" fill="#a9c4dc">群里也没人提过，但这类事故必须挡住，所以主动加</text>
+</svg>

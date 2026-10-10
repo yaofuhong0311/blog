@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="640" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="cabA" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="cabR" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b5544a"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">客户端放弃不等于服务端回滚</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">服务端从不保证「你放弃了我就不建」，唯一可靠的收尾是建完之后再删一次</text>
+
+  <!-- 上段：错位的两条线 + 比例 -->
+  <rect x="50" y="90" width="1100" height="176" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="76" y="116" font-size="15" font-weight="700" fill="#b5544a">客户端那条线停了，服务端那条线没停</text>
+
+  <!-- 断开时刻的竖线 -->
+  <text x="372" y="132" text-anchor="middle" font-size="11" fill="#b5544a">断开这一刻</text>
+  <line x1="372" y1="138" x2="372" y2="252" stroke="#b5544a" stroke-width="1.6" stroke-dasharray="4 4"/>
+
+  <!-- 客户端泳道 -->
+  <text x="76" y="171" font-size="11.5" fill="#6b87a3">客户端</text>
+  <rect x="116" y="146" width="84" height="40" rx="10" fill="#5b88b0"/>
+  <text x="158" y="171" text-anchor="middle" font-size="12.5" fill="#ffffff">发请求</text>
+  <path d="M200,166 L258,166" stroke="#3a6491" stroke-width="2" marker-end="url(#cabA)"/>
+  <text x="232" y="160" text-anchor="middle" font-size="10.5" fill="#6b87a3">等 50 毫秒</text>
+  <rect x="270" y="146" width="94" height="40" rx="10" fill="#b5544a"/>
+  <text x="317" y="171" text-anchor="middle" font-size="12.5" fill="#ffffff">放弃断开</text>
+  <text x="382" y="171" font-size="11.5" fill="#6b87a3">客户端以为「没建成」</text>
+
+  <!-- 服务端泳道 -->
+  <text x="76" y="227" font-size="11.5" fill="#6b87a3">服务端</text>
+  <rect x="116" y="202" width="84" height="40" rx="10" fill="#ffffff" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="158" y="227" text-anchor="middle" font-size="12" fill="#24476b">收到请求</text>
+  <path d="M200,222 L258,222" stroke="#3a6491" stroke-width="2" marker-end="url(#cabA)"/>
+  <rect x="270" y="202" width="94" height="40" rx="10" fill="#ffffff" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="317" y="227" text-anchor="middle" font-size="12" fill="#24476b">继续处理</text>
+  <path d="M364,222 L396,222" stroke="#b5544a" stroke-width="2" marker-end="url(#cabR)"/>
+  <rect x="402" y="202" width="100" height="40" rx="10" fill="#8c4a42"/>
+  <text x="452" y="227" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">沙箱建成</text>
+  <text x="514" y="227" font-size="11.5" fill="#8c4a42">资源已占住</text>
+
+  <!-- 比例面板 -->
+  <rect x="616" y="134" width="516" height="120" rx="12" fill="#f6ebe9" stroke="#d8c2bf" stroke-width="1.5"/>
+  <line x1="874" y1="152" x2="874" y2="222" stroke="#d8c2bf" stroke-width="1.5"/>
+
+  <text x="745" y="182" text-anchor="middle" font-size="38" font-weight="700" fill="#b5544a">16.4%</text>
+  <text x="745" y="202" text-anchor="middle" font-size="11" fill="#8c4a42">
+    <tspan x="745">经引擎建的放弃请求里</tspan>
+    <tspan x="745" dy="16">服务端照样建出了沙箱</tspan>
+  </text>
+
+  <text x="1003" y="180" text-anchor="middle" font-size="28" font-weight="700" fill="#8c4a42">25.5%</text>
+  <text x="1003" y="200" text-anchor="middle" font-size="11" fill="#8c4a42">
+    <tspan x="1003">直接建 Pod 时</tspan>
+    <tspan x="1003" dy="16">同样是放弃后仍建成</tspan>
+  </text>
+
+  <rect x="628" y="224" width="492" height="24" rx="8" fill="#ffffff"/>
+  <text x="874" y="240" text-anchor="middle" font-size="11.5" fill="#8c4a42">差的这 9 个百分点 = 多一跳就多一个可取消窗口</text>
+
+  <!-- 中段：三种失效 -->
+  <text x="600" y="292" text-anchor="middle" font-size="15" font-weight="700" fill="#b5544a">三种失效，最后都留下一个没人认领的沙箱</text>
+
+  <rect x="50" y="302" width="356" height="90" rx="12" fill="#ffffff" stroke="#b5544a" stroke-width="1.8"/>
+  <circle cx="80" cy="330" r="13" fill="#b5544a"/>
+  <text x="80" y="335" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">1</text>
+  <text x="102" y="329" font-size="13.5" font-weight="700" fill="#b5544a">客户端放弃了 → 服务端照建</text>
+  <text x="102" y="353" font-size="11.5" fill="#8c4a42">
+    <tspan x="102">断开只是关掉连接，服务端那条</tspan>
+    <tspan x="102" dy="17">流程没有任何东西会去中止它</tspan>
+  </text>
+
+  <rect x="422" y="302" width="356" height="90" rx="12" fill="#ffffff" stroke="#b5544a" stroke-width="1.8"/>
+  <circle cx="452" cy="330" r="13" fill="#b5544a"/>
+  <text x="452" y="335" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">2</text>
+  <text x="474" y="329" font-size="13.5" font-weight="700" fill="#b5544a">引擎返回了报错 → 沙箱已建成</text>
+  <text x="474" y="353" font-size="11.5" fill="#8c4a42">
+    <tspan x="474">返回码写的是失败，实际可能建成了</tspan>
+    <tspan x="474" dy="17">返回码不能当作「没建成」的证据</tspan>
+  </text>
+
+  <rect x="794" y="302" width="356" height="90" rx="12" fill="#ffffff" stroke="#b5544a" stroke-width="1.8"/>
+  <circle cx="824" cy="330" r="13" fill="#b5544a"/>
+  <text x="824" y="335" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">3</text>
+  <text x="846" y="329" font-size="13.5" font-weight="700" fill="#b5544a">没人删 → 一晚多出 49 个孤儿沙箱</text>
+  <text x="846" y="353" font-size="11.5" fill="#8c4a42">
+    <tspan x="846">这是现网一晚实际数出来的数字</tspan>
+    <tspan x="846" dy="17">每一个都占着配额和算力</tspan>
+  </text>
+
+  <!-- 下段：补偿机制 -->
+  <text x="600" y="418" text-anchor="middle" font-size="15" font-weight="700" fill="#24476b">补偿机制：不指望取消生效，默认它没生效，事后再删一次</text>
+
+  <rect x="50" y="428" width="356" height="64" rx="12" fill="#eef5fa" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="228" y="454" text-anchor="middle" font-size="13.5" font-weight="700" fill="#24476b">调用方放弃后补删</text>
+  <text x="228" y="476" text-anchor="middle" font-size="11.5" fill="#6b87a3">连接一断，就去删掉可能已经建出来的</text>
+
+  <rect x="422" y="428" width="356" height="64" rx="12" fill="#eef5fa" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="600" y="454" text-anchor="middle" font-size="13.5" font-weight="700" fill="#24476b">定期对照应有的沙箱</text>
+  <text x="600" y="476" text-anchor="middle" font-size="11.5" fill="#6b87a3">多出来的一律删掉，不问它是怎么来的</text>
+
+  <rect x="794" y="428" width="356" height="64" rx="12" fill="#eef5fa" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="972" y="454" text-anchor="middle" font-size="13.5" font-weight="700" fill="#24476b">报错也按「可能已建成」处理</text>
+  <text x="972" y="476" text-anchor="middle" font-size="11.5" fill="#6b87a3">引擎回了错，照样走一次删除</text>
+
+  <rect x="50" y="502" width="1100" height="34" rx="10" fill="#ffffff" stroke="#24476b" stroke-width="1.8"/>
+  <text x="600" y="524" text-anchor="middle" font-size="13" fill="#24476b">再加一条：同一个请求编号只建一次（幂等键）—— 补删和重试撞到一起，也不会多建出来</text>
+
+  <!-- 底部结论 -->
+  <rect x="50" y="550" width="1100" height="68" rx="12" fill="#24476b"/>
+  <text x="600" y="578" text-anchor="middle" font-size="14.5" font-weight="700" fill="#ffffff">取消请求和回收资源，是两件事</text>
+  <text x="600" y="601" text-anchor="middle" font-size="12.5" fill="#a9c4dc">不做补偿就会漏：放弃的、报错的、没人删的，最后都变成占着资源的孤儿</text>
+</svg>
