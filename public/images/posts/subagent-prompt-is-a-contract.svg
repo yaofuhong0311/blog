@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="600" rx="20" fill="#f2f6fa"/>
+  <defs><marker id="sp" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker></defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">每条禁令都得配一份补偿</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">只拿掉信息不补事实，它不会停下来问，会自己编一个意图再照着干</text>
+
+  <!-- 三组对照 -->
+  <g>
+    <rect x="60" y="104" width="1080" height="112" rx="12" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+    <rect x="86" y="124" width="400" height="72" rx="9" fill="#f6ebe9"/>
+    <text x="106" y="148" font-size="13" font-weight="700" fill="#b5544a">禁令　切断开发过程</text>
+    <text x="106" y="170" font-size="11.5" fill="#8c4a42">「你对这段代码的开发过程一无所知——这是有意安排的」</text>
+    <text x="106" y="188" font-size="11.5" fill="#8c4a42">77 条这样开场</text>
+    <path d="M490,160 L540,160" stroke="#3a6491" stroke-width="2" marker-end="url(#sp)"/>
+    <rect x="546" y="124" width="568" height="72" rx="9" fill="#eef5fa"/>
+    <text x="566" y="148" font-size="13" font-weight="700" fill="#24476b">补偿　给客观事实</text>
+    <text x="566" y="170" font-size="11.5" fill="#3a6491">68 条给 commit 区间或 diff · 61 条点名先读哪几份文档</text>
+    <text x="566" y="188" font-size="11.5" fill="#3a6491">35 条写明「违反仓库明文约定按 P1 起步」</text>
+  </g>
+
+  <g>
+    <rect x="60" y="228" width="1080" height="112" rx="12" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+    <rect x="86" y="248" width="400" height="72" rx="9" fill="#f6ebe9"/>
+    <text x="106" y="272" font-size="13" font-weight="700" fill="#b5544a">禁令　不许读实现</text>
+    <text x="106" y="294" font-size="11.5" fill="#8c4a42">「你看不到、也不要去读实现代码」</text>
+    <text x="106" y="312" font-size="11.5" fill="#8c4a42">37 条，其中 32 条把理由写进了 prompt</text>
+    <path d="M490,284 L540,284" stroke="#3a6491" stroke-width="2" marker-end="url(#sp)"/>
+    <rect x="546" y="248" width="568" height="72" rx="9" fill="#24476b"/>
+    <text x="566" y="272" font-size="13" font-weight="700" fill="#ffffff">补偿　手写契约</text>
+    <text x="566" y="294" font-size="11.5" fill="#a9c4dc">黑盒类指令里，契约占全文篇幅的中位数是 92%</text>
+    <text x="566" y="312" font-size="11.5" fill="#ffffff">任务描述只剩开头两三句</text>
+  </g>
+
+  <g>
+    <rect x="60" y="352" width="1080" height="112" rx="12" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+    <rect x="86" y="372" width="400" height="72" rx="9" fill="#f6ebe9"/>
+    <text x="106" y="396" font-size="13" font-weight="700" fill="#b5544a">禁令　只许改这些文件</text>
+    <text x="106" y="418" font-size="11.5" fill="#8c4a42">4 条修测试的指令，禁止改其他任何文件</text>
+    <path d="M490,408 L540,408" stroke="#3a6491" stroke-width="2" marker-end="url(#sp)"/>
+    <rect x="546" y="372" width="568" height="72" rx="9" fill="#eef5fa"/>
+    <text x="566" y="396" font-size="13" font-weight="700" fill="#24476b">补偿　修法原则 + 留出口</text>
+    <text x="566" y="416" font-size="11.5" fill="#3a6491">「修测试对齐现行实现，不是改业务代码过测试」</text>
+    <text x="566" y="434" font-size="11.5" fill="#3a6491">判断是业务真 bug 时，单独列出证据，不要改</text>
+  </g>
+
+  <!-- 反面 -->
+  <rect x="60" y="476" width="530" height="96" rx="12" fill="#f6ebe9" stroke="#b5544a" stroke-width="2"/>
+  <text x="325" y="500" text-anchor="middle" font-size="13.5" font-weight="700" fill="#b5544a">补偿写错了，禁令会把错误原样放大</text>
+  <text x="325" y="524" text-anchor="middle" font-size="11.5" fill="#8c4a42">
+    <tspan x="325">契约初稿写「SSE 共 7 种事件」，实际 14 种。</tspan>
+    <tspan x="325" dy="18">拿它派黑盒设计员，会推出一张自洽、完整、而且错的清单——</tspan>
+    <tspan x="325" dy="18">因为我禁止了它去看实现，纠错的通道被一起删掉了</tspan>
+  </text>
+
+  <rect x="610" y="476" width="530" height="96" rx="12" fill="#24476b"/>
+  <text x="875" y="500" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">这套写法不是每条指令都要用</text>
+  <text x="875" y="524" text-anchor="middle" font-size="11.5" fill="#a9c4dc">
+    <tspan x="875">424 条里有 227 条一条禁令都没有——取数、转格式、按清单提取事实，</tspan>
+    <tspan x="875" dy="18">交付物对不对我一眼看得出来。</tspan>
+    <tspan x="875" dy="18" fill="#ffffff">值得写禁令的是：交付物是一个判断，而我没法一眼验收它</tspan>
+  </text>
+</svg>

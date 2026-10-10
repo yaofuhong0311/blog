@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="560" rx="20" fill="#f2f6fa"/>
+  <defs><marker id="cr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker></defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">作者读不出文档的问题，因为缺的那块在他脑子里</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">检验可读性唯一有效的办法，是找一个确实不知道背景的读者</text>
+
+  <!-- 左：作者自评 -->
+  <rect x="60" y="104" width="520" height="252" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="320" y="132" text-anchor="middle" font-size="15.5" font-weight="700" fill="#b5544a">作者自己读</text>
+
+  <rect x="96" y="150" width="448" height="76" rx="10" fill="#f6ebe9"/>
+  <text x="320" y="174" text-anchor="middle" font-size="12.5" fill="#8c4a42">文档里写：「走 A 方案，经引擎建」</text>
+  <text x="320" y="196" text-anchor="middle" font-size="12.5" fill="#8c4a42">作者读到这句，脑子里自动补上了</text>
+  <text x="320" y="214" text-anchor="middle" font-size="11.5" fill="#b5544a">A 方案是什么、引擎指哪个、为什么不是 B</text>
+
+  <path d="M320,230 L320,252" stroke="#b5544a" stroke-width="2" marker-end="url(#cr)"/>
+
+  <rect x="96" y="258" width="448" height="40" rx="8" fill="#ffffff" stroke="#d8c2bf" stroke-width="1.5"/>
+  <text x="320" y="283" text-anchor="middle" font-size="13" fill="#8c4a42">读起来很顺 → 判定「写清楚了」</text>
+
+  <text x="320" y="326" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b5544a">自评永远过，因为补全发生在读之前</text>
+
+  <!-- 右：冷读 -->
+  <rect x="620" y="104" width="520" height="252" rx="14" fill="#ffffff" stroke="#24476b" stroke-width="2.5"/>
+  <text x="880" y="132" text-anchor="middle" font-size="15.5" font-weight="700" fill="#24476b">派一个没有上下文的 agent 只读 README</text>
+
+  <rect x="656" y="150" width="448" height="76" rx="10" fill="#24476b"/>
+  <text x="880" y="174" text-anchor="middle" font-size="12.5" fill="#ffffff">它没有那块背景，补不出来</text>
+  <text x="880" y="196" text-anchor="middle" font-size="12.5" fill="#a9c4dc">卡在哪一句，哪一句就是缺的</text>
+  <text x="880" y="214" text-anchor="middle" font-size="11.5" fill="#ffffff">它问「引擎指哪个」，就是文档没说</text>
+
+  <path d="M880,230 L880,252" stroke="#3a6491" stroke-width="2" marker-end="url(#cr)"/>
+
+  <rect x="656" y="258" width="448" height="40" rx="8" fill="#eef5fa"/>
+  <text x="880" y="283" text-anchor="middle" font-size="13" fill="#24476b">卡住的位置就是要补的位置</text>
+
+  <text x="880" y="326" text-anchor="middle" font-size="12.5" font-weight="700" fill="#24476b">一份文档被这样连否三版</text>
+
+  <!-- 验收模板 -->
+  <rect x="60" y="376" width="1080" height="80" rx="12" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="600" y="400" text-anchor="middle" font-size="13.5" font-weight="700" fill="#3a6491">「说人话」是可判定的，判据是本人读不读得懂，不是文字专不专业</text>
+  <text x="600" y="424" text-anchor="middle" font-size="12" fill="#6b87a3">
+    <tspan x="600">要让别人一眼看上去就知道：我们做了什么 · 对比了什么 · 基于什么对比的 · 对比的效果如何</tspan>
+    <tspan x="600" dy="19">术语必须当场解释——「别忘了解析一下专有名词，你得让别人知道」</tspan>
+  </text>
+
+  <rect x="60" y="474" width="1080" height="54" rx="12" fill="#24476b"/>
+  <text x="600" y="498" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">冷读测试的代价：它只找得出「看不懂」，找不出「看懂了但写错了」</text>
+  <text x="600" y="519" text-anchor="middle" font-size="12.5" fill="#a9c4dc">事实正确性还得另外核，两件事不能互相替代</text>
+</svg>

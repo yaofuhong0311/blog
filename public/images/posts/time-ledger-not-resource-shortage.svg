@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="560" rx="20" fill="#f2f6fa"/>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">只记开始和结束，会把工具问题读成资源问题</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">同一段 77 小时，拆开之前和拆开之后指向的结论完全相反</text>
+
+  <!-- 上：不拆 -->
+  <text x="80" y="124" font-size="14" font-weight="700" fill="#6b87a3">只记两个时间点</text>
+  <rect x="80" y="136" width="1040" height="52" rx="8" fill="#5b88b0"/>
+  <text x="600" y="168" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">总计 77 小时</text>
+  <text x="80" y="210" font-size="12.5" fill="#6b87a3">看到这个数，能得出的结论只有两种：要更多资源，或者方案太复杂。两个都是错的。</text>
+
+  <!-- 下：拆开 -->
+  <text x="80" y="256" font-size="14" font-weight="700" fill="#24476b">按中断类型分类记</text>
+
+  <rect x="80" y="268" width="759" height="56" rx="8" fill="#b5544a"/>
+  <text x="459" y="292" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">断网等重连　56 小时</text>
+  <text x="459" y="314" text-anchor="middle" font-size="12.5" fill="#f0d9d6">占 73%——这段时间里什么都做不了</text>
+
+  <rect x="845" y="268" width="275" height="56" rx="8" fill="#24476b"/>
+  <text x="982" y="292" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">连得上集群　20 小时</text>
+  <text x="982" y="314" text-anchor="middle" font-size="12.5" fill="#a9c4dc">占 27%</text>
+
+  <!-- 20h 再拆 -->
+  <path d="M982,324 L982,348" stroke="#3a6491" stroke-width="2"/>
+  <path d="M982,348 L560,348 L560,366" stroke="#3a6491" stroke-width="2"/>
+  <path d="M982,348 L1120,348 L1120,366" stroke="#3a6491" stroke-width="2"/>
+
+  <rect x="80" y="368" width="1040" height="54" rx="8" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="600" y="390" text-anchor="middle" font-size="13" font-weight="700" fill="#3a6491">这 20 小时里，实验本身只跑了 9.3 分钟</text>
+  <text x="600" y="410" text-anchor="middle" font-size="12" fill="#6b87a3">其余是代理中断后重读上下文、流水线排队、工具不可用</text>
+
+  <!-- 结论 -->
+  <rect x="80" y="442" width="1040" height="56" rx="12" fill="#24476b"/>
+  <text x="600" y="466" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">瓶颈不在算力，也不在方案复杂度，在工具链稳定性</text>
+  <text x="600" y="487" text-anchor="middle" font-size="12.5" fill="#a9c4dc">不分类记录，就看不出该修哪一条</text>
+
+  <text x="600" y="528" text-anchor="middle" font-size="12.5" fill="#6b87a3">分类要在中断发生时就记，事后回忆分不清「在等工具」和「在想问题」</text>
+</svg>
