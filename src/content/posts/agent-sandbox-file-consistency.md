@@ -3,7 +3,7 @@ title: Agent Sandbox 工程实践（五）：进程终止不等于文件回滚
 published: 2026-08-28T09:00:00+08:00
 description: Signal 只能终止进程，不能撤销已经发生的文件写入；可恢复的 Sandbox 必须同时设计写入提交协议、挂载边界与完整性校验。
 tags: [AI Agent, Sandbox, 文件系统, 可靠性]
-category: 工程实践
+category: 沙箱系统
 ---
 
 > Command 被终止，只能证明进程不再继续执行，不能证明文件恢复到执行前。平台若允许任务恢复，必须把“文件仍然存在”和“文件可以安全使用”作为两个独立问题处理。

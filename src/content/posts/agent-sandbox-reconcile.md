@@ -3,7 +3,7 @@ title: Agent Sandbox 工程实践（一）：Sandbox 消失后为什么不能直
 published: 2026-08-14
 description: 控制面看到 Sandbox 不存在时，仍需结合任务与外部动作状态判断恢复、失败还是等待确认。资源存在性不能替代业务语义。
 tags: [Agent Sandbox, Kubernetes, 故障恢复]
-category: 工程实践
+category: 沙箱系统
 ---
 
 > 控制面发现 Sandbox 消失后，是否应该立即重建？我的答案是：**不能只根据资源不存在做决定，还必须知道任务执行到哪里、外部动作是否已经生效。**

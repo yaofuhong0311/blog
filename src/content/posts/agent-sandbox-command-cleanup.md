@@ -4,7 +4,7 @@ published: 2026-08-21T09:00:00+08:00
 updated: 2026-08-25T09:00:00+08:00
 description: Command timeout 只应终止本次执行的进程集合；Sandbox 回收处理整个运行载体，PID 1 则负责容器内的进程生命周期。
 tags: [AI Agent, Sandbox, OpenSandbox, 进程管理]
-category: 工程实践
+category: 沙箱系统
 ---
 
 > 清理逻辑是否正确，首先取决于系统准备清理哪个集合。Command 超时、Sandbox TTL 和 PID 1 分别处理一次执行、整个运行载体和容器内进程生命周期，不能使用同一种终止方式代替。

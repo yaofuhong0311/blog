@@ -3,7 +3,7 @@ title: Agent Sandbox 工程实践（二）：创建成功必须拆成四个边�
 published: 2026-08-17
 description: 从业务请求到 Pod 与 execd，创建链路经历多次语义转换；Accepted、Provisioned、Connected 和 Agent Ready 不能共用一个成功状态。
 tags: [AI Agent, Sandbox, Kubernetes, 工程实践]
-category: 工程实践
+category: 沙箱系统
 ---
 
 > Sandbox 创建不是一次 HTTP 请求，而是一条跨业务服务、CRD、Controller、Scheduler、Runtime 和健康检查的状态链。若接口只返回“成功”，上层无法知道环境究竟创建到哪一步。

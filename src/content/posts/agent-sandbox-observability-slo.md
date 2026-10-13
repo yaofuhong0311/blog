@@ -3,7 +3,7 @@ title: Agent Sandbox 工程实践（三）：总创建耗时无法定位性能�
 published: 2026-08-18
 description: Ready Latency 只能描述用户等待，必须拆分队列、资源创建、调度、容器启动和健康检查，才能形成可治理 SLO。
 tags: [AI Agent, Sandbox, Observability, SLO]
-category: 工程实践
+category: 沙箱系统
 ---
 
 > 端到端 Ready Latency 是必要的用户指标，却不能解释 Sandbox 为什么慢。创建链路跨越多个责任边界，只有记录阶段时间点和稳定失败分类，SLO 未达标时才能选择正确动作。
