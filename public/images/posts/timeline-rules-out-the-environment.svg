@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="678" viewBox="0 0 1200 678" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="678" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="tlArrowCalc" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#6b87a3"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">证明「不是 Pod 的问题」，靠的是时间线对得上</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">三种解释在「容器重启了」这一层完全一样，能把前两种删掉的只有时间线</text>
+
+  <!-- ============ 上块：三种候选解释对照 ============ -->
+
+  <!-- 第 1 栏：内存超限 -->
+  <rect x="50" y="96" width="356" height="246" rx="14" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.6" stroke-dasharray="6 5"/>
+  <rect x="64" y="106" width="328" height="34" rx="9" fill="#6b87a3"/>
+  <text x="228" y="128" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">内存超限 / 内核 SIGKILL</text>
+
+  <text x="78" y="162" font-size="11.5" fill="#6b87a3">① 这种解释该留下什么</text>
+  <text x="78" y="182" font-size="12" fill="#24476b">
+    <tspan x="78">进程瞬间消失，来不及写任何东西</tspan>
+    <tspan x="78" dy="18">没有一行优雅关停的痕迹</tspan>
+    <tspan x="78" dy="18">积压的连接被内核直接 RST</tspan>
+  </text>
+  <line x1="74" y1="232" x2="382" y2="232" stroke="#c3d6e6" stroke-width="1"/>
+
+  <text x="78" y="252" font-size="11.5" fill="#6b87a3">② 日志里实际查到什么</text>
+  <text x="78" y="272" font-size="12" fill="#3a6491">
+    <tspan x="78">3 次重启里有 2 次，打出了完整关停日志</tspan>
+    <tspan x="78" dy="18">积压的健康检查全部返回 200，不是 RST</tspan>
+  </text>
+  <line x1="74" y1="304" x2="382" y2="304" stroke="#c3d6e6" stroke-width="1"/>
+  <text x="228" y="326" text-anchor="middle" fill="#6b87a3"><tspan font-size="26" font-weight="700">✗</tspan><tspan font-size="13.5" dx="10">这条删掉</tspan></text>
+
+  <!-- 第 2 栏：节点抖动或驱逐 -->
+  <rect x="422" y="96" width="356" height="246" rx="14" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.6" stroke-dasharray="6 5"/>
+  <rect x="436" y="106" width="328" height="34" rx="9" fill="#6b87a3"/>
+  <text x="600" y="128" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">节点抖动或驱逐</text>
+
+  <text x="450" y="162" font-size="11.5" fill="#6b87a3">① 这种解释该留下什么</text>
+  <text x="450" y="182" font-size="12" fill="#24476b">
+    <tspan x="450">重启时刻与探针参数无关</tspan>
+    <tspan x="450" dy="18">驱逐和节点压力，落点是随机的</tspan>
+    <tspan x="450" dy="18">不会三次都落在同一秒上</tspan>
+  </text>
+  <line x1="446" y1="232" x2="754" y2="232" stroke="#c3d6e6" stroke-width="1"/>
+
+  <text x="450" y="252" font-size="11.5" fill="#6b87a3">② 日志里实际查到什么</text>
+  <text x="450" y="272" font-size="12" fill="#3a6491">
+    <tspan x="450">3 次重启时刻与探针式子的预测值</tspan>
+    <tspan x="450" dy="18">误差都 &lt; 1 秒，三次用同一组参数</tspan>
+  </text>
+  <line x1="446" y1="304" x2="754" y2="304" stroke="#c3d6e6" stroke-width="1"/>
+  <text x="600" y="326" text-anchor="middle" fill="#6b87a3"><tspan font-size="26" font-weight="700">✗</tspan><tspan font-size="13.5" dx="10">这条删掉</tspan></text>
+
+  <!-- 第 3 栏：代码卡住事件循环 -->
+  <rect x="794" y="96" width="356" height="246" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2.2"/>
+  <rect x="808" y="106" width="328" height="34" rx="9" fill="#b5544a"/>
+  <text x="972" y="128" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">代码卡住事件循环</text>
+
+  <text x="822" y="162" font-size="11.5" fill="#8c4a42">① 这种解释该留下什么</text>
+  <text x="822" y="182" font-size="12" fill="#24476b">
+    <tspan x="822">进程活着，请求只是排队没人取</tspan>
+    <tspan x="822" dy="18">阻塞一结束，积压的瞬间全部返回</tspan>
+    <tspan x="822" dy="18">重启时刻可由探针参数正着算出</tspan>
+  </text>
+  <line x1="818" y1="232" x2="1126" y2="232" stroke="#f0d9d6" stroke-width="1"/>
+
+  <text x="822" y="252" font-size="11.5" fill="#8c4a42">② 日志里实际查到什么</text>
+  <text x="822" y="272" font-size="12" font-weight="600" fill="#8c4a42">
+    <tspan x="822">打分那 100 秒出头，健康检查 0 次响应</tspan>
+    <tspan x="822" dy="18">打分一结束，几毫秒内全部返回 200</tspan>
+  </text>
+  <line x1="818" y1="304" x2="1126" y2="304" stroke="#f0d9d6" stroke-width="1"/>
+  <text x="972" y="326" text-anchor="middle" fill="#b5544a"><tspan font-size="26" font-weight="700">✓</tspan><tspan font-size="13.5" dx="10" font-weight="700">只剩这条</tspan></text>
+
+  <!-- 对照组证据横条 -->
+  <rect x="50" y="354" width="1100" height="34" rx="10" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <text x="600" y="376" text-anchor="middle" font-size="12.5" fill="#3a6491">
+    <tspan font-weight="700" fill="#24476b">对照组</tspan><tspan>　同一个 Deployment 下 3 个副本，探针参数 / 资源限额 / 镜像完全相同，当天重启次数 </tspan><tspan font-weight="700" fill="#b5544a">3 / 0 / 0</tspan><tspan>　变量只剩「那台在跑打分」</tspan>
+  </text>
+
+  <!-- ============ 下块：时间轴 ============ -->
+  <rect x="50" y="400" width="1100" height="178" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.6"/>
+  <text x="76" y="426" font-size="14" font-weight="700" fill="#24476b">重启时刻不是读出来的，是拿探针配置正着算出来的 —— 方向反过来挑参数去凑，永远能凑上</text>
+
+  <!-- 节点标题 -->
+  <text x="162" y="456" text-anchor="middle" font-size="12.5" font-weight="600" fill="#24476b">打分请求进来</text>
+  <text x="337" y="456" text-anchor="middle" font-size="12.5" font-weight="600" fill="#24476b">同步大模型调用</text>
+  <text x="512" y="456" text-anchor="middle" font-size="12.5" font-weight="600" fill="#24476b">事件循环被占满</text>
+  <text x="687" y="456" text-anchor="middle" font-size="12.5" font-weight="600" fill="#6b87a3">存活探针连续探不到</text>
+  <text x="862" y="456" text-anchor="middle" font-size="12.5" font-weight="600" fill="#6b87a3">关停宽限期</text>
+  <text x="1037" y="456" text-anchor="middle" font-size="12.5" font-weight="600" fill="#6b87a3">容器重启</text>
+
+  <!-- 轴：前半段实证（实线砖红），后半段推算（虚线灰） -->
+  <line x1="104" y1="476" x2="687" y2="476" stroke="#b5544a" stroke-width="2.6"/>
+  <line x1="687" y1="476" x2="1096" y2="476" stroke="#6b87a3" stroke-width="2.6" stroke-dasharray="8 5" marker-end="url(#tlArrowCalc)"/>
+
+  <circle cx="162" cy="476" r="11" fill="none" stroke="#b5544a" stroke-width="1.3" opacity="0.55"/>
+  <circle cx="162" cy="476" r="6" fill="#b5544a"/>
+  <circle cx="337" cy="476" r="6" fill="#b5544a"/>
+  <circle cx="512" cy="476" r="6" fill="#b5544a"/>
+  <circle cx="687" cy="476" r="6" fill="#ffffff" stroke="#6b87a3" stroke-width="2.2"/>
+  <circle cx="862" cy="476" r="6" fill="#ffffff" stroke="#6b87a3" stroke-width="2.2"/>
+  <circle cx="1037" cy="476" r="6" fill="#ffffff" stroke="#6b87a3" stroke-width="2.2"/>
+
+  <!-- 节点说明 -->
+  <text x="162" y="498" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b5544a">
+    <tspan x="162">锚点，来自业务日志</tspan>
+    <tspan x="162" dy="16" font-weight="400" fill="#8c4a42">起点只在业务日志里</tspan>
+  </text>
+  <text x="337" y="498" text-anchor="middle" font-size="11.5" fill="#8c4a42">
+    <tspan x="337">单次 <tspan font-family="monospace">20–45</tspan> 秒</tspan>
+    <tspan x="337" dy="16">没 await，也没丢线程池</tspan>
+  </text>
+  <text x="512" y="498" text-anchor="middle" font-size="11.5" fill="#8c4a42">
+    <tspan x="512">累计 <tspan font-family="monospace">100</tspan> 秒出头</tspan>
+    <tspan x="512" dy="16">健康检查 0 次响应</tspan>
+  </text>
+  <text x="687" y="498" text-anchor="middle" font-size="11.5" fill="#6b87a3">
+    <tspan x="687">失败阈值 × 探测周期</tspan>
+    <tspan x="687" dy="16">都写在 Deployment 里</tspan>
+  </text>
+  <text x="862" y="498" text-anchor="middle" font-size="11.5" fill="#6b87a3">
+    <tspan x="862"><tspan font-family="monospace">SIGTERM</tspan> 先到，跑关停 handler</tspan>
+    <tspan x="862" dy="16">宽限期走完才补 <tspan font-family="monospace">SIGKILL</tspan></tspan>
+  </text>
+  <text x="1037" y="498" text-anchor="middle" font-size="11.5" fill="#6b87a3">
+    <tspan x="1037">日志平台上的那一行</tspan>
+    <tspan x="1037" dy="16">当天出现 3 次</tspan>
+  </text>
+
+  <!-- 两段的来源 -->
+  <path d="M104,524 L104,531 L687,531 L687,524" fill="none" stroke="#b5544a" stroke-width="1.6"/>
+  <path d="M687,524 L687,531 L1096,531 L1096,524" fill="none" stroke="#6b87a3" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="395" y="547" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b5544a">这一段是日志里读出来的</text>
+  <text x="891" y="547" text-anchor="middle" font-size="11.5" fill="#6b87a3">这一段是算出来的，没有任何一行记录直接写着</text>
+
+  <text x="600" y="568" text-anchor="middle" font-size="13" font-weight="700" fill="#24476b">三次重启的实测时刻，与这条式子算出的预测时刻误差都 &lt; 1 秒</text>
+
+  <!-- ============ 底部：结论 + 未证实 ============ -->
+  <rect x="50" y="592" width="620" height="66" rx="12" fill="#24476b"/>
+  <text x="360" y="618" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">环境问题和代码问题，现象上是同一句「容器重启了」</text>
+  <text x="360" y="640" text-anchor="middle" font-size="12" fill="#a9c4dc">「日志里没有 OOM」一条都删不掉，三次对上式子才删得掉</text>
+
+  <rect x="686" y="592" width="464" height="66" rx="12" fill="#eef5fa" stroke="#6b87a3" stroke-width="1.8" stroke-dasharray="6 5"/>
+  <text x="706" y="616" font-size="12" font-weight="700" fill="#6b87a3">未证实 · 需要集群权限才能读</text>
+  <text x="1130" y="616" text-anchor="end" font-size="11.5" font-weight="700" fill="#24476b">4 条证据 = 3 条实证 + 1 条推算</text>
+  <text x="706" y="638" font-size="10" fill="#6b87a3"><tspan font-family="monospace">Last State</tspan> 的 Reason 与 Exit Code · kubelet 的 <tspan font-family="monospace">Unhealthy</tspan> / <tspan font-family="monospace">Killing</tspan> 事件</text>
+</svg>

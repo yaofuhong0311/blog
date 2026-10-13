@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="624" viewBox="0 0 1200 624" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="624" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="lvb" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L9,3.5 L0,7 z" fill="#3a6491"/></marker>
+    <marker id="lvg" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L9,3.5 L0,7 z" fill="#6b87a3"/></marker>
+    <marker id="lvn" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L9,3.5 L0,7 z" fill="#24476b"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">存活探针超时证明的是答不上话，不是进程死了</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">60 秒的阻塞够不到重启线；「日志里没有 OOM」一条解释都排除不掉</text>
+
+  <rect x="50" y="92" width="1100" height="408" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <line x1="550" y1="106" x2="550" y2="486" stroke="#c3d6e6" stroke-width="1.2"/>
+
+  <!-- ===================== 左栏：时间账 ===================== -->
+  <text x="300" y="118" text-anchor="middle" font-size="16" font-weight="700" fill="#24476b">阻塞要越过约 160 秒才触发重启</text>
+  <text x="300" y="138" text-anchor="middle" font-size="11.5" fill="#6b87a3">存活探针：30 秒一次，超时 10 秒，连续 6 次失败才算死</text>
+
+  <text x="526" y="158" text-anchor="end" font-size="11" font-weight="700" fill="#24476b">重启阈值 ≈160 秒</text>
+  <text x="526" y="172" text-anchor="end" font-size="10" fill="#6b87a3">随首次探测落点浮动，实际落在 160–190 秒</text>
+
+  <!-- 探针刻度 -->
+  <text x="96" y="188" text-anchor="middle" font-size="10.5" font-family="monospace" fill="#24476b">t=0s</text>
+  <text x="161" y="188" text-anchor="middle" font-size="10.5" font-family="monospace" fill="#24476b">30s</text>
+  <text x="226" y="188" text-anchor="middle" font-size="10.5" font-family="monospace" fill="#24476b">60s</text>
+  <text x="291" y="188" text-anchor="middle" font-size="10.5" font-family="monospace" fill="#24476b">90s</text>
+  <text x="356" y="188" text-anchor="middle" font-size="10.5" font-family="monospace" fill="#24476b">120s</text>
+  <text x="421" y="188" text-anchor="middle" font-size="10.5" font-family="monospace" fill="#24476b">150s</text>
+
+  <text x="96" y="204" text-anchor="middle" font-size="9.5" fill="#b5544a">探针失败</text>
+  <text x="161" y="204" text-anchor="middle" font-size="9.5" fill="#b5544a">探针失败</text>
+  <text x="226" y="204" text-anchor="middle" font-size="9.5" fill="#b5544a">探针失败</text>
+  <text x="291" y="204" text-anchor="middle" font-size="9.5" fill="#b5544a">探针失败</text>
+  <text x="356" y="204" text-anchor="middle" font-size="9.5" fill="#b5544a">探针失败</text>
+  <text x="421" y="204" text-anchor="middle" font-size="9.5" fill="#b5544a">探针失败</text>
+
+  <line x1="86" y1="220" x2="524" y2="220" stroke="#3a6491" stroke-width="2" marker-end="url(#lvb)"/>
+
+  <circle cx="96" cy="220" r="7.5" fill="#b5544a"/>
+  <circle cx="161" cy="220" r="7.5" fill="#b5544a"/>
+  <circle cx="226" cy="220" r="7.5" fill="#b5544a"/>
+  <circle cx="291" cy="220" r="7.5" fill="#b5544a"/>
+  <circle cx="356" cy="220" r="7.5" fill="#b5544a"/>
+  <circle cx="421" cy="220" r="7.5" fill="#b5544a"/>
+  <text x="96" y="223.5" text-anchor="middle" font-size="9" font-family="monospace" fill="#ffffff">1</text>
+  <text x="161" y="223.5" text-anchor="middle" font-size="9" font-family="monospace" fill="#ffffff">2</text>
+  <text x="226" y="223.5" text-anchor="middle" font-size="9" font-family="monospace" fill="#ffffff">3</text>
+  <text x="291" y="223.5" text-anchor="middle" font-size="9" font-family="monospace" fill="#ffffff">4</text>
+  <text x="356" y="223.5" text-anchor="middle" font-size="9" font-family="monospace" fill="#ffffff">5</text>
+  <text x="421" y="223.5" text-anchor="middle" font-size="9" font-family="monospace" fill="#ffffff">6</text>
+
+  <text x="90" y="240" font-size="10.5" fill="#3a6491">事件循环开始被占住 <tspan font-family="monospace">t=0</tspan></text>
+
+  <!-- 三段阻塞 -->
+  <rect x="96" y="254" width="130" height="18" rx="4" fill="#6b87a3"/>
+  <text x="161" y="267" text-anchor="middle" font-size="11" fill="#ffffff">阻塞 60 秒</text>
+  <text x="234" y="267" font-size="11" fill="#6b87a3">越不过线，无事发生</text>
+
+  <rect x="96" y="280" width="260" height="18" rx="4" fill="#6b87a3"/>
+  <text x="226" y="293" text-anchor="middle" font-size="11" fill="#ffffff">中间档：阻塞 120 秒</text>
+  <text x="364" y="293" font-size="11" fill="#6b87a3">仍然越不过</text>
+
+  <rect x="96" y="308" width="412" height="18" rx="4" fill="#b5544a"/>
+  <text x="302" y="321" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ffffff">阻塞 190 秒 → 越过阈值，容器重启</text>
+
+  <!-- 160 秒阈值虚线：画在三段阻塞之上，只有第三段穿过它 -->
+  <line x1="443" y1="180" x2="443" y2="336" stroke="#24476b" stroke-width="2" stroke-dasharray="5 4"/>
+
+  <rect x="290" y="336" width="236" height="46" rx="10" fill="#f6ebe9" stroke="#b5544a" stroke-width="1.4"/>
+  <text x="408" y="356" text-anchor="middle" font-size="11" font-weight="700" fill="#b5544a">第 6 次失败落定 ≈ <tspan font-family="monospace">t=160s</tspan></text>
+  <text x="408" y="374" text-anchor="middle" font-size="10.5" fill="#8c4a42"><tspan font-family="monospace">SIGTERM</tspan> → 优雅关停 → 容器重启</text>
+
+  <line x1="76" y1="400" x2="526" y2="400" stroke="#c3d6e6" stroke-width="1"/>
+  <text x="76" y="420" font-size="11.5" fill="#6b87a3">· 单次同步模型调用：20–45 秒</text>
+  <text x="76" y="442" font-size="11.5" fill="#24476b">· 一个评测串 3–4 个用例 → 事件循环被连续占住 60–190 秒</text>
+  <text x="76" y="464" font-size="11.5" fill="#8c4a42">· 上线以来共重启 8 次，当天该副本 3 次</text>
+
+  <!-- ===================== 右栏：四条证据 ===================== -->
+  <text x="850" y="118" text-anchor="middle" font-size="16" font-weight="700" fill="#24476b">四条证据，各排除了什么</text>
+  <text x="850" y="138" text-anchor="middle" font-size="11.5" fill="#6b87a3">自上而下由弱到强，最后一条才正面指认机制</text>
+
+  <!-- 强度色带 -->
+  <text x="580" y="144" text-anchor="middle" font-size="10" fill="#6b87a3">弱</text>
+  <rect x="574" y="150" width="12" height="64" fill="#c3d6e6"/>
+  <rect x="574" y="214" width="12" height="66" fill="#a9c4dc"/>
+  <rect x="574" y="280" width="12" height="56" fill="#5b88b0"/>
+  <rect x="574" y="336" width="12" height="67" fill="#3a6491"/>
+  <rect x="574" y="403" width="12" height="71" fill="#24476b"/>
+  <text x="580" y="488" text-anchor="middle" font-size="10" font-weight="700" fill="#24476b">强</text>
+
+  <!-- 第 0 行：作废 -->
+  <rect x="596" y="150" width="236" height="50" rx="10" fill="#f2f6fa" stroke="#c3d6e6" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <rect x="610" y="166" width="36" height="18" rx="4" fill="#6b87a3"/>
+  <text x="628" y="179.5" text-anchor="middle" font-size="9.5" fill="#ffffff">作废</text>
+  <text x="654" y="180" font-size="11.5" fill="#6b87a3">日志里没有 <tspan font-family="monospace">OOM</tspan> 记录</text>
+  <line x1="652" y1="176" x2="766" y2="176" stroke="#6b87a3" stroke-width="1.2"/>
+
+  <path d="M834,175 L848,175" stroke="#6b87a3" stroke-width="1.6" marker-end="url(#lvg)"/>
+
+  <rect x="852" y="150" width="274" height="50" rx="10" fill="#f2f6fa" stroke="#c3d6e6" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="868" y="172" font-size="10.8" fill="#6b87a3">
+    <tspan x="868">什么都排除不掉：内存超限由内核直接</tspan>
+    <tspan x="868" dy="18"><tspan font-family="monospace">SIGKILL</tspan>，进程来不及写任何日志</tspan>
+  </text>
+
+  <text x="596" y="218" font-size="12" fill="#6b87a3">以下三条各排除一类解释，合起来只说「不是别的」</text>
+
+  <!-- 第 1 行 -->
+  <rect x="596" y="228" width="236" height="48" rx="10" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.4"/>
+  <text x="612" y="250" font-size="11" fill="#24476b">
+    <tspan x="612">三次重启时刻 vs 按 6 次失败推算</tspan>
+    <tspan x="612" dy="18">误差不到 <tspan font-family="monospace">1</tspan> 秒</tspan>
+  </text>
+
+  <path d="M834,252 L848,252" stroke="#3a6491" stroke-width="1.6" marker-end="url(#lvb)"/>
+
+  <rect x="852" y="228" width="274" height="48" rx="10" fill="#eef5fa" stroke="#5b88b0" stroke-width="1.4"/>
+  <text x="868" y="250" font-size="12" font-weight="700" fill="#24476b">排除：随机重启</text>
+  <text x="868" y="268" font-size="10.5" fill="#6b87a3">还分不出是谁动的手</text>
+
+  <!-- 第 2 行 -->
+  <rect x="596" y="284" width="236" height="48" rx="10" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.4"/>
+  <text x="612" y="306" font-size="11" fill="#24476b">
+    <tspan x="612">3 个副本同配置、同镜像、同节点池</tspan>
+    <tspan x="612" dy="18">跑评测那台重启 3 次，另两台 0 次</tspan>
+  </text>
+
+  <path d="M834,308 L848,308" stroke="#3a6491" stroke-width="1.6" marker-end="url(#lvb)"/>
+
+  <rect x="852" y="284" width="274" height="48" rx="10" fill="#eef5fa" stroke="#5b88b0" stroke-width="1.4"/>
+  <text x="868" y="306" font-size="12" font-weight="700" fill="#24476b">排除：节点 / 镜像 / 资源配额</text>
+  <text x="868" y="324" font-size="10.5" fill="#6b87a3">三台共享的因素都不成立</text>
+
+  <!-- 第 3 行 -->
+  <rect x="596" y="340" width="236" height="48" rx="10" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.4"/>
+  <text x="612" y="362" font-size="11" fill="#24476b">
+    <tspan x="612">3 次重启里有 2 次走完整优雅关停</tspan>
+    <tspan x="612" dy="18">每一步日志都在</tspan>
+  </text>
+
+  <path d="M834,364 L848,364" stroke="#3a6491" stroke-width="1.6" marker-end="url(#lvb)"/>
+
+  <rect x="852" y="340" width="274" height="48" rx="10" fill="#eef5fa" stroke="#5b88b0" stroke-width="1.4"/>
+  <text x="868" y="362" font-size="12" font-weight="700" fill="#24476b">排除：内存超限</text>
+  <text x="868" y="380" font-size="10.5" fill="#6b87a3"><tspan font-family="monospace">SIGKILL</tspan> 不会留下关停流程</text>
+
+  <text x="596" y="408" font-size="12" font-weight="700" fill="#24476b">这一条不是排除，是正面指认机制</text>
+
+  <!-- 第 4 行：高亮 -->
+  <rect x="596" y="418" width="236" height="56" rx="10" fill="#ffffff" stroke="#24476b" stroke-width="2.4"/>
+  <text x="614" y="443" font-size="11" font-weight="700" fill="#24476b">
+    <tspan x="614">打分结束瞬间，9 个积压的健康检查</tspan>
+    <tspan x="614" dy="18">在几毫秒内全部返回 <tspan font-family="monospace">200</tspan></tspan>
+  </text>
+
+  <path d="M834,446 L848,446" stroke="#24476b" stroke-width="2" marker-end="url(#lvn)"/>
+
+  <rect x="852" y="418" width="274" height="56" rx="10" fill="#24476b"/>
+  <text x="868" y="443" font-size="11" fill="#ffffff">
+    <tspan x="868">只有「进程活着、循环被占住、</tspan>
+    <tspan x="868" dy="18">连接在 <tspan font-family="monospace">accept</tspan> 队列里排着」能解释</tspan>
+  </text>
+
+  <!-- ===================== 脚注 ===================== -->
+  <rect x="50" y="520" width="1100" height="78" rx="12" fill="#24476b"/>
+  <text x="600" y="550" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">还没坐实：「是存活探针杀的」是按日志时间推算的，不是直接证据</text>
+  <text x="600" y="574" text-anchor="middle" font-size="12" fill="#a9c4dc">直接证据是 Pod 事件里那条 <tspan font-family="monospace">Liveness probe failed</tspan>，需要集群权限才看得到</text>
+</svg>

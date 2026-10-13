@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="644" viewBox="0 0 1200 644" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="644" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="selw" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L9,3.5 L0,7 z" fill="#3a6491"/></marker>
+  </defs>
+
+  <text x="600" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">监控比的是另一个上限，真正的墙是 fd_set 的位宽</text>
+  <text x="600" y="72" text-anchor="middle" font-size="14" fill="#6b87a3">水位 0.1% 和墙在 1024 不矛盾：指标比的是 fd 数量，位图卡的是 fd 编号</text>
+
+  <!-- 栏 1：监控看到的 -->
+  <rect x="50" y="100" width="300" height="330" rx="12" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.6"/>
+  <circle cx="72" cy="124" r="11" fill="#5b88b0"/>
+  <text x="72" y="128.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">1</text>
+  <text x="92" y="129" font-size="15" font-weight="700" fill="#24476b">监控看到的</text>
+  <text x="72" y="152" font-size="11.5" fill="#6b87a3">指标口径：fd 数量 / <tspan font-family="monospace">RLIMIT_NOFILE</tspan></text>
+
+  <text x="72" y="188" font-size="16" font-weight="700" fill="#24476b">0.1%</text>
+  <rect x="72" y="196" width="256" height="26" rx="6" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.4"/>
+  <rect x="73" y="197" width="2.6" height="24" fill="#24476b"/>
+
+  <text x="72" y="242" font-size="11.5" fill="#24476b">fd 已用 <tspan font-family="monospace" font-weight="700">1043</tspan></text>
+  <text x="328" y="242" text-anchor="end" font-size="11.5" fill="#6b87a3">上限 <tspan font-family="monospace">RLIMIT_NOFILE</tspan></text>
+  <text x="328" y="258" text-anchor="end" font-size="11.5" font-family="monospace" fill="#6b87a3">= 1048576</text>
+
+  <circle cx="84" cy="294" r="11" fill="#5b88b0"/>
+  <path d="M78.5,294 L83,299 L90,288.5" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="104" y="299" font-size="12.5" fill="#24476b">水位绿，这条指标没报警</text>
+
+  <rect x="72" y="324" width="256" height="64" rx="8" fill="#eef5fa"/>
+  <text x="86" y="348" font-size="11.5" fill="#3a6491">「句柄耗尽」于是被排掉一轮</text>
+  <text x="86" y="370" font-size="11.5" fill="#3a6491">指标算对了，比的是另一个上限</text>
+
+  <!-- 栏 2：真正的墙在 1024 -->
+  <rect x="372" y="100" width="376" height="330" rx="12" fill="#ffffff" stroke="#5b88b0" stroke-width="2"/>
+  <circle cx="394" cy="124" r="11" fill="#5b88b0"/>
+  <text x="394" y="128.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">2</text>
+  <text x="414" y="129" font-size="15" font-weight="700" fill="#24476b">真正的墙在 1024</text>
+  <text x="394" y="152" font-size="11.5" fill="#6b87a3">fd 编号轴，刻度不等距，只标四个位置</text>
+
+  <text x="530" y="184" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b5544a"><tspan font-family="monospace">fd_set</tspan> = 1024 位 = 128 字节</text>
+  <line x1="530" y1="192" x2="530" y2="246" stroke="#b5544a" stroke-width="2.5"/>
+
+  <line x1="402" y1="238" x2="572" y2="238" stroke="#3a6491" stroke-width="1.8"/>
+  <line x1="572" y1="238" x2="708" y2="238" stroke="#6b87a3" stroke-width="1.8" stroke-dasharray="5 5"/>
+  <line x1="402" y1="232" x2="402" y2="244" stroke="#3a6491" stroke-width="1.8"/>
+  <line x1="708" y1="232" x2="708" y2="244" stroke="#6b87a3" stroke-width="1.8"/>
+  <circle cx="572" cy="238" r="5" fill="#24476b"/>
+
+  <text x="572" y="222" text-anchor="middle" font-size="11.5" font-family="monospace" font-weight="700" fill="#24476b">1043</text>
+  <text x="402" y="258" text-anchor="middle" font-size="11.5" font-family="monospace" fill="#6b87a3">0</text>
+  <text x="530" y="261" text-anchor="middle" font-size="11.5" font-family="monospace" font-weight="700" fill="#b5544a">1024</text>
+  <text x="708" y="258" text-anchor="middle" font-size="11.5" font-family="monospace" fill="#6b87a3">1048576</text>
+  <text x="530" y="282" text-anchor="middle" font-size="11" fill="#8c4a42"><tspan font-family="monospace">sizeof(fd_set)</tspan> 实测 128 字节</text>
+
+  <rect x="394" y="300" width="332" height="52" rx="8" fill="#eef5fa"/>
+  <text x="408" y="324" font-size="11.5" fill="#3a6491"><tspan font-family="monospace">1043</tspan> 对 <tspan font-family="monospace">1048576</tspan> = 0.1%</text>
+  <text x="408" y="344" font-size="11.5" fill="#8c4a42">对 <tspan font-family="monospace">1024</tspan> 已经超了 19 个</text>
+
+  <text x="394" y="376" font-size="11.5" fill="#6b87a3">右端 <tspan font-family="monospace">1048576</tspan> 是 <tspan font-family="monospace">RLIMIT_NOFILE</tspan>，不是这次的墙</text>
+  <text x="394" y="398" font-size="11.5" fill="#6b87a3">CPython 进内核前先查编号，超了抛 ValueError</text>
+
+  <!-- 栏 3：卡编号，不卡数量 -->
+  <rect x="770" y="100" width="380" height="330" rx="12" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.6"/>
+  <circle cx="792" cy="124" r="11" fill="#5b88b0"/>
+  <text x="792" y="128.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">3</text>
+  <text x="812" y="129" font-size="15" font-weight="700" fill="#24476b">卡编号，不卡数量</text>
+  <text x="792" y="152" font-size="11.5" fill="#6b87a3">fd 数量差一大截，抛的是同一个错</text>
+
+  <rect x="792" y="168" width="176" height="52" rx="9" fill="#ffffff" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="806" y="191" font-size="11.5" fill="#24476b">进程开着 <tspan font-family="monospace">1022</tspan> 个 fd</text>
+  <text x="806" y="209" font-size="11.5" fill="#3a6491">最高编号 <tspan font-family="monospace">1025</tspan></text>
+
+  <rect x="792" y="238" width="176" height="52" rx="9" fill="#ffffff" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="806" y="261" font-size="11.5" fill="#24476b">进程只剩 <tspan font-family="monospace">2</tspan> 个 fd</text>
+  <text x="806" y="279" font-size="11.5" fill="#3a6491">编号仍是 <tspan font-family="monospace">1025</tspan></text>
+
+  <path d="M968,194 L993,211" stroke="#3a6491" stroke-width="1.8" marker-end="url(#selw)"/>
+  <path d="M968,264 L993,247" stroke="#3a6491" stroke-width="1.8" marker-end="url(#selw)"/>
+
+  <rect x="1000" y="182" width="128" height="94" rx="9" fill="#b5544a"/>
+  <text x="1064" y="206" text-anchor="middle" font-size="11.5" font-family="monospace" font-weight="700" fill="#ffffff">ValueError:</text>
+  <text x="1064" y="223" text-anchor="middle" font-size="11.5" font-family="monospace" fill="#ffffff">filedescriptor</text>
+  <text x="1064" y="240" text-anchor="middle" font-size="11.5" font-family="monospace" fill="#ffffff">out of range</text>
+  <text x="1064" y="257" text-anchor="middle" font-size="11.5" font-family="monospace" fill="#ffffff">in select()</text>
+
+  <rect x="792" y="298" width="336" height="78" rx="8" fill="#eef5fa"/>
+  <text x="806" y="321" font-size="11.5" fill="#3a6491">边界实测：<tspan font-family="monospace">fd=1023</tspan> 通过，<tspan font-family="monospace">fd=1024</tspan> 抛错</text>
+  <text x="806" y="343" font-size="11.5" fill="#3a6491">同一个 fd 交给 <tspan font-family="monospace">poll /</tspan></text>
+  <text x="806" y="361" font-size="11.5" fill="#3a6491"><tspan font-family="monospace">selectors.DefaultSelector</tspan> 正常返回就绪</text>
+
+  <text x="792" y="400" font-size="11.5" fill="#6b87a3">不自愈出在这：高编号 fd 属于还活着的沙箱</text>
+
+  <!-- 底部对照带 -->
+  <rect x="50" y="462" width="1100" height="156" rx="14" fill="#24476b"/>
+  <line x1="600" y1="478" x2="600" y2="556" stroke="#5b88b0" stroke-width="1.5"/>
+
+  <text x="80" y="494" font-size="14.5" font-weight="700" fill="#ffffff">宽度：调不掉，只能换 API</text>
+  <circle cx="84" cy="520" r="2.5" fill="#5b88b0"/>
+  <text x="96" y="524" font-size="12.5" fill="#a9c4dc"><tspan font-family="monospace">fd_set</tspan> 1024 位</text>
+  <circle cx="330" cy="520" r="2.5" fill="#5b88b0"/>
+  <text x="342" y="524" font-size="12.5" fill="#a9c4dc">VLAN ID 12 位 → 4094 个</text>
+  <circle cx="84" cy="546" r="2.5" fill="#5b88b0"/>
+  <text x="96" y="550" font-size="12.5" fill="#a9c4dc">TCP 窗口字段 16 位 → 64KB</text>
+  <circle cx="330" cy="546" r="2.5" fill="#5b88b0"/>
+  <text x="342" y="550" font-size="12.5" fill="#a9c4dc">IPv4 地址 32 位</text>
+
+  <text x="632" y="494" font-size="14.5" font-weight="700" fill="#ffffff">参数：调得动</text>
+  <circle cx="636" cy="520" r="2.5" fill="#5b88b0"/>
+  <text x="648" y="524" font-size="12.5" font-family="monospace" fill="#a9c4dc">RLIMIT_NOFILE</text>
+  <circle cx="768" cy="520" r="2.5" fill="#5b88b0"/>
+  <text x="780" y="524" font-size="12.5" font-family="monospace" fill="#a9c4dc">pid_max</text>
+  <circle cx="855" cy="520" r="2.5" fill="#5b88b0"/>
+  <text x="867" y="524" font-size="12.5" fill="#a9c4dc">本地端口范围</text>
+  <text x="632" y="550" font-size="11.5" fill="#a9c4dc">有 <tspan font-family="monospace">getrlimit</tspan> / <tspan font-family="monospace">sysctl</tspan> 能读能写</text>
+
+  <rect x="420" y="570" width="360" height="34" rx="17" fill="#ffffff"/>
+  <text x="600" y="592" text-anchor="middle" font-size="13.5" font-weight="700" fill="#24476b">判据：能不能找到一个读写它的接口</text>
+</svg>

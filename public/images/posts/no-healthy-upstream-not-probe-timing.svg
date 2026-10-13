@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="670" viewBox="0 0 1200 670" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <rect width="1200" height="670" rx="20" fill="#f2f6fa"/>
+  <defs>
+    <marker id="nhuBlue" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#3a6491"/></marker>
+    <marker id="nhuGrey" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#6b87a3"/></marker>
+    <pattern id="nhuHatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="#f6ebe9"/>
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#b5544a" stroke-width="2.4" stroke-opacity="0.3"/>
+    </pattern>
+  </defs>
+
+  <text x="600" y="42" text-anchor="middle" font-size="21" font-weight="700" fill="#24476b">根因是部署策略，不是探针参数</text>
+  <text x="600" y="68" text-anchor="middle" font-size="14" fill="#6b87a3">端点列表空着的那段时间网关没有上游可挑，探针参数碰不到「列表空不空」这个状态</text>
+
+  <!-- ===== 顶部窄条：探测路径 ===== -->
+  <rect x="50" y="86" width="1100" height="126" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="74" y="109" font-size="13.5" font-weight="700" fill="#24476b">数据来自哪条路：两轮探测只有第二条和报故障的人同路</text>
+
+  <!-- 第一轮：绕过网关 -->
+  <text x="74" y="135" font-size="11.5" font-weight="700" fill="#6b87a3">① 探测点错误：绕过网关</text>
+  <text x="74" y="151" font-size="10.5" fill="#6b87a3">失败落在 kube-proxy 那层</text>
+
+  <rect x="226" y="122" width="112" height="32" rx="8" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="282" y="143" text-anchor="middle" font-size="12.5" fill="#6b87a3">调试 Pod</text>
+  <path d="M344,138 L408,138" stroke="#6b87a3" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#nhuGrey)"/>
+  <text x="376" y="130" text-anchor="middle" font-size="10" fill="#6b87a3">不经过网关</text>
+  <rect x="414" y="122" width="146" height="32" rx="8" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="487" y="143" text-anchor="middle" font-size="12.5" fill="#6b87a3">Service ClusterIP</text>
+  <path d="M566,138 L606,138" stroke="#6b87a3" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#nhuGrey)"/>
+  <rect x="612" y="122" width="104" height="32" rx="8" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="664" y="143" text-anchor="middle" font-size="12.5" fill="#6b87a3">后端 Pod</text>
+
+  <rect x="740" y="124" width="386" height="28" rx="8" fill="#f2f6fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <text x="933" y="143" text-anchor="middle" font-size="11.5" fill="#6b87a3">353 次探测 · 22 次连接超时 · 0 个 503</text>
+
+  <!-- 第二轮：网关内部 -->
+  <text x="74" y="181" font-size="11.5" font-weight="700" fill="#24476b">② 和报故障的人同路</text>
+  <text x="74" y="197" font-size="10.5" fill="#3a6491">在网关 Pod 内部发探测</text>
+
+  <rect x="226" y="166" width="112" height="32" rx="8" fill="#5b88b0"/>
+  <text x="282" y="187" text-anchor="middle" font-size="12.5" fill="#ffffff">网关 Pod 内部</text>
+  <path d="M344,182 L408,182" stroke="#3a6491" stroke-width="2" marker-end="url(#nhuBlue)"/>
+  <text x="376" y="174" text-anchor="middle" font-size="10" fill="#3a6491">同一条路</text>
+  <rect x="414" y="166" width="146" height="32" rx="8" fill="#ffffff" stroke="#5b88b0" stroke-width="1.8"/>
+  <text x="487" y="187" text-anchor="middle" font-size="12.5" fill="#24476b">Service 端点列表</text>
+  <path d="M566,182 L606,182" stroke="#3a6491" stroke-width="2" marker-end="url(#nhuBlue)"/>
+  <rect x="612" y="166" width="104" height="32" rx="8" fill="#ffffff" stroke="#5b88b0" stroke-width="1.8"/>
+  <text x="664" y="187" text-anchor="middle" font-size="12.5" fill="#24476b">后端 Pod</text>
+
+  <rect x="740" y="168" width="386" height="28" rx="8" fill="#f6ebe9" stroke="#b5544a" stroke-width="1.4"/>
+  <text x="933" y="187" text-anchor="middle" font-size="11.5" fill="#8c4a42">抓到带 <tspan font-family="monospace">no healthy upstream</tspan> 的响应体</text>
+
+  <!-- ===== 机制注 ===== -->
+  <rect x="50" y="222" width="1100" height="36" rx="10" fill="#eef5fa" stroke="#c3d6e6" stroke-width="1.2"/>
+  <text x="600" y="245" text-anchor="middle" font-size="12" fill="#3a6491">摘端点发生在 Pod 进入 Terminating 的那一秒，当时探针仍返回 HTTP 200 —— 就绪探针只能影响新 Pod 何时进列表，影响不了列表空不空</text>
+
+  <!-- ===== 左栏：RollingUpdate ===== -->
+  <rect x="50" y="270" width="540" height="302" rx="14" fill="#ffffff" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="320" y="296" text-anchor="middle" font-size="16" font-weight="700" fill="#24476b">RollingUpdate</text>
+  <text x="320" y="315" text-anchor="middle" font-size="11.5" fill="#6b87a3"><tspan font-family="monospace">maxUnavailable=0</tspan> · <tspan font-family="monospace">maxSurge=1</tspan></text>
+
+  <text x="208" y="337" font-size="11.5" font-weight="700" fill="#24476b">← 重叠 16 秒：新 Pod 先进列表，旧 Pod 才允许被摘</text>
+  <rect x="146" y="340" width="56" height="50" rx="4" fill="#5b88b0" fill-opacity="0.14" stroke="#3a6491" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <rect x="146" y="344" width="56" height="18" rx="4" fill="#5b88b0"/>
+  <rect x="146" y="368" width="420" height="18" rx="4" fill="#24476b"/>
+  <text x="140" y="357" text-anchor="end" font-size="10" fill="#6b87a3">旧 Pod 端点</text>
+  <text x="140" y="381" text-anchor="end" font-size="10" fill="#6b87a3">新 Pod 端点</text>
+
+  <text x="62" y="406" font-size="10" font-weight="700" fill="#6b87a3">列表里的地址数</text>
+  <text x="140" y="420" text-anchor="end" font-size="10" fill="#6b87a3">2 个</text>
+  <text x="140" y="440" text-anchor="end" font-size="10" fill="#6b87a3">1 个</text>
+  <text x="140" y="460" text-anchor="end" font-size="10" font-weight="700" fill="#b5544a">0 个</text>
+  <path d="M146,416 L202,416 L202,436 L566,436" fill="none" stroke="#3a6491" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="146" cy="416" r="3" fill="#3a6491"/>
+
+  <!-- 左栏时间轴 -->
+  <line x1="146" y1="486" x2="566" y2="486" stroke="#c3d6e6" stroke-width="1.5"/>
+  <line x1="146" y1="486" x2="146" y2="491" stroke="#c3d6e6" stroke-width="1.5"/>
+  <line x1="251" y1="486" x2="251" y2="491" stroke="#c3d6e6" stroke-width="1.5"/>
+  <line x1="356" y1="486" x2="356" y2="491" stroke="#c3d6e6" stroke-width="1.5"/>
+  <line x1="461" y1="486" x2="461" y2="491" stroke="#c3d6e6" stroke-width="1.5"/>
+  <line x1="566" y1="486" x2="566" y2="491" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="146" y="503" text-anchor="middle" font-size="10" fill="#6b87a3">0</text>
+  <text x="251" y="503" text-anchor="middle" font-size="10" fill="#6b87a3">30</text>
+  <text x="356" y="503" text-anchor="middle" font-size="10" fill="#6b87a3">60</text>
+  <text x="461" y="503" text-anchor="middle" font-size="10" fill="#6b87a3">90</text>
+  <text x="566" y="503" text-anchor="middle" font-size="10" fill="#6b87a3">120 秒</text>
+
+  <rect x="72" y="512" width="496" height="46" rx="10" fill="#eef5fa" stroke="#5b88b0" stroke-width="1.6"/>
+  <text x="320" y="532" text-anchor="middle" font-size="14" font-weight="700" fill="#24476b">752 次探测 · 0 个 503</text>
+  <text x="320" y="550" text-anchor="middle" font-size="11" fill="#3a6491">地址数一次都没掉到 0 个</text>
+
+  <!-- ===== 右栏：Recreate ===== -->
+  <rect x="610" y="270" width="540" height="302" rx="14" fill="#ffffff" stroke="#b5544a" stroke-width="2"/>
+  <text x="880" y="296" text-anchor="middle" font-size="16" font-weight="700" fill="#b5544a">Recreate</text>
+  <text x="880" y="315" text-anchor="middle" font-size="11.5" fill="#8c4a42">临时改回去的那一轮，探测脚本原样不动</text>
+
+  <text x="712" y="337" font-size="11.5" font-weight="700" fill="#b5544a">↓ t = 0 秒 旧 Pod 进 Terminating，端点立刻被摘</text>
+  <rect x="706" y="344" width="353" height="42" rx="4" fill="url(#nhuHatch)" stroke="#b5544a" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <rect x="706" y="344" width="7" height="18" rx="2" fill="#5b88b0"/>
+  <rect x="1059" y="368" width="67" height="18" rx="4" fill="#24476b"/>
+  <text x="700" y="357" text-anchor="end" font-size="10" fill="#6b87a3">旧 Pod 端点</text>
+  <text x="700" y="381" text-anchor="end" font-size="10" fill="#6b87a3">新 Pod 端点</text>
+  <text x="886" y="362" text-anchor="middle" font-size="13.5" font-weight="700" fill="#b5544a">端点列表 EMPTY 101 秒</text>
+  <text x="886" y="379" text-anchor="middle" font-size="11" fill="#8c4a42">这 101 秒里 503 在持续返回</text>
+
+  <text x="622" y="406" font-size="10" font-weight="700" fill="#6b87a3">列表里的地址数</text>
+  <text x="696" y="420" text-anchor="end" font-size="10" fill="#6b87a3">2 个</text>
+  <text x="696" y="440" text-anchor="end" font-size="10" fill="#6b87a3">1 个</text>
+  <text x="696" y="460" text-anchor="end" font-size="10" font-weight="700" fill="#b5544a">0 个</text>
+  <line x1="706" y1="340" x2="706" y2="456" stroke="#b5544a" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <path d="M706,436 L706,456 L1059,456 L1059,436 L1126,436" fill="none" stroke="#8c4a42" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M706,456 L1059,456" stroke="#b5544a" stroke-width="4.5" stroke-linecap="butt"/>
+  <circle cx="706" cy="436" r="3" fill="#8c4a42"/>
+
+  <!-- 右栏时间轴 -->
+  <line x1="706" y1="486" x2="1126" y2="486" stroke="#c3d6e6" stroke-width="1.5"/>
+  <line x1="706" y1="486" x2="706" y2="491" stroke="#c3d6e6" stroke-width="1.5"/>
+  <line x1="811" y1="486" x2="811" y2="491" stroke="#c3d6e6" stroke-width="1.5"/>
+  <line x1="916" y1="486" x2="916" y2="491" stroke="#c3d6e6" stroke-width="1.5"/>
+  <line x1="1021" y1="486" x2="1021" y2="491" stroke="#c3d6e6" stroke-width="1.5"/>
+  <line x1="1126" y1="486" x2="1126" y2="491" stroke="#c3d6e6" stroke-width="1.5"/>
+  <text x="706" y="503" text-anchor="middle" font-size="10" fill="#6b87a3">0</text>
+  <text x="811" y="503" text-anchor="middle" font-size="10" fill="#6b87a3">30</text>
+  <text x="916" y="503" text-anchor="middle" font-size="10" fill="#6b87a3">60</text>
+  <text x="1021" y="503" text-anchor="middle" font-size="10" fill="#6b87a3">90</text>
+  <text x="1126" y="503" text-anchor="middle" font-size="10" fill="#6b87a3">120 秒</text>
+
+  <rect x="632" y="512" width="496" height="46" rx="10" fill="#f6ebe9" stroke="#b5544a" stroke-width="1.6"/>
+  <text x="880" y="532" text-anchor="middle" font-size="14" font-weight="700" fill="#b5544a">2595 次探测 · 840 个 <tspan font-family="monospace">no healthy upstream</tspan></text>
+  <text x="880" y="550" text-anchor="middle" font-size="11" fill="#8c4a42">和同事报的响应体逐字一样</text>
+
+  <!-- ===== 贯穿两栏的「地址数 = 0」基线 ===== -->
+  <line x1="146" y1="456" x2="1126" y2="456" stroke="#b5544a" stroke-width="1.2" stroke-dasharray="5 4" stroke-opacity="0.75"/>
+  <text x="146" y="473" font-size="10" fill="#b5544a">红色基线 = 列表里 0 个地址，网关挑不出健康上游</text>
+
+  <!-- ===== 底部窄条：注脚 ===== -->
+  <rect x="50" y="588" width="1100" height="62" rx="12" fill="#24476b"/>
+  <text x="600" y="613" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">为什么「改完抓不到 503」不算证据：空窗长度本身就在 15 到 101 秒之间浮动</text>
+  <text x="600" y="634" text-anchor="middle" font-size="11.5" fill="#a9c4dc">上面那条错误路径的同一轮也是 Recreate，但节点上有热镜像，空窗只有 15 秒（353 次探测 · 22 次连接失败）——差别只是镜像要不要现拉</text>
+</svg>
